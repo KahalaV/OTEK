@@ -11,6 +11,10 @@
 #include <QVector>
 #include <map>
 
+/*!
+ * Doxytest start
+ */
+
 namespace Ui {
 class MainWindow;
 }
