@@ -4,13 +4,6 @@
 #include "graphics/simplemainwindow.hh"
 #include "city.h"
 
-#include <QGraphicsScene>
-#include <QTimer>
-#include <iostream>
-#include <memory>
-#include <QVector>
-#include <map>
-
 /*!
  * Doxytest start
  */
@@ -18,6 +11,8 @@
 namespace Ui {
 class MainWindow;
 }
+
+namespace Student {
 
 class MainWindow : public CourseSide::SimpleMainWindow
 {
@@ -27,8 +22,16 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void setPicture(QImage &img);
+
 private:
     Ui::MainWindow *ui;
+    QGraphicsScene *map;
+
+    int width_ = 1095;
+    int height_ = 592;
 };
+
+}
 
 #endif // MAINWINDOW_H
