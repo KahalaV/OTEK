@@ -3,6 +3,8 @@
 
 #include "interfaces/icity.hh"
 
+#include <QTime>
+
 namespace Student
 {
 
@@ -22,6 +24,13 @@ public:
     void actorMoved(std::shared_ptr<Interface::IActor> actor);
     std::vector<std::shared_ptr<Interface::IActor> > getNearbyActors(Interface::Location loc) const;
     bool isGameOver() const;
+
+private:
+    QTime clock_;
+    QImage background_;
+    std::vector<std::shared_ptr<Interface::IActor>> actors_;
+    std::vector<std::shared_ptr<Interface::IStop>> stops_;
+    bool gamestatus_ = false;
 };
 
 }
