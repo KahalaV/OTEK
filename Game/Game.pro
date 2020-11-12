@@ -41,3 +41,9 @@ HEADERS += \
     city.h \
     gameengine.h \
     mainwindow.h
+
+RESOURCES += \
+    Resources.qrc
+
+DISTFILES += \
+    Resources/Graphics/nysse.bmp

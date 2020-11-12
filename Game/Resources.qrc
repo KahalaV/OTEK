@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Resources/Graphics/nysse.bmp</file>
+        <file>Resources/Graphics/stop.bmp</file>
+    </qresource>
+</RCC>
