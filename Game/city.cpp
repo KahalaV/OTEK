@@ -5,9 +5,20 @@
 namespace Student
 {
 
-City::City() {}
+City::City(QImage &background) :
+
+    background_(background)
+{
+
+}
 City::~City() {}
-void City::setBackground(QImage &basicbackground, QImage &bigbackground) {}
+
+void City::setBackground(QImage& basicbackground, QImage& bigbackground) {};
+
+QImage City::getBackground()
+{
+    return background_;
+}
 void City::setClock(QTime clock)
 {
     clock_ = clock;
@@ -29,6 +40,10 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 bool City::isGameOver() const
 {
     return false;
+}
+std::vector<std::shared_ptr<Interface::IStop>> City::returnStopVector()
+{
+    return stops_;
 }
 
 }

@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include <iostream>
 namespace Student {
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -19,9 +19,21 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::setPicture(QImage &img)
+void MainWindow::setPicture(QImage img)
 {
     map->setBackgroundBrush(img);
+}
+
+void MainWindow::addStops(std::vector<std::shared_ptr<Interface::IStop>> stops)
+{
+
+    for (auto stop : stops) {
+        QGraphicsPixmapItem *stopSprite = new QGraphicsPixmapItem(QPixmap(":/Resources/Graphics/stop.bmp"));
+        int x = (stop->getLocation()).giveX();
+        int y = 500 - (stop->getLocation()).giveY();
+        stopSprite->setPos(x, y);
+        map->addItem(stopSprite);
+    }
 }
 
 }

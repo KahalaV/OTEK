@@ -22,14 +22,16 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void setPicture(QImage &img);
+    void setPicture(QImage img);
+
+    void addStops(std::vector<std::shared_ptr<Interface::IStop>> stops);
 
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *map;
 
-    int width_ = 1095;
-    int height_ = 592;
+    int width_ = 500;
+    int height_ = 500;
 };
 
 }

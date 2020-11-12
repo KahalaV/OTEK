@@ -11,9 +11,10 @@ namespace Student
 class City : public Interface::ICity
 {
 public:
-    City();
+    City(QImage &background);
     ~City();
-    void setBackground(QImage &basicbackground, QImage &bigbackground);
+    void setBackground(QImage& basicbackground, QImage& bigbackground);
+    QImage getBackground();
     void setClock(QTime clock);
     void addStop(std::shared_ptr<Interface::IStop> stop);
     void startGame();
@@ -24,10 +25,11 @@ public:
     void actorMoved(std::shared_ptr<Interface::IActor> actor);
     std::vector<std::shared_ptr<Interface::IActor> > getNearbyActors(Interface::Location loc) const;
     bool isGameOver() const;
+    std::vector<std::shared_ptr<Interface::IStop>> returnStopVector();
 
 private:
     QTime clock_;
-    QImage background_;
+    QImage &background_;
     std::vector<std::shared_ptr<Interface::IActor>> actors_;
     std::vector<std::shared_ptr<Interface::IStop>> stops_;
     bool gamestatus_ = false;
