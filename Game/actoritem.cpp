@@ -14,16 +14,12 @@ ActorItem::~ActorItem()
 
 QRectF ActorItem::boundingRect() const
 {
-    return QRectF(0, 0, 10, 10);
+    return QRectF(0, 0, 50, 50);
 }
 
 void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QRectF bounds = boundingRect();
-    QColor color(type_%256, type_%256, type_%256);
-    QBrush brush(color);
-    painter->setBrush(brush);
-    painter->drawEllipse(bounds);
+    painter->drawImage(QPoint(0, 0), QImage(":/Resources/Graphics/nysse.bmp"));
 }
 
 void ActorItem::setCoord(int x, int y)

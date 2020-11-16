@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
     std::shared_ptr<Student::City> sanAndreas(new Student::City(smallMap));
 
     gameLogic.takeCity(sanAndreas);
+    gameLogic.setTime(12, 0); //for testing
     gameLogic.finalizeGameStart();
 
 

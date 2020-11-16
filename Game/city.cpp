@@ -1,8 +1,5 @@
 #include "city.h"
 
-#include <iostream>
-#include <QTime>
-
 namespace Student
 {
 
@@ -12,7 +9,6 @@ City::City(QImage &background) :
     mainWindow_(new Student::MainWindow)
 {
     mainWindow_->setPicture(background_);
-    //mainWindow_->drawStops(stops_);
     mainWindow_->show();
 }
 City::~City() {}
@@ -50,7 +46,12 @@ void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
     int x = actor->giveLocation().giveX();
     int y = 500 - actor->giveLocation().giveY();
-    mainWindow_->addActor(x, y, 1);
+    //City actors_ and MainWindow actors_ have the actors in the same order
+    std::vector<std::shared_ptr<Interface::IActor>>::iterator it = std::find(actors_.begin(), actors_.end(), actor);
+    int index = std::distance(actors_.begin(), it);
+
+    Student::ActorItem *tempItem = mainWindow_->returnActorItem(index);
+    mainWindow_->moveActor(tempItem, x, y);
 }
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const {}
 bool City::isGameOver() const

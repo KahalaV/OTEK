@@ -33,7 +33,8 @@ public:
 
     void setPicture(QImage img);
     void addActor(int x, int y, int type);
-    void updateCoords(int x, int y);
+    void moveActor(ActorItem *actor, int x, int y);
+    Student::ActorItem* returnActorItem(int index);
 
     void drawStops(std::vector<std::shared_ptr<Interface::IStop>> stops);
 
@@ -41,8 +42,7 @@ private:
     Ui::MainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
-    QVector<QGraphicsItem*> actors_;
-    ActorItem *last_;
+    QVector<Student::ActorItem*> actors_;
 
     int width_ = 500;
     int height_ = 500;

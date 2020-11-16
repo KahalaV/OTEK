@@ -31,16 +31,19 @@ void MainWindow::setPicture(QImage img)
 
 void MainWindow::addActor(int x, int y, int type)
 {
-    ActorItem* nActor = new ActorItem(x, y, 1);
+    ActorItem* nActor = new ActorItem(x, y, type);
     actors_.push_back(nActor);
     map->addItem(nActor);
-    last_ = nActor;
 }
 
-void MainWindow::updateCoords(int x, int y)
+void MainWindow::moveActor(ActorItem *actor, int x, int y)
 {
-    map->removeItem(last_);
-    last_->setCoord(x, y);
+    actor->setPos(x, y);
+}
+
+Student::ActorItem* MainWindow::returnActorItem(int index)
+{
+    return actors_[index];
 }
 
 void MainWindow::drawStops(std::vector<std::shared_ptr<Interface::IStop>> stops)

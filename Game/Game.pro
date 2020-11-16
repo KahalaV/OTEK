@@ -47,5 +47,3 @@ HEADERS += \
 RESOURCES += \
     Resources.qrc
 
-DISTFILES += \
-    Resources/Graphics/nysse.bmp

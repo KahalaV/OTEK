@@ -5,9 +5,10 @@
 #include "interfaces/istop.hh"
 #include "interfaces/icity.hh"
 #include "mainwindow.h"
-#include "graphics/simplemainwindow.hh"
 
 #include <QTime>
+#include <iostream>
+#include <iterator>
 
 namespace Student
 {
@@ -34,7 +35,6 @@ private:
     QTime clock_;
     QImage &background_;
     std::shared_ptr<Student::MainWindow> mainWindow_;
-    //std::shared_ptr<CourseSide::SimpleMainWindow> simpleMainWindow_;
     std::vector<std::shared_ptr<Interface::IActor>> actors_;
     std::vector<std::shared_ptr<Interface::IStop>> stops_;
     bool gamestatus_ = false;
