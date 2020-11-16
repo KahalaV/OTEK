@@ -1,8 +1,17 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "graphics/simplemainwindow.hh"
-#include "city.h"
+#include "actoritem.h"
+#include "interfaces/istop.hh"
+#include "interfaces/iactor.hh"
+
+#include <QMainWindow>
+#include <QGraphicsScene>
+#include <QTimer>
+#include <iostream>
+#include <memory>
+#include <QVector>
+#include <map>
 
 /*!
  * Doxytest start
@@ -14,7 +23,7 @@ class MainWindow;
 
 namespace Student {
 
-class MainWindow : public CourseSide::SimpleMainWindow
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
@@ -23,12 +32,17 @@ public:
     ~MainWindow();
 
     void setPicture(QImage img);
+    void addActor(int x, int y, int type);
+    void updateCoords(int x, int y);
 
-    void addStops(std::vector<std::shared_ptr<Interface::IStop>> stops);
+    void drawStops(std::vector<std::shared_ptr<Interface::IStop>> stops);
 
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *map;
+    QTimer *timer;
+    QVector<QGraphicsItem*> actors_;
+    ActorItem *last_;
 
     int width_ = 500;
     int height_ = 500;

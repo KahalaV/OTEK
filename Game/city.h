@@ -1,7 +1,11 @@
 #ifndef CITY_H
 #define CITY_H
 
+#include "interfaces/iactor.hh"
+#include "interfaces/istop.hh"
 #include "interfaces/icity.hh"
+#include "mainwindow.h"
+#include "graphics/simplemainwindow.hh"
 
 #include <QTime>
 
@@ -25,11 +29,12 @@ public:
     void actorMoved(std::shared_ptr<Interface::IActor> actor);
     std::vector<std::shared_ptr<Interface::IActor> > getNearbyActors(Interface::Location loc) const;
     bool isGameOver() const;
-    std::vector<std::shared_ptr<Interface::IStop>> returnStopVector();
 
 private:
     QTime clock_;
     QImage &background_;
+    std::shared_ptr<Student::MainWindow> mainWindow_;
+    //std::shared_ptr<CourseSide::SimpleMainWindow> simpleMainWindow_;
     std::vector<std::shared_ptr<Interface::IActor>> actors_;
     std::vector<std::shared_ptr<Interface::IStop>> stops_;
     bool gamestatus_ = false;

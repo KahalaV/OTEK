@@ -6,6 +6,7 @@ QT += core gui widgets network multimedia
 CONFIG += c++14
 
 SOURCES += \
+    actoritem.cpp \
     city.cpp \
     main.cc \
     mainwindow.cpp
@@ -38,6 +39,7 @@ FORMS += \
     mainwindow.ui
 
 HEADERS += \
+    actoritem.h \
     city.h \
     gameengine.h \
     mainwindow.h
