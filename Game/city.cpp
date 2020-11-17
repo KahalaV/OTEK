@@ -26,15 +26,22 @@ void City::setClock(QTime clock)
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     stops_.push_back(stop);
+    int x = stop->getLocation().giveX();
+    int y = 500 - stop->getLocation().giveY();
+    mainWindow_->addStop(x, y);
 }
 void City::startGame() {}
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
+    int type = 0; //0 = passenger, 1 = nysse
+    if (std::dynamic_pointer_cast<CourseSide::Passenger>(newactor) == nullptr)
+    {
+        type = 1;
+    }
     actors_.push_back(newactor);
     int x = newactor->giveLocation().giveX();
     int y = 500 - newactor->giveLocation().giveY();
-    mainWindow_->addActor(x, y, 1);
-
+    mainWindow_->addActor(x, y, type);
 }
 void City::removeActor(std::shared_ptr<Interface::IActor> actor) {}
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)

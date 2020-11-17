@@ -36,6 +36,13 @@ void MainWindow::addActor(int x, int y, int type)
     map->addItem(nActor);
 }
 
+void MainWindow::addStop(int x, int y)
+{
+    QGraphicsPixmapItem* stopSprite = new QGraphicsPixmapItem(QPixmap(":/Resources/Graphics/stop.bmp"));
+    stopSprite->setPos(x, y);
+    map->addItem(stopSprite);
+}
+
 void MainWindow::moveActor(ActorItem *actor, int x, int y)
 {
     actor->setPos(x, y);

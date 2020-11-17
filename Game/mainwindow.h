@@ -7,6 +7,7 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
 #include <QTimer>
 #include <iostream>
 #include <memory>
@@ -33,6 +34,7 @@ public:
 
     void setPicture(QImage img);
     void addActor(int x, int y, int type);
+    void addStop(int x, int y);
     void moveActor(ActorItem *actor, int x, int y);
     Student::ActorItem* returnActorItem(int index);
 

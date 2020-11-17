@@ -4,6 +4,7 @@
 #include "interfaces/iactor.hh"
 #include "interfaces/istop.hh"
 #include "interfaces/icity.hh"
+#include "actors/passenger.hh"
 #include "mainwindow.h"
 
 #include <QTime>

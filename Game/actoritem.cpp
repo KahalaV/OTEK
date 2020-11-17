@@ -19,13 +19,19 @@ QRectF ActorItem::boundingRect() const
 
 void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->drawImage(QPoint(0, 0), QImage(":/Resources/Graphics/nysse.bmp"));
+    if (type_ == 0)
+    {
+        painter->drawImage(QPoint(0, 0), QImage(":/Resources/Graphics/passenger.bmp"));
+    }
+    if (type_ == 1) {
+        painter->drawImage(QPoint(0, 0), QImage(":/Resources/Graphics/nysse.bmp"));
+    }
 }
 
 void ActorItem::setCoord(int x, int y)
 {
-    setX( x );
-    setY( y );
+    setX(x);
+    setY(y);
 }
 
 }
