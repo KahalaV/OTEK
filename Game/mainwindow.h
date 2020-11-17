@@ -38,16 +38,14 @@ public:
     void moveActor(ActorItem *actor, int x, int y);
     Student::ActorItem* returnActorItem(int index);
 
-    void drawStops(std::vector<std::shared_ptr<Interface::IStop>> stops);
-
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
     QVector<Student::ActorItem*> actors_;
 
-    int width_ = 500;
-    int height_ = 500;
+    int width_ = 1095;
+    int height_ = 592;
 };
 
 }

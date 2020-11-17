@@ -53,17 +53,5 @@ Student::ActorItem* MainWindow::returnActorItem(int index)
     return actors_[index];
 }
 
-void MainWindow::drawStops(std::vector<std::shared_ptr<Interface::IStop>> stops)
-{
-
-    for (auto stop : stops) {
-        QGraphicsPixmapItem *stopSprite = new QGraphicsPixmapItem(QPixmap(":/Resources/Graphics/stop.bmp"));
-        int x = (stop->getLocation()).giveX();
-        int y = 500 - (stop->getLocation()).giveY();
-        stopSprite->setPos(x, y);
-        map->addItem(stopSprite);
-    }
-}
-
 }
 
