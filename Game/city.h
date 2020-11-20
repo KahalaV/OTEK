@@ -6,8 +6,10 @@
 #include "interfaces/icity.hh"
 #include "actors/passenger.hh"
 #include "mainwindow.h"
+#include "player.h"
 
 #include <QTime>
+#include <QTimer>
 #include <iostream>
 #include <iterator>
 
@@ -24,13 +26,19 @@ public:
     void setClock(QTime clock);
     void addStop(std::shared_ptr<Interface::IStop> stop);
     void startGame();
+    bool isGameOver() const;
+    //actors
     void addActor(std::shared_ptr<Interface::IActor> newactor);
     void removeActor(std::shared_ptr<Interface::IActor> actor);
     void actorRemoved(std::shared_ptr<Interface::IActor> actor);
     bool findActor(std::shared_ptr<Interface::IActor> actor) const;
     void actorMoved(std::shared_ptr<Interface::IActor> actor);
     std::vector<std::shared_ptr<Interface::IActor> > getNearbyActors(Interface::Location loc) const;
-    bool isGameOver() const;
+    //player
+    void setPlayer();
+
+signals:
+    QTime getTime();
 
 private:
     QTime clock_;
@@ -38,6 +46,7 @@ private:
     std::shared_ptr<Student::MainWindow> mainWindow_;
     std::vector<std::shared_ptr<Interface::IActor>> actors_;
     std::vector<std::shared_ptr<Interface::IStop>> stops_;
+    Student::Player* player_;
     bool gamestatus_ = false;
 };
 

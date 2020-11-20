@@ -9,7 +9,9 @@ SOURCES += \
     actoritem.cpp \
     city.cpp \
     main.cc \
-    mainwindow.cpp
+    mainwindow.cpp \
+    player.cpp \
+    startwindow.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -36,13 +38,16 @@ else:unix: PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/libCourseLib.a
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    startwindow.ui
 
 HEADERS += \
     actoritem.h \
     city.h \
     gameengine.h \
-    mainwindow.h
+    mainwindow.h \
+    player.h \
+    startwindow.h
 
 RESOURCES += \
     Resources.qrc

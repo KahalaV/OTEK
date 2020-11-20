@@ -1,5 +1,5 @@
-#ifndef ACTORITEM_H
-#define ACTORITEM_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include <QGraphicsItem>
 #include <QGraphicsScene>
@@ -7,24 +7,27 @@
 
 namespace Student {
 
-class ActorItem : public QGraphicsItem
+class Player : public QGraphicsItem
 {
 public:
-    ActorItem(int x, int y, int type);
-    ~ActorItem();
+    Player();
+    ~Player();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    void setCoord(int x, int y);
-    int returnX();
-    int returnY();
-
-private:
+    void updateCoords(int dx, int dy);
+    void setDirection(int dir);
+    bool checkNewCoords(int dx, int dy);
     int x_;
     int y_;
-    int type_;
+
+
+private:
+
+    int dir_;
     QImage image_;
 };
 
 }
-#endif // ACTORITEM_H
+
+#endif // PLAYER_H

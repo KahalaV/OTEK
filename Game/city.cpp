@@ -7,9 +7,11 @@ City::City(QImage &background) :
 
     background_(background),
     mainWindow_(new Student::MainWindow)
+
 {
     mainWindow_->setPicture(background_);
     mainWindow_->show();
+    setPlayer();
 }
 City::~City() {}
 
@@ -64,6 +66,16 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 bool City::isGameOver() const
 {
     return false;
+}
+void City::setPlayer()
+{
+    Student::Player* player(new Student::Player());
+    player_ = player;
+    mainWindow_->setPlayer(player_);
+}
+QTime City::getTime()
+{
+    return clock_;
 }
 
 }

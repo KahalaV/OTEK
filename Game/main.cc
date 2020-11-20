@@ -1,5 +1,6 @@
 #include "core/logic.hh"
 #include "city.h"
+#include "startwindow.h"
 
 #include <QApplication>
 #include <QLabel>
@@ -8,6 +9,9 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     Q_INIT_RESOURCE(offlinedata);
+
+    //Student::StartWindow sw;
+    //sw.show();
 
     //map image
     QImage bigMap = QImage(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
@@ -20,7 +24,6 @@ int main(int argc, char *argv[])
     gameLogic.takeCity(sanAndreas);
     //gameLogic.setTime(12, 0); //for testing
     gameLogic.finalizeGameStart();
-
 
 
     return a.exec();
