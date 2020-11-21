@@ -82,4 +82,8 @@ void Player::updateCoords(int dx, int dy)
     x_ += dx;
     y_ += dy;
 }
+int Player::getDir()
+{
+    return dir_;
+}
 }

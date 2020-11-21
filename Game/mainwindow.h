@@ -47,10 +47,11 @@ public:
     //player
     void setPlayer(Student::Player* player);
     void keyPressEvent(QKeyEvent *event);
-    void movePlayer(int dir);
 
 public slots:
     void updateTimeLabel();
+    //player
+    void movePlayer();
 
 public:
 
@@ -62,7 +63,7 @@ private:
     QVector<Student::ActorItem*> actors_;
     Student::Player* player_;
 
-    int tick_ = 500;
+    int tick_ = 250;
     int width_ = 1095;
     int height_ = 592;
 };

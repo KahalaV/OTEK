@@ -18,11 +18,12 @@ public:
     void updateCoords(int dx, int dy);
     void setDirection(int dir);
     bool checkNewCoords(int dx, int dy);
-    int x_;
-    int y_;
+    int getDir();
 
 
 private:
+    int x_;
+    int y_;
     int dir_;
     QImage image_;
 };

@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateTimeLabel()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(movePlayer()));
     timer->start(tick_);
 }
 
@@ -68,29 +69,73 @@ void MainWindow::setPlayer(Student::Player* player)
 }
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
+    int dir = player_->getDir();
     switch (event->key()) {
         case Qt::Key_W:
-            movePlayer(1);
-            break;
+            if (dir == 2 || dir == 8) {
+                player_->setDirection(1);
+                break;
+            } if (dir == 7) {
+                player_->setDirection(8);
+                break;
+            } if (dir == 3) {
+                player_->setDirection(2);
+                break;
+            } else {
+                break;
+            }
+
         case Qt::Key_D:
-            movePlayer(3);
-            break;
+            if (dir == 2 || dir == 4) {
+                player_->setDirection(3);
+                break;
+            } if (dir == 1) {
+                player_->setDirection(2);
+                break;
+            } if (dir == 5) {
+                player_->setDirection(4);
+                break;
+            } else {
+                break;
+            }
+
+
         case Qt::Key_S:
-            movePlayer(5);
-            break;
+            if (dir == 6 || dir == 4) {
+                player_->setDirection(5);
+                break;
+            } if (dir == 7) {
+                player_->setDirection(6);
+                break;
+            } if (dir == 3) {
+                player_->setDirection(4);
+                break;
+            } else {
+                break;
+            }
+
         case Qt::Key_A:
-            movePlayer(7);
-            break;
+            if (dir == 6 || dir == 8) {
+                player_->setDirection(7);
+                break;
+            } if (dir == 1) {
+                player_->setDirection(8);
+                break;
+            } if (dir == 5) {
+                player_->setDirection(6);
+                break;
+            } else {
+                break;
+            }
     }
 }
-void MainWindow::movePlayer(int dir)
+void MainWindow::movePlayer()
 {
     int dx, dy = 0;
-    switch (dir) {
+    switch (player_->getDir()) {
         case 1:
             dx = 0;
             dy = -10;
-            player_->setDirection(dir);
             if (player_->checkNewCoords(dx, dy)) {
                 break;
             }
@@ -98,9 +143,8 @@ void MainWindow::movePlayer(int dir)
             player_->moveBy(dx, dy);
             break;
         case 2:
-            dx = 10;
-            dy = -10;
-            player_->setDirection(dir);
+            dx = 7;
+            dy = -7;
             if (player_->checkNewCoords(dx, dy)) {
                 break;
             }
@@ -110,7 +154,6 @@ void MainWindow::movePlayer(int dir)
         case 3:
             dx = 10;
             dy = 0;
-            player_->setDirection(dir);
             if (player_->checkNewCoords(dx, dy)) {
                 break;
             }
@@ -118,9 +161,8 @@ void MainWindow::movePlayer(int dir)
             player_->moveBy(dx, dy);
             break;
         case 4:
-            dx = 10;
-            dy = 10;
-            player_->setDirection(dir);
+            dx = 7;
+            dy = 7;
             if (player_->checkNewCoords(dx, dy)) {
                 break;
             }
@@ -130,7 +172,6 @@ void MainWindow::movePlayer(int dir)
         case 5:
             dx = 0;
             dy = 10;
-            player_->setDirection(dir);
             if (player_->checkNewCoords(dx, dy)) {
                 break;
             }
@@ -138,9 +179,8 @@ void MainWindow::movePlayer(int dir)
             player_->moveBy(dx, dy);
             break;
         case 6:
-            dx = -10;
-            dy = 10;
-            player_->setDirection(dir);
+            dx = -7;
+            dy = 7;
             if (player_->checkNewCoords(dx, dy)) {
                 break;
             }
@@ -150,7 +190,6 @@ void MainWindow::movePlayer(int dir)
         case 7:
             dx = -10;
             dy = 0;
-            player_->setDirection(dir);
             if (player_->checkNewCoords(dx, dy)) {
                 break;
             }
@@ -158,9 +197,8 @@ void MainWindow::movePlayer(int dir)
             player_->moveBy(dx, dy);
             break;
         case 8:
-            dx = -10;
-            dy = -10;
-            player_->setDirection(dir);
+            dx = -7;
+            dy = -7;
             if (player_->checkNewCoords(dx, dy)) {
                 break;
             }
