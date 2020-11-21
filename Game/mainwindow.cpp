@@ -69,6 +69,7 @@ void MainWindow::setPlayer(Student::Player* player)
 }
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
+    //movement
     int dir = player_->getDir();
     switch (event->key()) {
         case Qt::Key_W:
@@ -127,6 +128,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             } else {
                 break;
             }
+
+        //bombing
+        case Qt::Key_Space:
+            dropBomb();
     }
 }
 void MainWindow::movePlayer()
@@ -207,6 +212,22 @@ void MainWindow::movePlayer()
             break;
     }
 }
+void MainWindow::dropBomb()
+{
+    int bombX = player_->x() + player_->quadrantSide_;
+    int bombY = player_->y() + player_->quadrantSide_;
+
+    for (auto actor : actors_) {
+        int actorX = actor->x();
+        int actorY = actor->y();
+        int distance = sqrt((actorX - bombX)*(actorX - bombX) + (actorY-bombY)*(actorY-bombY));
+        if (distance < 50 && actor->getType() == 1) {
+            actor->setType(2);
+            std::cout << "Nysse hit!" << std::endl;
+        }
+
+    }
+
 }
 
-
+}

@@ -11,5 +11,7 @@
         <file>Resources/Graphics/plane_SE.bmp</file>
         <file>Resources/Graphics/plane_SW.bmp</file>
         <file>Resources/Graphics/plane_W.bmp</file>
+        <file>Resources/Graphics/bombtest.bmp</file>
+        <file>Resources/Graphics/destroyed_nysse.bmp</file>
     </qresource>
 </RCC>

@@ -16,12 +16,11 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void setCoord(int x, int y);
-    int returnX();
-    int returnY();
+    int getType();
+    void setType(int type);
 
 private:
-    int x_;
-    int y_;
+    //0 = passenger, 1 = nysse, 2 = destroyed nysse
     int type_;
     QImage image_;
 };

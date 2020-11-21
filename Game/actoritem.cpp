@@ -2,9 +2,9 @@
 
 namespace Student {
 
-ActorItem::ActorItem(int x, int y, int type):x_(x), y_(y), type_(type)
+ActorItem::ActorItem(int x, int y, int type):type_(type)
 {
-    setPos(mapToParent(x_, y_ ));
+    setPos(mapToParent(x, y));
     if (type_ == 0) {
         image_ = QImage(":/Resources/Graphics/passenger.bmp");
         setZValue(0.6);
@@ -28,6 +28,14 @@ QRectF ActorItem::boundingRect() const
 void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->drawImage(QPoint(0, 0), image_);
+    /* enable to show coordinates on map
+    if (type_ == 1) {
+        QString text(QString::number(this->x()) + " " + QString::number(this->y()));
+        QPen pen2(QBrush(QColor(0,0,0)),2);
+        painter->setPen(pen2);
+        painter->drawText(10, 20, text);
+    }*/
+
 }
 
 void ActorItem::setCoord(int x, int y)
@@ -35,15 +43,17 @@ void ActorItem::setCoord(int x, int y)
     setX(x);
     setY(y);
 }
-
-int ActorItem::returnX()
+int ActorItem::getType()
 {
-    return x_;
+    return type_;
 }
-
-int ActorItem::returnY()
+void ActorItem::setType(int type)
 {
-    return y_;
+    type_ = type;
+    if (type == 2) {
+         image_ = QImage(":/Resources/Graphics/destroyed_nysse.bmp");
+         setZValue(0.3);
+    }
 }
 
 }

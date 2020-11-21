@@ -20,6 +20,7 @@ public:
     bool checkNewCoords(int dx, int dy);
     int getDir();
 
+    const int quadrantSide_ = 24;
 
 private:
     int x_;

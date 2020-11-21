@@ -18,6 +18,7 @@
 #include <memory>
 #include <QVector>
 #include <map>
+#include <math.h>
 
 /*!
  * Doxytest start
@@ -47,6 +48,7 @@ public:
     //player
     void setPlayer(Student::Player* player);
     void keyPressEvent(QKeyEvent *event);
+    void dropBomb();
 
 public slots:
     void updateTimeLabel();
