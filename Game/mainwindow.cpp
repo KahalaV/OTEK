@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <iostream>
 
-#include <QKeyEvent>
 
 namespace Student {
 
@@ -15,6 +13,10 @@ MainWindow::MainWindow(QWidget *parent) :
     map = new QGraphicsScene(this);
     ui->graphicsView->setScene(map);
     map->setSceneRect(0,0,width_,height_);
+
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateTimeLabel()));
+    timer->start(tick_);
 }
 
 MainWindow::~MainWindow()
@@ -25,6 +27,11 @@ MainWindow::~MainWindow()
 void MainWindow::setPicture(QImage img)
 {
     map->setBackgroundBrush(img);
+}
+void MainWindow::setClock(QTime &clock)
+{
+    clock_ = &clock;
+    ui->timeLabel->setText(clock_->toString("h:mm"));
 }
 
 void MainWindow::addActor(int x, int y, int type)
@@ -50,9 +57,9 @@ Student::ActorItem* MainWindow::returnActorItem(int index)
 {
     return actors_[index];
 }
-void MainWindow::updateTimeLabel(QTime clock)
+void MainWindow::updateTimeLabel()
 {
-    ui->timeLabel->setText(clock.toString("h:mm"));
+    ui->timeLabel->setText(clock_->toString("h:mm"));
 }
 void MainWindow::setPlayer(Student::Player* player)
 {
@@ -161,9 +168,7 @@ void MainWindow::movePlayer(int dir)
             player_->moveBy(dx, dy);
             break;
     }
-    std::cout << "Player coords: x: " << player_->x_ << "y: " << player_->y_ << std::endl;
 }
-
 }
 
 

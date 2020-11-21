@@ -23,7 +23,6 @@ public:
 
 
 private:
-
     int dir_;
     QImage image_;
 };

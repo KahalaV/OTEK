@@ -8,10 +8,12 @@
 #include "mainwindow.h"
 #include "player.h"
 
+#include <QObject>
 #include <QTime>
 #include <QTimer>
 #include <iostream>
 #include <iterator>
+#include <QDebug>
 
 namespace Student
 {
@@ -37,11 +39,9 @@ public:
     //player
     void setPlayer();
 
-signals:
-    QTime getTime();
-
 private:
     QTime clock_;
+    QTimer* timer_;
     QImage &background_;
     std::shared_ptr<Student::MainWindow> mainWindow_;
     std::vector<std::shared_ptr<Interface::IActor>> actors_;

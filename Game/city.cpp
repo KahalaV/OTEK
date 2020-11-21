@@ -10,8 +10,10 @@ City::City(QImage &background) :
 
 {
     mainWindow_->setPicture(background_);
+    mainWindow_->setClock(clock_);
     mainWindow_->show();
     setPlayer();
+
 }
 City::~City() {}
 
@@ -72,10 +74,6 @@ void City::setPlayer()
     Student::Player* player(new Student::Player());
     player_ = player;
     mainWindow_->setPlayer(player_);
-}
-QTime City::getTime()
-{
-    return clock_;
 }
 
 }

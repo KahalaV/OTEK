@@ -5,7 +5,10 @@
 #include "interfaces/istop.hh"
 #include "interfaces/iactor.hh"
 #include "player.h"
+#include <iostream>
 
+#include <QKeyEvent>
+#include <QDebug>
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
@@ -35,6 +38,7 @@ public:
     ~MainWindow();
 
     void setPicture(QImage img);
+    void setClock(QTime &clock);
     void addActor(int x, int y, int type);
     void addStop(int x, int y);
     void moveActor(ActorItem *actor, int x, int y);
@@ -46,14 +50,19 @@ public:
     void movePlayer(int dir);
 
 public slots:
-    void updateTimeLabel(QTime clock);
+    void updateTimeLabel();
+
+public:
 
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *map;
+    QTimer* timer;
+    QTime* clock_;
     QVector<Student::ActorItem*> actors_;
     Student::Player* player_;
 
+    int tick_ = 500;
     int width_ = 1095;
     int height_ = 592;
 };
