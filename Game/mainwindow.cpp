@@ -7,7 +7,8 @@ namespace Student {
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    score_(0)
+    score_(0),
+    cloudStatus_(30)
 {   
     ui->setupUi(this);
     ui->scoreLabel->setText(QString::number(score_));
@@ -19,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateTimeLabel()));
     connect(timer, SIGNAL(timeout()), this, SLOT(movePlayer()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(moveClouds()));
     timer->start(tick_);
 }
 
@@ -210,5 +212,57 @@ void MainWindow::dropBomb()
     }
 
 }
+std::vector<int> MainWindow::randomizeCloudSlots()
+{
+    //first generate the amount of clouds (2-4)
+    int cloudsAmount = (rand() % 3) + 2;
 
+    //then generate the slots (0-11)
+    std::vector<int> cloudSlots(12, 0);
+    for (int i = 0; i < cloudsAmount;) {
+        int slot = (rand() % 12) + 1;
+        if (cloudSlots[slot - 1] == 0) {
+            cloudSlots[slot - 1]  = 1;
+            i++;
+        } else {
+            continue;
+        }
+    }
+    return cloudSlots;
+}
+void MainWindow::addClouds()
+{
+    cloudStatus_ = 0;
+    std::vector<int> cloudSlots = randomizeCloudSlots();
+    for (int i = 0; i < 12; i++) {
+        if (cloudSlots[i] == 1) {
+            //add new cloud to the slot
+            std::cout << "Adding cloud to the slot " << i << std::endl;
+            Student::Cloud* cloud(new Student::Cloud(i * 50));
+            clouds_.push_back(cloud);
+            map->addItem(cloud);
+        } else {
+            continue;
+        }
+    }
+}
+
+void MainWindow::moveClouds()
+{
+    if (cloudStatus_ >= cloudInterval_) {
+        cloudStatus_ = 0;
+        addClouds();
+    } else {
+        cloudStatus_++;
+    }
+
+    for (auto cloud : clouds_) {
+        if (cloud->x() < 0) {
+            map->removeItem(cloud); //delete from scene
+            clouds_.remove(clouds_.indexOf(cloud)); //delete from QVector
+        } else {
+            cloud->moveBy(-(cloud->getSpeed()), 0);
+        }
+    }
+}
 }

@@ -17,7 +17,7 @@ Player::~Player()
 
 QRectF Player::boundingRect() const
 {
-    return QRectF(0, 0, 150, 150);
+    return QRectF(0, 0, 49, 49);
 }
 
 void Player::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
