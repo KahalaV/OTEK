@@ -3,12 +3,10 @@
 namespace Student {
 
 Player::Player() :
-    x_(600),
-    y_(300),
     dir_(1),
     image_(QImage(":/Resources/Graphics/plane_N.bmp"))
 {
-    setPos(x_, y_);
+    setPos(600, 300);
     setZValue(1);
 }
 
@@ -68,28 +66,43 @@ void Player::setDirection(int dir)
 }
 bool Player::checkNewCoords(int dx, int dy)
 {
-    if (x_ + dx < 0) {
+    int x = this->x();
+    int y = this->y();
+    if (x + dx < 0) {
         return true;
     }
-    if (x_ + dx > 1040) {
+    if (x + dx > 1040) {
         return true;
     }
-    if (y_ + dy < 0) {
+    if (y + dy < 0) {
         return true;
     }
-    if (y_ + dy > 540) {
+    if (y + dy > 540) {
         return true;
     }
     return false;
 }
 void Player::updateCoords(int dx, int dy)
 {
-    x_ += dx;
-    y_ += dy;
+    this->setX(this->x() + dx);
+    this->setY(this->y() + dy);
 }
 int Player::getDir()
 {
     return dir_;
+}
+int Player::getSpeedStraight()
+{
+    return speedStraight_;
+}
+
+int Player::getSpeedDiagonal()
+{
+    return speedDiagonal_;
+}
+int Player::getBombRadius()
+{
+    return bombRadius;
 }
 
 }

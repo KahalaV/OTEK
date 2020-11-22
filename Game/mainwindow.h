@@ -64,8 +64,9 @@ private:
     QTime* clock_;
     QVector<Student::ActorItem*> actors_;
     Student::Player* player_;
+    int score_;
 
-    int tick_ = 250;
+    int tick_ = 50;
     int width_ = 1095;
     int height_ = 592;
 };

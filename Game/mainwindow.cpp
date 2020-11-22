@@ -6,9 +6,11 @@ namespace Student {
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    score_(0)
 {   
     ui->setupUi(this);
+    ui->scoreLabel->setText(QString::number(score_));
 
     map = new QGraphicsScene(this);
     ui->graphicsView->setScene(map);
@@ -136,79 +138,56 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 }
 void MainWindow::movePlayer()
 {
-    int dx, dy = 0;
+    int ss = player_->getSpeedStraight();
+    int sd = player_->getSpeedDiagonal();
     switch (player_->getDir()) {
         case 1:
-            dx = 0;
-            dy = -10;
-            if (player_->checkNewCoords(dx, dy)) {
+            if (player_->checkNewCoords(0, -ss)) {
                 break;
             }
-            player_->updateCoords(dx, dy);
-            player_->moveBy(dx, dy);
+            player_->moveBy(0, -ss);
             break;
         case 2:
-            dx = 7;
-            dy = -7;
-            if (player_->checkNewCoords(dx, dy)) {
+            if (player_->checkNewCoords(sd, -sd)) {
                 break;
             }
-            player_->updateCoords(dx, dy);
-            player_->moveBy(dx, dy);
+            player_->moveBy(sd, -sd);
             break;
         case 3:
-            dx = 10;
-            dy = 0;
-            if (player_->checkNewCoords(dx, dy)) {
+            if (player_->checkNewCoords(ss, 0)) {
                 break;
             }
-            player_->updateCoords(dx, dy);
-            player_->moveBy(dx, dy);
+            player_->moveBy(ss, 0);
             break;
         case 4:
-            dx = 7;
-            dy = 7;
-            if (player_->checkNewCoords(dx, dy)) {
+            if (player_->checkNewCoords(sd, sd)) {
                 break;
             }
-            player_->updateCoords(dx, dy);
-            player_->moveBy(dx, dy);
+            player_->moveBy(sd, sd);
             break;
         case 5:
-            dx = 0;
-            dy = 10;
-            if (player_->checkNewCoords(dx, dy)) {
+            if (player_->checkNewCoords(0, ss)) {
                 break;
             }
-            player_->updateCoords(dx, dy);
-            player_->moveBy(dx, dy);
+            player_->moveBy(0, ss);
             break;
         case 6:
-            dx = -7;
-            dy = 7;
-            if (player_->checkNewCoords(dx, dy)) {
+            if (player_->checkNewCoords(-sd, sd)) {
                 break;
             }
-            player_->updateCoords(dx, dy);
-            player_->moveBy(dx, dy);
+            player_->moveBy(-sd, sd);
             break;
         case 7:
-            dx = -10;
-            dy = 0;
-            if (player_->checkNewCoords(dx, dy)) {
+            if (player_->checkNewCoords(-ss, 0)) {
                 break;
             }
-            player_->updateCoords(dx, dy);
-            player_->moveBy(dx, dy);
+            player_->moveBy(-ss, 0);
             break;
         case 8:
-            dx = -7;
-            dy = -7;
-            if (player_->checkNewCoords(dx, dy)) {
+            if (player_->checkNewCoords(-sd, -sd)) {
                 break;
             }
-            player_->updateCoords(dx, dy);
-            player_->moveBy(dx, dy);
+            player_->moveBy(-sd, -sd);
             break;
     }
 }
@@ -216,14 +195,16 @@ void MainWindow::dropBomb()
 {
     int bombX = player_->x() + player_->quadrantSide_;
     int bombY = player_->y() + player_->quadrantSide_;
+    int bombRadius = player_->getBombRadius();
 
     for (auto actor : actors_) {
         int actorX = actor->x();
         int actorY = actor->y();
         int distance = sqrt((actorX - bombX)*(actorX - bombX) + (actorY-bombY)*(actorY-bombY));
-        if (distance < 50 && actor->getType() == 1) {
+        if (distance < bombRadius && actor->getType() == 1) {
             actor->setType(2);
-            std::cout << "Nysse hit!" << std::endl;
+            score_++;
+            ui->scoreLabel->setText(QString::number(score_));
         }
 
     }
