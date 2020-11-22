@@ -8,6 +8,7 @@ CONFIG += c++14
 SOURCES += \
     actoritem.cpp \
     city.cpp \
+    engine.cpp \
     main.cc \
     mainwindow.cpp \
     player.cpp \
@@ -44,6 +45,7 @@ FORMS += \
 HEADERS += \
     actoritem.h \
     city.h \
+    engine.hh \
     gameengine.h \
     mainwindow.h \
     player.h \

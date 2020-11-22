@@ -1,6 +1,6 @@
-#include "core/logic.hh"
-#include "city.h"
 #include "startwindow.h"
+#include "engine.hh"
+#include "city.h"
 
 #include <QApplication>
 #include <QLabel>
@@ -21,10 +21,13 @@ int main(int argc, char *argv[])
     gameLogic.fileConfig();
     std::shared_ptr<Student::City> sanAndreas(new Student::City(bigMap));
 
+
     gameLogic.takeCity(sanAndreas);
     //gameLogic.setTime(12, 0); //for testing
     gameLogic.finalizeGameStart();
 
+    //std::shared_ptr<Student::City> sanAndreas = Engine::createGame();
+    //int gameStatus = Engine::engine(sanAndreas);
 
     return a.exec();
 }
