@@ -1,26 +1,28 @@
 #include "engine.hh"
 
-namespace Engine
+namespace Student
 {
-    std::shared_ptr<Student::City> createGame()
-    {
-        //map image
-        QImage bigMap = QImage(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
-        //QImage smallMap = QImage(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
 
-        std::shared_ptr<Student::City> sanAndreas(new Student::City(bigMap));
+Engine::Engine() :
+    gameLogic_(new CourseSide::Logic),
+    engineState_(0)
+{
+    //map image
+    QImage bigMap = QImage(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
+    //QImage smallMap = QImage(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
+    city_ = std::shared_ptr<Student::City>(new Student::City(bigMap));
+}
 
-        return sanAndreas;
-    }
+Engine::~Engine() {}
 
-    int engine(std::shared_ptr<Student::City> city)
-    {
-        CourseSide::Logic gameLogic;
-        gameLogic.fileConfig();
-        gameLogic.takeCity(city);
-        //gameLogic.setTime(12, 0); //for testing
-        gameLogic.finalizeGameStart();
+void Engine::logic()
+{
+    gameLogic_->fileConfig();
+    gameLogic_->takeCity(city_);
+    //gameLogic.setTime(12, 0); //for testing
+    gameLogic_->finalizeGameStart();
 
-        return 0;
-    }
+    engineState_ = 1;
+}
+
 }

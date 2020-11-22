@@ -7,10 +7,24 @@
 
 #include <memory>
 
-namespace Engine
+namespace Student
 {
-    std::shared_ptr<Student::City> createGame();
-    int engine(std::shared_ptr<Student::City>);
+
+class Engine
+{
+public:
+    Engine();
+    ~Engine();
+    //std::shared_ptr<Student::City> createGame();
+    void logic();
+
+private:
+    std::shared_ptr<Student::City> city_;
+    std::shared_ptr<CourseSide::Logic> gameLogic_;
+    // engineState = 0 default, after game start value is 1
+    int engineState_;
+};
+
 }
 
 #endif // ENGINE_HH
