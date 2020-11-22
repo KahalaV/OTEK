@@ -52,7 +52,7 @@ void ActorItem::setType(int type)
     type_ = type;
     if (type == 2) {
          image_ = QImage(":/Resources/Graphics/destroyed_nysse.bmp");
-         setZValue(0.3);
+         setZValue(0.2);
     }
 }
 

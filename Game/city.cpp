@@ -62,7 +62,13 @@ void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
     int index = std::distance(actors_.begin(), it);
 
     Student::ActorItem *tempItem = mainWindow_->returnActorItem(index);
-    mainWindow_->moveActor(tempItem, x, y);
+    //if the item is a destroyed nysse, no movement and the actor is set to NULL
+    if (tempItem->getType() == 2) {
+        actor = NULL;
+        return;
+    } else {
+        mainWindow_->moveActor(tempItem, x, y);
+    }
 }
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const {}
 bool City::isGameOver() const
