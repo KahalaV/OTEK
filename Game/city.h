@@ -12,7 +12,6 @@
 #include <QTime>
 #include <QTimer>
 #include <iostream>
-#include <iterator>
 #include <QDebug>
 
 namespace Student
@@ -44,7 +43,7 @@ private:
     QTimer* timer_;
     QImage &background_;
     std::shared_ptr<Student::MainWindow> mainWindow_;
-    std::vector<std::shared_ptr<Interface::IActor>> actors_;
+    //std::vector<std::shared_ptr<Interface::IActor>> actors_;
     std::vector<std::shared_ptr<Interface::IStop>> stops_;
     Student::Player* player_;
     bool gamestatus_ = false;

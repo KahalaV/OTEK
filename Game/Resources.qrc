@@ -14,5 +14,7 @@
         <file>Resources/Graphics/bombtest.bmp</file>
         <file>Resources/Graphics/destroyed_nysse.bmp</file>
         <file>Resources/Graphics/cloud.bmp</file>
+        <file>Resources/Sound/CloudHitSound.wav</file>
+        <file>Resources/Sound/error.wav</file>
     </qresource>
 </RCC>

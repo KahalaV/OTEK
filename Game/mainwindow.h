@@ -5,6 +5,7 @@
 #include "cloud.h"
 #include "interfaces/istop.hh"
 #include "interfaces/iactor.hh"
+#include "actors/passenger.hh"
 #include "player.h"
 #include <iostream>
 
@@ -18,10 +19,12 @@
 #include <iostream>
 #include <memory>
 #include <QVector>
-#include <vector>
 #include <map>
 #include <math.h>
 #include "cstdlib"
+#include "QSound"
+#include <bits/stdc++.h>
+#include <iterator>
 
 /*!
  * Doxytest start
@@ -43,10 +46,12 @@ public:
 
     void setPicture(QImage img);
     void setClock(QTime &clock);
-    void addActor(int x, int y, int type);
+    void addActor(std::shared_ptr<Interface::IActor> newactor);
+    void removeActor(std::shared_ptr<Interface::IActor> actor);
+    bool findActor(std::shared_ptr<Interface::IActor> actor);
     void addStop(int x, int y);
-    void moveActor(ActorItem *actor, int x, int y);
-    Student::ActorItem* returnActorItem(int index);
+    void moveActor(std::shared_ptr<Interface::IActor> actor, int x, int y);
+    void updateTimeLabel();
 
     //player
     void setPlayer(Student::Player* player);
@@ -59,7 +64,6 @@ public:
 
 
 public slots:
-    void updateTimeLabel();
     //player
     void movePlayer();
     //clouds
@@ -72,7 +76,8 @@ private:
     QGraphicsScene* map;
     QTimer* timer;
     QTime* clock_;
-    QVector<Student::ActorItem*> actors_;
+    //QVector<Student::ActorItem*> actors_;
+    QVector<std::pair<std::shared_ptr<Interface::IActor>, Student::ActorItem*>> actors_;
     QVector<Student::Cloud*> clouds_;
     Student::Player* player_;
     int score_;

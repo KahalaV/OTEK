@@ -63,6 +63,8 @@ void MainWindow::addStop(int x, int y)
 
 void MainWindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int y)
 {
+    
+    /*
     auto it = std::find_if(actors_.begin(), actors_.end(), [&actor](const std::pair<std::shared_ptr<Interface::IActor>, ActorItem*>& elem){ return elem.first == actor;});
     //if the item is a destroyed bus, ActorItem is set to nullptr to stop the movement
     if (it->second->getType() == 2) {
@@ -70,7 +72,7 @@ void MainWindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int 
     } else {
         it->second->setPos(x, y);
     }
-
+*/
 }
 
 void MainWindow::updateTimeLabel()

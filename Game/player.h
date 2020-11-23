@@ -17,7 +17,6 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    void updateCoords(int dx, int dy);
     void setDirection(int dir);
     bool checkNewCoords(int dx, int dy);
     int getDir();

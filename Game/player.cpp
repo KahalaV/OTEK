@@ -82,11 +82,7 @@ bool Player::checkNewCoords(int dx, int dy)
     }
     return false;
 }
-void Player::updateCoords(int dx, int dy)
-{
-    this->setX(this->x() + dx);
-    this->setY(this->y() + dy);
-}
+
 int Player::getDir()
 {
     return dir_;

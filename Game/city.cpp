@@ -7,7 +7,6 @@ City::City(QImage &background) :
 
     background_(background),
     mainWindow_(new Student::MainWindow)
-
 {
     mainWindow_->setPicture(background_);
     mainWindow_->setClock(clock_);
@@ -26,6 +25,7 @@ QImage City::getBackground()
 void City::setClock(QTime clock)
 {
     clock_ = clock;
+    mainWindow_->updateTimeLabel();
 }
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
@@ -37,38 +37,27 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 void City::startGame() {}
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
-    int type = 0; //0 = passenger, 1 = nysse
-    if (std::dynamic_pointer_cast<CourseSide::Passenger>(newactor) == nullptr)
-    {
-        type = 1;
-    }
-    actors_.push_back(newactor);
-    int x = newactor->giveLocation().giveX() + 353;
-    int y = 500 - newactor->giveLocation().giveY() + 56;
-    mainWindow_->addActor(x, y, type);
+    mainWindow_->addActor(newactor);
 }
-void City::removeActor(std::shared_ptr<Interface::IActor> actor) {}
+void City::removeActor(std::shared_ptr<Interface::IActor> actor)
+{
+    mainWindow_->removeActor(actor);
+}
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
-
+    //mikä vittu tämän idea on
 }
-bool City::findActor(std::shared_ptr<Interface::IActor> actor) const {}
+bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
+{
+    return mainWindow_->findActor(actor);
+}
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
     int x = actor->giveLocation().giveX() + 353;
     int y = 500 - actor->giveLocation().giveY() + 56;
-    //City actors_ and MainWindow actors_ have the actors in the same order
-    std::vector<std::shared_ptr<Interface::IActor>>::iterator it = std::find(actors_.begin(), actors_.end(), actor);
-    int index = std::distance(actors_.begin(), it);
 
-    Student::ActorItem *tempItem = mainWindow_->returnActorItem(index);
-    //if the item is a destroyed nysse, no movement and the actor is set to NULL
-    if (tempItem->getType() == 2) {
-        actor = NULL;
-        return;
-    } else {
-        mainWindow_->moveActor(tempItem, x, y);
-    }
+    mainWindow_->moveActor(actor, x, y);
+
 }
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const {}
 bool City::isGameOver() const
