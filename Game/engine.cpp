@@ -19,7 +19,7 @@ void Engine::logic()
 {
     gameLogic_->fileConfig();
     gameLogic_->takeCity(city_);
-    //gameLogic.setTime(12, 0); //for testing
+    gameLogic_->setTime(12, 0); //for testing
     gameLogic_->finalizeGameStart();
 
     engineState_ = 1;

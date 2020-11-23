@@ -3,7 +3,6 @@
         <file>Resources/Graphics/nysse.bmp</file>
         <file>Resources/Graphics/stop.bmp</file>
         <file>Resources/Graphics/passenger.bmp</file>
-        <file>Resources/Graphics/bombtest.bmp</file>
         <file>Resources/Graphics/destroyed_nysse.bmp</file>
         <file>Resources/Graphics/cloud.bmp</file>
         <file>Resources/Sound/CloudHitSound.wav</file>
@@ -11,5 +10,7 @@
         <file>Resources/Graphics/red_baron.bmp</file>
         <file>Resources/Graphics/bomber.bmp</file>
         <file>Resources/Graphics/thunderbird.bmp</file>
+        <file>Resources/Graphics/explosion.bmp</file>
+        <file>Resources/Graphics/bomb.bmp</file>
     </qresource>
 </RCC>

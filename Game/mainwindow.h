@@ -8,6 +8,7 @@
 #include "actors/passenger.hh"
 #include "player.h"
 #include <iostream>
+#include "bomb.h"
 
 #include <QKeyEvent>
 #include <QDebug>
@@ -67,6 +68,7 @@ public:
 public slots:
     //player
     void movePlayer();
+    void updateBombs();
     //clouds
     void moveClouds();
 
@@ -79,6 +81,7 @@ private:
     QTime* clock_;
     QVector<std::pair<std::shared_ptr<Interface::IActor>, Student::ActorItem*>> actors_;
     QVector<Student::Cloud*> clouds_;
+    QVector<Student::Bomb*> bombs_;
     Student::Player* player_;
     int score_;
     int cloudStatus_;

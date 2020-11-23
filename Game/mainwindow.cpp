@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     timer = new QTimer(this);
     //connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
     connect(timer, SIGNAL(timeout()), this, SLOT(movePlayer()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateBombs()));
     connect(timer, SIGNAL(timeout()), this, SLOT(moveClouds()));
     timer->start(tick_);
 }
@@ -229,30 +230,63 @@ void MainWindow::movePlayer()
 }
 void MainWindow::dropBomb()
 {
-    int bombX = player_->x() + player_->quadrantSide_;
-    int bombY = player_->y() + player_->quadrantSide_;
-    int bombRadius = player_->getBombRadius();
+    int x = player_->x() + 25;
+    int y = player_->y() + 25;
 
-    //DEBUG
+    //TEST BOMB DROP LOCATION
     /*
-    QGraphicsRectItem* bomb = new QGraphicsRectItem(bombX, bombY, 3, 3);
-    bomb->setZValue(2);
+    QGraphicsRectItem* rect = new QGraphicsRectItem(x, y, 3, 3);
+    rect->setZValue(2);
+    map->addItem(rect);*/
+
+    Student::Bomb* bomb(new Student::Bomb);
+    bomb->setPos(x, y);
+    bomb->setDirection(player_->getDir());
+    bombs_.push_back(bomb);
     map->addItem(bomb);
-*/
-
-    for (auto actor : actors_) {
-        int actorX = actor.second->x();
-        int actorY = actor.second->y();
-        int distance = sqrt((actorX - bombX)*(actorX - bombX) + (actorY-bombY)*(actorY-bombY));
-        if (distance < bombRadius && actor.second->getType() == 1) {
-            actor.second->setType(2);
-            score_++;
-            ui->scoreLabel->setText(QString::number(score_));
-        }
-
-    }
-
 }
+void MainWindow::updateBombs()
+{
+    for (auto bomb : bombs_) {
+        if (!bomb->getStatus()) {
+            //if the bomb has not exploded yet
+            bomb->setScale(bomb->dropTime_*0.1);
+            bomb->dropTime_--;
+            if (bomb->dropTime_ == 0) {
+                bomb->explode();
+                //check nearby actors and destroy buses within explosion radius
+                int bombX = bomb->x();
+                int bombY = bomb->y();
+                int bombRadius = player_->getBombRadius();
+
+                //test destruction radius
+                //map->addEllipse(bombX - bombRadius, bombY - bombRadius, 2*bombRadius, 2*bombRadius);
+
+                for (auto actor : actors_) {
+                    int actorX = actor.second->x();
+                    int actorY = actor.second->y();
+                    //euclidean distance
+                    int distance = sqrt((actorX - bombX)*(actorX - bombX) + (actorY-bombY)*(actorY-bombY));
+                    if (distance < bombRadius && actor.second->getType() == 1) {
+                        actor.second->setType(2);
+                        score_++;
+                        ui->scoreLabel->setText(QString::number(score_));
+                    }
+
+                }
+            }
+        } else {
+            //if the bomb has exploded
+            bomb->setScale((bomb->explosionTime_)*0.2);
+            bomb->explosionTime_++;
+            if (bomb->explosionTime_ == 10) {
+                map->removeItem(bomb); //delete from scene
+                bombs_.remove(bombs_.indexOf(bomb)); //delete from QVector
+            }
+        }
+    }
+}
+
 std::vector<int> MainWindow::randomizeCloudSlots()
 {
     //first generate the amount of clouds (2-4)

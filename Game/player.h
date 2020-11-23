@@ -24,8 +24,6 @@ public:
     int getSpeedDiagonal();
     int getBombRadius();
 
-    const int quadrantSide_ = 24; //fourth of the image size
-
 private:
     int dir_;
     int speedStraight_ = 4; //rb = 4; bm = 3; tb = 6

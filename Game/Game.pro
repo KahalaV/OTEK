@@ -7,6 +7,7 @@ CONFIG += c++14
 
 SOURCES += \
     actoritem.cpp \
+    bomb.cpp \
     city.cpp \
     cloud.cpp \
     engine.cpp \
@@ -45,6 +46,7 @@ FORMS += \
 
 HEADERS += \
     actoritem.h \
+    bomb.h \
     city.h \
     cloud.h \
     engine.hh \
