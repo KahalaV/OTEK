@@ -13,7 +13,6 @@
 #include <QDebug>
 #include <QMainWindow>
 #include <QGraphicsScene>
-#include <QGraphicsPixmapItem>
 #include <QTimer>
 #include <QTime>
 #include <iostream>
@@ -25,6 +24,8 @@
 #include "QSound"
 #include <bits/stdc++.h>
 #include <iterator>
+#include <QGraphicsRectItem>
+
 
 /*!
  * Doxytest start
@@ -50,7 +51,7 @@ public:
     void removeActor(std::shared_ptr<Interface::IActor> actor);
     bool findActor(std::shared_ptr<Interface::IActor> actor);
     void addStop(int x, int y);
-    void moveActor(std::shared_ptr<Interface::IActor> actor, int x, int y);
+    void moveActor(std::shared_ptr<Interface::IActor> actor);
     void updateTimeLabel();
 
     //player
@@ -76,14 +77,13 @@ private:
     QGraphicsScene* map;
     QTimer* timer;
     QTime* clock_;
-    //QVector<Student::ActorItem*> actors_;
     QVector<std::pair<std::shared_ptr<Interface::IActor>, Student::ActorItem*>> actors_;
     QVector<Student::Cloud*> clouds_;
     Student::Player* player_;
     int score_;
     int cloudStatus_;
 
-    int tick_ = 100;
+    int tick_ = 50;
     int cloudInterval_ = 50; //ticks between cloud sets
     int width_ = 1095;
     int height_ = 592;

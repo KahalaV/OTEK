@@ -28,11 +28,10 @@ public:
 
 private:
     int dir_;
-    int speedStraight_ = 4;
-    int speedDiagonal_ = 3;
-    int bombRadius = 50;
+    int speedStraight_ = 4; //rb = 4; bm = 3; tb = 6
+    int speedDiagonal_ = 3; //rb = 3; bm = 2; tb = 4
+    int bombRadius = 40; //rb = 40; bm = 50; tb = 30
     QImage image_;
-    Interface::Location loc_;
 };
 
 }

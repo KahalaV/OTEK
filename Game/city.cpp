@@ -29,7 +29,6 @@ void City::setClock(QTime clock)
 }
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
-    stops_.push_back(stop);
     int x = stop->getLocation().giveX() + 353;
     int y = 500 - stop->getLocation().giveY() + 56;
     mainWindow_->addStop(x, y);
@@ -37,11 +36,17 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 void City::startGame() {}
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
-    mainWindow_->addActor(newactor);
+    if (std::dynamic_pointer_cast<CourseSide::Passenger>(newactor) == nullptr) {
+        mainWindow_->addActor(newactor);
+    }
+
 }
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-    mainWindow_->removeActor(actor);
+    if (std::dynamic_pointer_cast<CourseSide::Passenger>(actor) == nullptr) {
+        mainWindow_->removeActor(actor);
+    }
+
 }
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
@@ -49,14 +54,16 @@ void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 }
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 {
-    return mainWindow_->findActor(actor);
+    if (std::dynamic_pointer_cast<CourseSide::Passenger>(actor) == nullptr) {
+        return mainWindow_->findActor(actor);
+    }
+
 }
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
-    int x = actor->giveLocation().giveX() + 353;
-    int y = 500 - actor->giveLocation().giveY() + 56;
-
-    mainWindow_->moveActor(actor, x, y);
+    if (std::dynamic_pointer_cast<CourseSide::Passenger>(actor) == nullptr) {
+        mainWindow_->moveActor(actor);
+    }
 
 }
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const {}

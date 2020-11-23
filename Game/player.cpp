@@ -4,10 +4,11 @@ namespace Student {
 
 Player::Player() :
     dir_(1),
-    image_(QImage(":/Resources/Graphics/plane_N.bmp"))
+    image_(QImage(":/Resources/Graphics/red_baron.bmp"))
 {
     setPos(600, 300);
     setZValue(1);
+    setTransformOriginPoint(this->boundingRect().center());
 }
 
 Player::~Player()
@@ -32,35 +33,35 @@ void Player::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 void Player::setDirection(int dir)
 {
     if (dir == 1) {
-        image_ = QImage(":/Resources/Graphics/plane_N.bmp");
+        this->setRotation(0);
         dir_ = dir;
     }
     if (dir == 2) {
-        image_ = QImage(":/Resources/Graphics/plane_NE.bmp");
+        this->setRotation(45);
         dir_ = dir;
     }
     if (dir == 3) {
-        image_ = QImage(":/Resources/Graphics/plane_E.bmp");
+        this->setRotation(90);
         dir_ = dir;
     }
     if (dir == 4) {
-        image_ = QImage(":/Resources/Graphics/plane_SE.bmp");
+        this->setRotation(135);
         dir_ = dir;
     }
     if (dir == 5) {
-        image_ = QImage(":/Resources/Graphics/plane_S.bmp");
+        this->setRotation(180);
         dir_ = dir;
     }
     if (dir == 6) {
-        image_ = QImage(":/Resources/Graphics/plane_SW.bmp");
+        this->setRotation(225);
         dir_ = dir;
     }
     if (dir == 7) {
-        image_ = QImage(":/Resources/Graphics/plane_W.bmp");
+        this->setRotation(270);
         dir_ = dir;
     }
     if (dir == 8) {
-        image_ = QImage(":/Resources/Graphics/plane_NW.bmp");
+        this->setRotation(315);
         dir_ = dir;
     }
 }
@@ -91,7 +92,6 @@ int Player::getSpeedStraight()
 {
     return speedStraight_;
 }
-
 int Player::getSpeedDiagonal()
 {
     return speedDiagonal_;

@@ -3,18 +3,13 @@
         <file>Resources/Graphics/nysse.bmp</file>
         <file>Resources/Graphics/stop.bmp</file>
         <file>Resources/Graphics/passenger.bmp</file>
-        <file>Resources/Graphics/plane_E.bmp</file>
-        <file>Resources/Graphics/plane_N.bmp</file>
-        <file>Resources/Graphics/plane_NE.bmp</file>
-        <file>Resources/Graphics/plane_NW.bmp</file>
-        <file>Resources/Graphics/plane_S.bmp</file>
-        <file>Resources/Graphics/plane_SE.bmp</file>
-        <file>Resources/Graphics/plane_SW.bmp</file>
-        <file>Resources/Graphics/plane_W.bmp</file>
         <file>Resources/Graphics/bombtest.bmp</file>
         <file>Resources/Graphics/destroyed_nysse.bmp</file>
         <file>Resources/Graphics/cloud.bmp</file>
         <file>Resources/Sound/CloudHitSound.wav</file>
         <file>Resources/Sound/error.wav</file>
+        <file>Resources/Graphics/red_baron.bmp</file>
+        <file>Resources/Graphics/bomber.bmp</file>
+        <file>Resources/Graphics/thunderbird.bmp</file>
     </qresource>
 </RCC>

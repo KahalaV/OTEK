@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     score_(0),
     cloudStatus_(30)
+    //DEBUG
 {   
     ui->setupUi(this);
     ui->scoreLabel->setText(QString::number(score_));
@@ -17,9 +18,9 @@ MainWindow::MainWindow(QWidget *parent) :
     map->setSceneRect(0,0,width_,height_);
 
     timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
-    //connect(timer, SIGNAL(timeout()), this, SLOT(movePlayer()));
-    //connect(timer, SIGNAL(timeout()), this, SLOT(moveClouds()));
+    //connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
+    connect(timer, SIGNAL(timeout()), this, SLOT(movePlayer()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(moveClouds()));
     timer->start(tick_);
 }
 
@@ -41,17 +42,19 @@ void MainWindow::setClock(QTime &clock)
 void MainWindow::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     //check type
-    int type = 0; //0 = passenger, 1 = nysse
+    /*int type = 0; //0 = passenger, 1 = nysse
     if (std::dynamic_pointer_cast<CourseSide::Passenger>(newactor) == nullptr)
     {
         type = 1;
-    }
+    }*/
     int x = newactor->giveLocation().giveX() + 353;
     int y = 500 - newactor->giveLocation().giveY() + 56;
-    ActorItem* nActorItem = new ActorItem(x, y, type);
+    ActorItem* nActorItem = new ActorItem(x, y, 1);
 
     actors_.push_back(std::make_pair(newactor, nActorItem));
     map->addItem(nActorItem);
+    //DEBUG
+    //ui->debugLabel->setText(QString::number(actors_.size()));
 }
 
 void MainWindow::addStop(int x, int y)
@@ -61,16 +64,18 @@ void MainWindow::addStop(int x, int y)
     map->addItem(stopSprite);
 }
 
-void MainWindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int y)
+void MainWindow::moveActor(std::shared_ptr<Interface::IActor> actor)
 {
+    int x = actor->giveLocation().giveX() + 353;
+    int y = 500 - actor->giveLocation().giveY() + 56;
     auto it = std::find_if(actors_.begin(), actors_.end(), [&actor](const std::pair<std::shared_ptr<Interface::IActor>, ActorItem*>& elem){ return elem.first == actor;});
     //if the item is a destroyed bus, ActorItem is set to nullptr to stop the movement
     if (it->second->getType() == 2) {
         return;
     } else {
-        it->second->setPos(x, y);
+        it->second->setX(x);
+        it->second->setY(y);
     }
-
 }
 
 void MainWindow::updateTimeLabel()
@@ -228,6 +233,13 @@ void MainWindow::dropBomb()
     int bombY = player_->y() + player_->quadrantSide_;
     int bombRadius = player_->getBombRadius();
 
+    //DEBUG
+    /*
+    QGraphicsRectItem* bomb = new QGraphicsRectItem(bombX, bombY, 3, 3);
+    bomb->setZValue(2);
+    map->addItem(bomb);
+*/
+
     for (auto actor : actors_) {
         int actorX = actor.second->x();
         int actorY = actor.second->y();
@@ -297,6 +309,7 @@ void MainWindow::removeActor(std::shared_ptr<Interface::IActor> actor) {
     it->first->remove();
     map->removeItem(it->second);
     actors_.erase(it);
+    //ui->debugLabel->setText(QString::number(actors_.size()));
 }
 
 bool MainWindow::findActor(std::shared_ptr<Interface::IActor> actor)
