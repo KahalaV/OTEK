@@ -94,61 +94,68 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     int dir = player_->getDir();
     switch (event->key()) {
         case Qt::Key_W:
-            if (dir == 2 || dir == 8) {
-                player_->setDirection(1);
-                break;
-            } if (dir == 7) {
-                player_->setDirection(8);
-                break;
-            } if (dir == 3) {
-                player_->setDirection(2);
-                break;
-            } else {
-                break;
+            if (1 <= dir && dir <= 4) {
+                dir--;
+                if (dir == 0) {
+                    dir = 8;
+                }
             }
+            if (6 <= dir && dir <= 8) {
+                dir++;
+                if (dir == 9) {
+                    dir = 1;
+                }
+            }
+            player_->setDirection(dir);
+            break;
 
         case Qt::Key_D:
-            if (dir == 2 || dir == 4) {
-                player_->setDirection(3);
-                break;
-            } if (dir == 1) {
-                player_->setDirection(2);
-                break;
-            } if (dir == 5) {
-                player_->setDirection(4);
-                break;
-            } else {
-                break;
+            if (4 <= dir && dir  <= 6) {
+                dir--;
+                if (dir == 0) {
+                    dir = 8;
+                }
             }
-
+            if ((1 <= dir && dir <= 2) || dir == 8) {
+                dir++;
+                if (dir == 9) {
+                    dir = 1;
+                }
+            }
+            player_->setDirection(dir);
+            break;
 
         case Qt::Key_S:
-            if (dir == 6 || dir == 4) {
-                player_->setDirection(5);
-                break;
-            } if (dir == 7) {
-                player_->setDirection(6);
-                break;
-            } if (dir == 3) {
-                player_->setDirection(4);
-                break;
-            } else {
-                break;
+            if (6 <= dir && dir <= 8) {
+                dir--;
+                if (dir == 0) {
+                    dir = 8;
+                }
             }
+            if (2 <= dir && dir <= 4) {
+                dir++;
+                if (dir == 9) {
+                    dir = 1;
+                }
+            }
+            player_->setDirection(dir);
+            break;
 
         case Qt::Key_A:
-            if (dir == 6 || dir == 8) {
-                player_->setDirection(7);
-                break;
-            } if (dir == 1) {
-                player_->setDirection(8);
-                break;
-            } if (dir == 5) {
-                player_->setDirection(6);
-                break;
-            } else {
-                break;
+            if ((1 <= dir && dir <= 2) || dir == 8) {
+                dir--;
+                if (dir == 0) {
+                    dir = 8;
+                }
             }
+            if (4 <= dir && dir <= 6) {
+                dir++;
+                if (dir == 9) {
+                    dir = 1;
+                }
+            }
+            player_->setDirection(dir);
+            break;
 
         //bombing
         case Qt::Key_Space:
