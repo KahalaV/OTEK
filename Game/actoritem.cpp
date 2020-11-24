@@ -7,11 +7,11 @@ ActorItem::ActorItem(int x, int y, int type):type_(type)
     setPos(mapToParent(x, y));
     if (type_ == 0) {
         image_ = QImage(":/Resources/Graphics/passenger.bmp");
-        setZValue(0.6);
+        setZValue(0.3);
     }
     if (type_ == 1) {
          image_ = QImage(":/Resources/Graphics/nysse.bmp");
-         setZValue(0.3);
+         setZValue(0.6);
     }
 }
 

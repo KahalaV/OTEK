@@ -4,6 +4,7 @@ namespace Student {
 
 Player::Player() :
     dir_(1),
+    recentlyHit_(false),
     image_(QImage(":/Resources/Graphics/red_baron.bmp"))
 {
     setPos(600, 300);
@@ -99,6 +100,14 @@ int Player::getSpeedDiagonal()
 int Player::getBombRadius()
 {
     return bombRadius;
+}
+bool Player::isRecentlyHit()
+{
+    return recentlyHit_;
+}
+void Player::setHit(bool hitStatus)
+{
+    recentlyHit_ = hitStatus;
 }
 
 }

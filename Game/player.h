@@ -23,12 +23,15 @@ public:
     int getSpeedStraight();
     int getSpeedDiagonal();
     int getBombRadius();
+    bool isRecentlyHit();
+    void setHit(bool hitStatus);
 
 private:
     int dir_;
     int speedStraight_ = 4; //rb = 4; bm = 3; tb = 6
     int speedDiagonal_ = 3; //rb = 3; bm = 2; tb = 4
     int bombRadius = 40; //rb = 40; bm = 50; tb = 30
+    bool recentlyHit_;
     QImage image_;
 };
 

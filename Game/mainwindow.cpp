@@ -43,25 +43,26 @@ void MainWindow::setClock(QTime &clock)
 void MainWindow::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     //check type
-    /*int type = 0; //0 = passenger, 1 = nysse
+    int type = 0; //0 = passenger, 1 = nysse
     if (std::dynamic_pointer_cast<CourseSide::Passenger>(newactor) == nullptr)
     {
         type = 1;
-    }*/
+    }
     int x = newactor->giveLocation().giveX() + 353;
     int y = 500 - newactor->giveLocation().giveY() + 56;
-    ActorItem* nActorItem = new ActorItem(x, y, 1);
+    ActorItem* nActorItem = new ActorItem(x, y, type);
 
     actors_.push_back(std::make_pair(newactor, nActorItem));
     map->addItem(nActorItem);
     //DEBUG
-    //ui->debugLabel->setText(QString::number(actors_.size()));
+    ui->debugLabel->setText(QString::number(actors_.size()));
 }
 
 void MainWindow::addStop(int x, int y)
 {
     QGraphicsPixmapItem* stopSprite = new QGraphicsPixmapItem(QPixmap(":/Resources/Graphics/stop.bmp"));
     stopSprite->setPos(x, y);
+    stopSprite->setZValue(0.1);
     map->addItem(stopSprite);
 }
 
@@ -70,6 +71,7 @@ void MainWindow::moveActor(std::shared_ptr<Interface::IActor> actor)
     int x = actor->giveLocation().giveX() + 353;
     int y = 500 - actor->giveLocation().giveY() + 56;
     auto it = std::find_if(actors_.begin(), actors_.end(), [&actor](const std::pair<std::shared_ptr<Interface::IActor>, ActorItem*>& elem){ return elem.first == actor;});
+
     //if the item is a destroyed bus, ActorItem is set to nullptr to stop the movement
     if (it->second->getType() == 2) {
         return;
@@ -230,15 +232,23 @@ void MainWindow::movePlayer()
     //check collision with clouds
     for (auto cloud : clouds_) {
         if (player_->collidesWithItem(cloud)) {
-            std::cout << "COLLISION!" << std::endl;
-            //QSound::play(":/Resources/Sound/CloudHitSound.wav");
+            if (!player_->isRecentlyHit()) {
+                //if the player has not recently taken hit
+                player_->setHit(true);
+                QSound::play(":/Resources/Sound/CloudHitSound.wav");
+                score_ -= 3;
+                ui->scoreLabel->setText(QString::number(score_));
+            } else {
+                return;
+            }
+
         }
     }
 }
 void MainWindow::dropBomb()
 {
-    int x = player_->x() + 25;
-    int y = player_->y() + 25;
+    int x = player_->x();
+    int y = player_->y();
 
     //TEST BOMB DROP LOCATION
     /*
@@ -257,13 +267,13 @@ void MainWindow::updateBombs()
     for (auto bomb : bombs_) {
         if (!bomb->getStatus()) {
             //if the bomb has not exploded yet
-            bomb->setScale(bomb->dropTime_*0.1);
+            bomb->setScale(bomb->dropTime_*0.15);
             bomb->dropTime_--;
             if (bomb->dropTime_ == 0) {
                 bomb->explode();
                 //check nearby actors and destroy buses within explosion radius
-                int bombX = bomb->x();
-                int bombY = bomb->y();
+                int bombX = bomb->x() + 25;
+                int bombY = bomb->y() + 25;
                 int bombRadius = player_->getBombRadius();
 
                 //test destruction radius
@@ -322,6 +332,7 @@ void MainWindow::addClouds()
             Student::Cloud* cloud(new Student::Cloud(i * 50));
             clouds_.push_back(cloud);
             map->addItem(cloud);
+            player_->setHit(false);
         } else {
             continue;
         }
@@ -350,7 +361,7 @@ void MainWindow::removeActor(std::shared_ptr<Interface::IActor> actor) {
     it->first->remove();
     map->removeItem(it->second);
     actors_.erase(it);
-    //ui->debugLabel->setText(QString::number(actors_.size()));
+    ui->debugLabel->setText(QString::number(actors_.size()));
 }
 
 bool MainWindow::findActor(std::shared_ptr<Interface::IActor> actor)

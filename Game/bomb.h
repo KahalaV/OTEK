@@ -7,7 +7,7 @@
 
 namespace Student {
 
-class Bomb : public QGraphicsItem
+class Bomb : public QGraphicsPixmapItem
 {
 public:
     Bomb();
@@ -19,13 +19,14 @@ public:
     int getExplosionTime();
     void explode();
     void setDirection(int dir);
+    QPixmap drawBomb();
 
     int dropTime_;
     int explosionTime_;
 
 private:
     bool exploded_;
-    QImage image_;
+    QPixmap image_;
     int dir_;
 };
 
