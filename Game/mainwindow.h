@@ -54,6 +54,8 @@ public:
     void addStop(int x, int y);
     void moveActor(std::shared_ptr<Interface::IActor> actor);
     void updateTimeLabel();
+    void startGame(const int GAME_TIME);
+    bool isGameOver();
 
     //player
     void setPlayer(Student::Player* player);
@@ -72,12 +74,14 @@ public slots:
     //clouds
     void moveClouds();
 
-public:
+    void decreaseGameTime();
 
 private:
     Ui::MainWindow* ui;
     QGraphicsScene* map;
     QTimer* timer;
+    QTime timeLeft_;
+    bool gameOver;
     QTime* clock_;
     QVector<std::pair<std::shared_ptr<Interface::IActor>, Student::ActorItem*>> actors_;
     QVector<Student::Cloud*> clouds_;
@@ -86,7 +90,7 @@ private:
     int score_;
     int cloudStatus_;
 
-    int tick_ = 50;
+    double tick_ = 50;
     int cloudInterval_ = 50; //ticks between cloud sets
     int width_ = 1095;
     int height_ = 592;

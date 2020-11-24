@@ -7,10 +7,7 @@ Engine::Engine() :
     gameLogic_(new CourseSide::Logic),
     engineState_(0)
 {
-    //map image
-    QImage bigMap = QImage(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
-    //QImage smallMap = QImage(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
-    city_ = std::shared_ptr<Student::City>(new Student::City(bigMap));
+    city_ = std::shared_ptr<Student::City>(new Student::City);
 }
 
 Engine::~Engine() {}

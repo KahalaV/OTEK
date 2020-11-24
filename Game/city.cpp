@@ -3,25 +3,20 @@
 namespace Student
 {
 
-City::City(QImage &background) :
-
-    background_(background),
+City::City(const int GAME_TIME) :
     mainWindow_(new Student::MainWindow)
 {
-    mainWindow_->setPicture(background_);
+    mainWindow_->setPicture(QImage(":/offlinedata/offlinedata/kartta_iso_1095x592.png"));
     mainWindow_->setClock(clock_);
     mainWindow_->show();
     setPlayer();
 
+    mainWindow_->startGame(GAME_TIME);
 }
 City::~City() {}
 
 void City::setBackground(QImage& basicbackground, QImage& bigbackground) {};
 
-QImage City::getBackground()
-{
-    return background_;
-}
 void City::setClock(QTime clock)
 {
     clock_ = clock;
@@ -69,7 +64,7 @@ void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const {}
 bool City::isGameOver() const
 {
-    return false;
+    mainWindow_->isGameOver();
 }
 void City::setPlayer()
 {
@@ -77,5 +72,6 @@ void City::setPlayer()
     player_ = player;
     mainWindow_->setPlayer(player_);
 }
+
 
 }

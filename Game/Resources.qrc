@@ -5,12 +5,15 @@
         <file>Resources/Graphics/passenger.bmp</file>
         <file>Resources/Graphics/destroyed_nysse.bmp</file>
         <file>Resources/Graphics/cloud.bmp</file>
-        <file>Resources/Sound/CloudHitSound.wav</file>
         <file>Resources/Sound/error.wav</file>
         <file>Resources/Graphics/red_baron.bmp</file>
         <file>Resources/Graphics/bomber.bmp</file>
         <file>Resources/Graphics/thunderbird.bmp</file>
         <file>Resources/Graphics/explosion.bmp</file>
         <file>Resources/Graphics/bomb.bmp</file>
+        <file>Resources/Sound/bombDrop.wav</file>
+        <file>Resources/Sound/cloudHitSound.wav</file>
+        <file>Resources/Sound/explosion.wav</file>
+        <file>Resources/Sound/error2.wav</file>
     </qresource>
 </RCC>

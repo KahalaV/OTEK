@@ -20,10 +20,9 @@ namespace Student
 class City : public Interface::ICity
 {
 public:
-    City(QImage &background);
+    City(const int GAME_TIME = 15);
     ~City();
     void setBackground(QImage& basicbackground, QImage& bigbackground);
-    QImage getBackground();
     void setClock(QTime clock);
     void addStop(std::shared_ptr<Interface::IStop> stop);
     void startGame();
@@ -40,8 +39,6 @@ public:
 
 private:
     QTime clock_;
-    QTimer* timer_;
-    QImage &background_;
     std::shared_ptr<Student::MainWindow> mainWindow_;
     Student::Player* player_;
     bool gamestatus_ = false;

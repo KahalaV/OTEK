@@ -5,6 +5,7 @@
 #include <QApplication>
 #include <QLabel>
 
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -15,21 +16,6 @@ int main(int argc, char *argv[])
 
     std::shared_ptr<Student::Engine> gameEngine(new Student::Engine);
     gameEngine->logic();
-
-    /*
-    //map image
-    QImage bigMap = QImage(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
-    //QImage smallMap = QImage(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
-
-    CourseSide::Logic gameLogic;
-    gameLogic.fileConfig();
-    std::shared_ptr<Student::City> sanAndreas(new Student::City(bigMap));
-
-
-    gameLogic.takeCity(sanAndreas);
-    //gameLogic.setTime(12, 0); //for testing
-    gameLogic.finalizeGameStart();
-    */
 
     return a.exec();
 }

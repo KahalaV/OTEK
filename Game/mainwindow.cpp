@@ -7,7 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     score_(0),
-    cloudStatus_(30)
+    cloudStatus_(30),
+    gameOver(false)
     //DEBUG
 {   
     ui->setupUi(this);
@@ -18,11 +19,10 @@ MainWindow::MainWindow(QWidget *parent) :
     map->setSceneRect(0,0,width_,height_);
 
     timer = new QTimer(this);
-    //connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
+    connect(timer, SIGNAL(timeout()), this, SLOT(decreaseGameTime()));
     connect(timer, SIGNAL(timeout()), this, SLOT(movePlayer()));
     connect(timer, SIGNAL(timeout()), this, SLOT(updateBombs()));
     connect(timer, SIGNAL(timeout()), this, SLOT(moveClouds()));
-    timer->start(tick_);
 }
 
 MainWindow::~MainWindow()
@@ -169,7 +169,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             QSound::play(":/Resources/Sound/error.wav");
             break;
         case Qt::Key_Q:
-            QSound::play(":/Resources/Sound/error.wav");
+            QSound::play(":/Resources/Sound/error2.wav");
             break;
 
     }
@@ -235,7 +235,7 @@ void MainWindow::movePlayer()
             if (!player_->isRecentlyHit()) {
                 //if the player has not recently taken hit
                 player_->setHit(true);
-                QSound::play(":/Resources/Sound/CloudHitSound.wav");
+                QSound::play(":/Resources/Sound/cloudHitSound.wav");
                 score_ -= 3;
                 ui->scoreLabel->setText(QString::number(score_));
             } else {
@@ -250,17 +250,12 @@ void MainWindow::dropBomb()
     int x = player_->x();
     int y = player_->y();
 
-    //TEST BOMB DROP LOCATION
-    /*
-    QGraphicsRectItem* rect = new QGraphicsRectItem(x, y, 3, 3);
-    rect->setZValue(2);
-    map->addItem(rect);*/
-
     Student::Bomb* bomb(new Student::Bomb);
     bomb->setPos(x, y);
     bomb->setDirection(player_->getDir());
     bombs_.push_back(bomb);
     map->addItem(bomb);
+    QSound::play(":/Resources/Sound/bombDrop.wav");
 }
 void MainWindow::updateBombs()
 {
@@ -271,6 +266,8 @@ void MainWindow::updateBombs()
             bomb->dropTime_--;
             if (bomb->dropTime_ == 0) {
                 bomb->explode();
+                QSound::play(":/Resources/Sound/explosion.wav");
+
                 //check nearby actors and destroy buses within explosion radius
                 int bombX = bomb->x() + 25;
                 int bombY = bomb->y() + 25;
@@ -372,4 +369,28 @@ bool MainWindow::findActor(std::shared_ptr<Interface::IActor> actor)
         return false;
     }
 }
+
+void MainWindow::decreaseGameTime()
+{
+    timeLeft_ = timeLeft_.addMSecs(-tick_);
+    ui->timeLeftLabel->setText(timeLeft_.toString("mm:ss"));
+
+    if (timeLeft_ == QTime(0,0,0,0)) {
+        gameOver = true;
+    } else {
+        return;
+    }
+}
+
+void MainWindow::startGame(const int GAME_TIME)
+{
+    timeLeft_ = QTime(0, GAME_TIME/60, GAME_TIME%60, 0);
+    ui->timeLeftLabel->setText(timeLeft_.toString("mm:ss"));
+    timer->start(tick_);
+}
+bool MainWindow::isGameOver()
+{
+    return gameOver;
+}
+
 }
