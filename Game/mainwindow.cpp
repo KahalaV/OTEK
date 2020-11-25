@@ -377,6 +377,7 @@ void MainWindow::decreaseGameTime()
 
     if (timeLeft_ == QTime(0,0,0,0)) {
         gameOver = true;
+        timer->stop();
     } else {
         return;
     }

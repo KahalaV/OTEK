@@ -10,6 +10,7 @@ SOURCES += \
     bomb.cpp \
     city.cpp \
     cloud.cpp \
+    endwindow.cpp \
     engine.cpp \
     main.cc \
     mainwindow.cpp \
@@ -41,6 +42,7 @@ else:unix: PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/libCourseLib.a
 
 FORMS += \
+    endwindow.ui \
     mainwindow.ui \
     startwindow.ui
 
@@ -49,6 +51,7 @@ HEADERS += \
     bomb.h \
     city.h \
     cloud.h \
+    endwindow.h \
     engine.hh \
     gameengine.h \
     mainwindow.h \

@@ -6,6 +6,7 @@
 #include "interfaces/icity.hh"
 #include "actors/passenger.hh"
 #include "mainwindow.h"
+#include "endwindow.h"
 #include "player.h"
 
 #include <QObject>
@@ -27,6 +28,7 @@ public:
     void addStop(std::shared_ptr<Interface::IStop> stop);
     void startGame();
     bool isGameOver() const;
+    void endGame() const;
     //actors
     void addActor(std::shared_ptr<Interface::IActor> newactor);
     void removeActor(std::shared_ptr<Interface::IActor> actor);

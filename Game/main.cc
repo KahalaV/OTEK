@@ -1,7 +1,7 @@
 #include "startwindow.h"
 #include "engine.hh"
 #include "city.h"
-
+#include "endwindow.h"
 #include <QApplication>
 #include <QLabel>
 
@@ -18,4 +18,5 @@ int main(int argc, char *argv[])
     gameEngine->logic();
 
     return a.exec();
+
 }

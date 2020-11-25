@@ -64,7 +64,14 @@ void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const {}
 bool City::isGameOver() const
 {
-    mainWindow_->isGameOver();
+    if (mainWindow_->isGameOver()) {
+        mainWindow_->close();
+        std::shared_ptr<Student::EndWindow> endWindow(new Student::EndWindow);
+        endWindow->exec();
+        return true;
+    } else {
+        return false;
+    }
 }
 void City::setPlayer()
 {
@@ -72,6 +79,10 @@ void City::setPlayer()
     player_ = player;
     mainWindow_->setPlayer(player_);
 }
-
+void City::endGame() const
+{
+    std::shared_ptr<Student::EndWindow> endWindow(new Student::EndWindow);
+    endWindow->exec();
+}
 
 }
