@@ -17,9 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     map = new QGraphicsScene(this);
     ui->graphicsView->setScene(map);
     map->setSceneRect(0,0,width_,height_);
-    QRect homo = QGuiApplication::primaryScreen()->geometry();
-    ui->graphicsView->resize(homo.width(), homo.height());
-    this->showMaximized();
+
     ui->graphicsView->scale(2,2);
 
 
@@ -382,6 +380,7 @@ void MainWindow::decreaseGameTime()
 {
     timeLeft_ = timeLeft_.addMSecs(-tick_);
     ui->timeLeftLabel->setText(timeLeft_.toString("mm:ss"));
+
     ui->graphicsView->centerOn(player_);
 
     if (timeLeft_ == QTime(0,0,0,0)) {
