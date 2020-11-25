@@ -26,6 +26,8 @@
 #include <bits/stdc++.h>
 #include <iterator>
 #include <QGraphicsRectItem>
+#include <QDesktopWidget>
+#include <QScreen>
 
 
 /*!

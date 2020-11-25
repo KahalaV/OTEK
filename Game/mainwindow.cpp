@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     score_(0),
     cloudStatus_(30),
     gameOver(false)
-    //DEBUG
+
 {   
     ui->setupUi(this);
     ui->scoreLabel->setText(QString::number(score_));
@@ -17,12 +17,19 @@ MainWindow::MainWindow(QWidget *parent) :
     map = new QGraphicsScene(this);
     ui->graphicsView->setScene(map);
     map->setSceneRect(0,0,width_,height_);
+    QRect homo = QGuiApplication::primaryScreen()->geometry();
+    ui->graphicsView->resize(homo.width(), homo.height());
+    this->showMaximized();
+    ui->graphicsView->scale(2,2);
+
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(decreaseGameTime()));
     connect(timer, SIGNAL(timeout()), this, SLOT(movePlayer()));
     connect(timer, SIGNAL(timeout()), this, SLOT(updateBombs()));
     connect(timer, SIGNAL(timeout()), this, SLOT(moveClouds()));
+
+
 }
 
 MainWindow::~MainWindow()
@@ -89,6 +96,7 @@ void MainWindow::setPlayer(Student::Player* player)
 {
     player_ = player;
     map->addItem(player_);
+    ui->graphicsView->centerOn(player_);
 }
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
@@ -374,6 +382,7 @@ void MainWindow::decreaseGameTime()
 {
     timeLeft_ = timeLeft_.addMSecs(-tick_);
     ui->timeLeftLabel->setText(timeLeft_.toString("mm:ss"));
+    ui->graphicsView->centerOn(player_);
 
     if (timeLeft_ == QTime(0,0,0,0)) {
         gameOver = true;
