@@ -17,8 +17,15 @@ public:
     explicit StartWindow(QWidget *parent = nullptr);
     ~StartWindow();
 
+public slots:
+    void setSettings();
+
+signals:
+    void settingsChanged(QString name);
+
 private:
     Ui::StartWindow *ui;
+    QString playerName_;
 };
 
 }

@@ -38,11 +38,13 @@ public:
     std::vector<std::shared_ptr<Interface::IActor> > getNearbyActors(Interface::Location loc) const;
     //player
     void setPlayer();
+    void setPlayerName(QString &name);
 
 private:
     QTime clock_;
     std::shared_ptr<Student::MainWindow> mainWindow_;
     Student::Player* player_;
+    QString playerName_;
     bool gamestatus_ = false;
 };
 

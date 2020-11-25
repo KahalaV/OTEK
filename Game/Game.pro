@@ -53,7 +53,6 @@ HEADERS += \
     cloud.h \
     endwindow.h \
     engine.hh \
-    gameengine.h \
     mainwindow.h \
     player.h \
     startwindow.h

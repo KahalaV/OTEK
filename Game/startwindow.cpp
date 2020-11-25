@@ -8,11 +8,19 @@ StartWindow::StartWindow(QWidget *parent) :
     ui(new Ui::StartWindow)
 {
     ui->setupUi(this);
+    connect(ui->goButton, SIGNAL (released()), this, SLOT (setSettings()));
+    connect(this, SIGNAL (settingsChanged()), this, SLOT (close()));
 }
 
 StartWindow::~StartWindow()
 {
     delete ui;
+}
+
+void StartWindow::setSettings()
+{
+    playerName_ = ui->lineEdit->text();
+    emit settingsChanged(playerName_);
 }
 
 }

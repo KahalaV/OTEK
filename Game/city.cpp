@@ -79,6 +79,11 @@ void City::setPlayer()
     player_ = player;
     mainWindow_->setPlayer(player_);
 }
+
+void City::setPlayerName(QString &name)
+{
+    playerName_ = name;
+}
 void City::endGame() const
 {
     std::shared_ptr<Student::EndWindow> endWindow(new Student::EndWindow);
