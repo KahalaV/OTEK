@@ -6,6 +6,7 @@ namespace Student {
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
+    playerName_(""),
     score_(0),
     cloudStatus_(30),
     gameOver(false)
@@ -273,6 +274,13 @@ void MainWindow::dropBomb()
     map->addItem(bomb);
     QSound::play(":/Resources/Sound/bombDrop.wav");
 }
+
+void MainWindow::setPlayerName(QString &name)
+{
+    playerName_ = name;
+    ui->playerLabel->setText(name);
+}
+
 void MainWindow::updateBombs()
 {
     for (auto bomb : bombs_) {

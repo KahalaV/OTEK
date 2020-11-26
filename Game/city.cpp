@@ -85,6 +85,7 @@ void City::setPlayer()
 void City::setPlayerName(QString &name)
 {
     playerName_ = name;
+    mainWindow_->setPlayerName(name);
 }
 void City::endGame() const
 {

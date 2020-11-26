@@ -60,6 +60,7 @@ public:
     void startGame(const int GAME_TIME);
     bool isGameOver();
     void dropBomb();
+    void setPlayerName(QString &name);
 
     //player
     void setPlayer(Student::Player* player);
@@ -92,6 +93,7 @@ private:
     QVector<Student::Cloud*> clouds_;
     QVector<Student::Bomb*> bombs_;
     Student::Player* player_;
+    QString playerName_;
     int score_;
     int cloudStatus_;
 
