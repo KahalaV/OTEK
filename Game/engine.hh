@@ -27,6 +27,7 @@ public:
 public slots:
     void settings(QString name);
     void logic();
+    void startGame();
 
 signals:
     void settingsChanged();

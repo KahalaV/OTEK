@@ -42,6 +42,7 @@ public:
 
 private:
     QTime clock_;
+    const int gameTime_;
     std::shared_ptr<Student::MainWindow> mainWindow_;
     Student::Player* player_;
     QString playerName_;

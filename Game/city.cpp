@@ -4,14 +4,13 @@ namespace Student
 {
 
 City::City(const int GAME_TIME) :
-    mainWindow_(new Student::MainWindow)
+    mainWindow_(new Student::MainWindow),
+    gameTime_(GAME_TIME)
 {
     mainWindow_->setPicture(QImage(":/offlinedata/offlinedata/kartta_iso_1095x592.png"));
     mainWindow_->setClock(clock_);
     mainWindow_->show();
     setPlayer();
-
-    mainWindow_->startGame(GAME_TIME);
 }
 City::~City() {}
 
@@ -28,7 +27,10 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
     int y = 500 - stop->getLocation().giveY() + 56;
     mainWindow_->addStop(x, y);
 }
-void City::startGame() {}
+void City::startGame()
+{
+    mainWindow_->startGame(gameTime_);
+}
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     if (std::dynamic_pointer_cast<CourseSide::Passenger>(newactor) == nullptr) {

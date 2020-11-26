@@ -13,6 +13,7 @@ Engine::Engine(QObject *parent) :
 
     connect(startWindow_.get(), SIGNAL (settingsChanged(QString)), this, SLOT (settings(QString)));
     connect(this, SIGNAL (settingsChanged()), this, SLOT (logic()));
+    connect(this, SIGNAL (settingsChanged()), this, SLOT (startGame()));
 }
 
 Engine::~Engine() {}
@@ -34,6 +35,11 @@ void Engine::logic()
     gameLogic_->takeCity(city_);
     gameLogic_->setTime(12, 0); //for testing
     gameLogic_->finalizeGameStart();
+}
+
+void Engine::startGame()
+{
+    city_->startGame();
 }
 
 }
