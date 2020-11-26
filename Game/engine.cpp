@@ -6,14 +6,15 @@ namespace Student
 Engine::Engine(QObject *parent) :
     QObject(parent),
     gameLogic_(new CourseSide::Logic),
-    startWindow_(new Student::StartWindow)
+    startWindow_(new Student::StartWindow),
+    city_(nullptr)
 {
-    city_ = std::shared_ptr<Student::City>(new Student::City);
+    // city_ = std::shared_ptr<Student::City>(new Student::City);
     startWindow_->show();
 
-    connect(startWindow_.get(), SIGNAL (settingsChanged(QString)), this, SLOT (settings(QString)));
-    connect(this, SIGNAL (settingsChanged()), this, SLOT (logic()));
-    connect(this, SIGNAL (settingsChanged()), this, SLOT (startGame()));
+    connect(startWindow_.get(), SIGNAL (settingsChanged(QString)), this, SLOT (initCity(QString)));
+    connect(this, SIGNAL (cityInitialized()), this, SLOT (logic()));
+    connect(this, SIGNAL (gameStartFinalized()), this, SLOT (startGame()));
 }
 
 Engine::~Engine() {}
@@ -23,10 +24,11 @@ void Engine::setPlayerName(QString name)
     city_->setPlayerName(name);
 }
 
-void Engine::settings(QString name)
+void Engine::initCity(QString name)
 {
+    city_ = std::shared_ptr<Student::City>(new Student::City);
     setPlayerName(name);
-    emit settingsChanged();
+    emit cityInitialized();
 }
 
 void Engine::logic()
@@ -35,6 +37,7 @@ void Engine::logic()
     gameLogic_->takeCity(city_);
     gameLogic_->setTime(12, 0); //for testing
     gameLogic_->finalizeGameStart();
+    emit gameStartFinalized();
 }
 
 void Engine::startGame()
