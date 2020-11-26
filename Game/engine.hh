@@ -23,10 +23,13 @@ public:
 
     void setPlayerName(QString name);
     //std::shared_ptr<Student::City> createGame();
-    void logic();
 
 public slots:
     void settings(QString name);
+    void logic();
+
+signals:
+    void settingsChanged();
 
 private:
     std::shared_ptr<Student::City> city_;

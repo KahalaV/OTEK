@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     //sw.show();
 
     std::shared_ptr<Student::Engine> gameEngine(new Student::Engine);
-    gameEngine->logic();
+    // gameEngine->logic();
 
     return a.exec();
 

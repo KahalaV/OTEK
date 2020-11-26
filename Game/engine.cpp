@@ -12,6 +12,7 @@ Engine::Engine(QObject *parent) :
     startWindow_->show();
 
     connect(startWindow_.get(), SIGNAL (settingsChanged(QString)), this, SLOT (settings(QString)));
+    connect(this, SIGNAL (settingsChanged()), this, SLOT (logic()));
 }
 
 Engine::~Engine() {}
@@ -24,6 +25,7 @@ void Engine::setPlayerName(QString name)
 void Engine::settings(QString name)
 {
     setPlayerName(name);
+    emit settingsChanged();
 }
 
 void Engine::logic()

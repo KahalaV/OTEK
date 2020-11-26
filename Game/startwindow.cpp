@@ -9,7 +9,7 @@ StartWindow::StartWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->goButton, SIGNAL (released()), this, SLOT (setSettings()));
-    connect(this, SIGNAL (settingsChanged()), this, SLOT (close()));
+    connect(this, SIGNAL (settingsChanged(QString)), this, SLOT (close()));
 }
 
 StartWindow::~StartWindow()
