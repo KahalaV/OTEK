@@ -5,6 +5,7 @@ namespace Student {
 Player::Player() :
     dir_(1),
     recentlyHit_(false),
+    bombs_(5),
     image_(QImage(":/Resources/Graphics/red_baron.bmp"))
 {
     setPos(600, 300);
@@ -108,6 +109,33 @@ bool Player::isRecentlyHit()
 void Player::setHit(bool hitStatus)
 {
     recentlyHit_ = hitStatus;
+}
+void Player::addBombs()
+{
+    bombs_ += bombsIncrease;
+}
+int Player::getBombs()
+{
+    return bombs_;
+}
+void Player::dropBomb()
+{
+    bombs_--;
+}
+void Player::decreaseHealth()
+{
+    health_--;
+}
+bool Player::healthLeft() {
+    if (health_ <= 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+int Player::getHealth()
+{
+    return health_;
 }
 
 }

@@ -20,13 +20,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->graphicsView->scale(2,2);
 
-
+    QSound::play(":/Resources/Sound/gameMusic.wav");
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(decreaseGameTime()));
     connect(timer, SIGNAL(timeout()), this, SLOT(movePlayer()));
     connect(timer, SIGNAL(timeout()), this, SLOT(updateBombs()));
     connect(timer, SIGNAL(timeout()), this, SLOT(moveClouds()));
-
+    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
 
 }
 
@@ -59,8 +59,7 @@ void MainWindow::addActor(std::shared_ptr<Interface::IActor> newactor)
 
     actors_.push_back(std::make_pair(newactor, nActorItem));
     map->addItem(nActorItem);
-    //DEBUG
-    ui->debugLabel->setText(QString::number(actors_.size()));
+
 }
 
 void MainWindow::addStop(int x, int y)
@@ -95,6 +94,7 @@ void MainWindow::setPlayer(Student::Player* player)
     player_ = player;
     map->addItem(player_);
     ui->graphicsView->centerOn(player_);
+    ui->bombsLeftLabel->setText(QString::number(player_->getBombs()));
 }
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
@@ -244,6 +244,11 @@ void MainWindow::movePlayer()
                 QSound::play(":/Resources/Sound/cloudHitSound.wav");
                 score_ -= 3;
                 ui->scoreLabel->setText(QString::number(score_));
+                player_->decreaseHealth();
+                ui->healthBar->setValue(player_->getHealth()*25);
+                if (player_->healthLeft()) {
+                    gameOver = true;
+                }
             } else {
                 return;
             }
@@ -253,6 +258,11 @@ void MainWindow::movePlayer()
 }
 void MainWindow::dropBomb()
 {
+    if (player_->getBombs() < 1) {
+        return;
+    }
+
+    player_->dropBomb();
     int x = player_->x();
     int y = player_->y();
 
@@ -364,7 +374,6 @@ void MainWindow::removeActor(std::shared_ptr<Interface::IActor> actor) {
     it->first->remove();
     map->removeItem(it->second);
     actors_.erase(it);
-    ui->debugLabel->setText(QString::number(actors_.size()));
 }
 
 bool MainWindow::findActor(std::shared_ptr<Interface::IActor> actor)
@@ -400,6 +409,11 @@ void MainWindow::startGame(const int GAME_TIME)
 bool MainWindow::isGameOver()
 {
     return gameOver;
+}
+void MainWindow::update()
+{
+    player_->addBombs();
+    ui->bombsLeftLabel->setText(QString::number(player_->getBombs()));
 }
 
 }

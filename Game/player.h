@@ -25,14 +25,23 @@ public:
     int getBombRadius();
     bool isRecentlyHit();
     void setHit(bool hitStatus);
+    void addBombs();
+    int getBombs();
+    void dropBomb();
+    void decreaseHealth();
+    int getHealth();
+    bool healthLeft();
 
 private:
     int dir_;
+    double bombs_;
+    double bombsIncrease = 0.05;
     int speedStraight_ = 4; //rb = 4; bm = 3; tb = 6
     int speedDiagonal_ = 3; //rb = 3; bm = 2; tb = 4
     int bombRadius = 40; //rb = 40; bm = 50; tb = 30
     bool recentlyHit_;
     QImage image_;
+    int health_ = 4;
 };
 
 }

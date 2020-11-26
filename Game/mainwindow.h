@@ -28,7 +28,8 @@
 #include <QGraphicsRectItem>
 #include <QDesktopWidget>
 #include <QScreen>
-
+#include <QSound>
+#include "unistd.h"
 
 /*!
  * Doxytest start
@@ -58,11 +59,11 @@ public:
     void updateTimeLabel();
     void startGame(const int GAME_TIME);
     bool isGameOver();
+    void dropBomb();
 
     //player
     void setPlayer(Student::Player* player);
     void keyPressEvent(QKeyEvent *event);
-    void dropBomb();
 
     //clouds
     void addClouds();
@@ -75,6 +76,8 @@ public slots:
     void updateBombs();
     //clouds
     void moveClouds();
+
+    void update();
 
     void decreaseGameTime();
 

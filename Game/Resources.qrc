@@ -15,5 +15,6 @@
         <file>Resources/Sound/cloudHitSound.wav</file>
         <file>Resources/Sound/explosion.wav</file>
         <file>Resources/Sound/error2.wav</file>
+        <file>Resources/Sound/gameMusic.wav</file>
     </qresource>
 </RCC>
