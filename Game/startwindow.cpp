@@ -5,9 +5,16 @@ namespace Student {
 
 StartWindow::StartWindow(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::StartWindow)
+    ui(new Ui::StartWindow),
+    imageRedBaron_(new QIcon(":/Resources/Graphics/red_baron.bmp")),
+    imageBomber_(new QIcon(":/Resources/Graphics/bomber.bmp")),
+    imageThunderbird_(new QIcon(":/Resources/Graphics/thunderbird.bmp"))
 {
     ui->setupUi(this);
+    ui->radioRedBaronButton->setIcon(*imageRedBaron_);
+    ui->radioBomberButton->setIcon(*imageBomber_);
+    ui->radioThunderbirdButton->setIcon(*imageThunderbird_);
+
     connect(ui->goButton, SIGNAL (released()), this, SLOT (setSettings()));
     connect(this, SIGNAL (settingsChanged(QString, int)), this, SLOT (close()));
 }

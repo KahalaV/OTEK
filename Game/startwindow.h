@@ -2,6 +2,7 @@
 #define STARTWINDOW_H
 
 #include <QDialog>
+#include <memory>
 
 namespace Ui {
 class StartWindow;
@@ -26,6 +27,9 @@ signals:
 private:
     Ui::StartWindow *ui;
     QString playerName_;
+    std::shared_ptr<QIcon> imageRedBaron_;
+    std::shared_ptr<QIcon> imageBomber_;
+    std::shared_ptr<QIcon> imageThunderbird_;
     int plane_; // 1 = Red Baron, 2 = Bomber, 3 = Thunderbird
 };
 
