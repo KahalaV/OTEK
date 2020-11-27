@@ -21,11 +21,12 @@ public slots:
     void setSettings();
 
 signals:
-    void settingsChanged(QString name);
+    void settingsChanged(QString name, int plane);
 
 private:
     Ui::StartWindow *ui;
     QString playerName_;
+    int plane_; // 1 = Red Baron, 2 = Bomber, 3 = Thunderbird
 };
 
 }

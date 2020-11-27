@@ -31,6 +31,7 @@ public:
     void decreaseHealth();
     int getHealth();
     bool healthLeft();
+    void setPlaneType(int plane);
 
 private:
     int dir_;
@@ -41,6 +42,7 @@ private:
     int bombRadius = 40; //rb = 40; bm = 50; tb = 30
     bool recentlyHit_;
     QImage image_;
+    int planeType_; // 1 = Red Baron, 2 = Bomber, 3 = Thunderbird
     int health_ = 4;
 };
 

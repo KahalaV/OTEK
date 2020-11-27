@@ -39,6 +39,7 @@ public:
     //player
     void setPlayer();
     void setPlayerName(QString &name);
+    void setPlaneType(int &plane);
 
 private:
     QTime clock_;
@@ -46,6 +47,7 @@ private:
     std::shared_ptr<Student::MainWindow> mainWindow_;
     Student::Player* player_;
     QString playerName_;
+    int planeType_;
     bool gamestatus_ = false;
 };
 

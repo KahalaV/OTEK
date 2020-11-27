@@ -12,22 +12,18 @@ Engine::Engine(QObject *parent) :
     // city_ = std::shared_ptr<Student::City>(new Student::City);
     startWindow_->show();
 
-    connect(startWindow_.get(), SIGNAL (settingsChanged(QString)), this, SLOT (initCity(QString)));
+    connect(startWindow_.get(), SIGNAL (settingsChanged(QString, int)), this, SLOT (initCity(QString, int)));
     connect(this, SIGNAL (cityInitialized()), this, SLOT (logic()));
     connect(this, SIGNAL (gameStartFinalized()), this, SLOT (startGame()));
 }
 
 Engine::~Engine() {}
 
-void Engine::setPlayerName(QString name)
-{
-    city_->setPlayerName(name);
-}
-
-void Engine::initCity(QString name)
+void Engine::initCity(QString name, int plane)
 {
     city_ = std::shared_ptr<Student::City>(new Student::City);
-    setPlayerName(name);
+    city_->setPlayerName(name);
+    city_->setPlaneType(plane);
     emit cityInitialized();
 }
 

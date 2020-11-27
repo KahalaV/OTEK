@@ -9,7 +9,7 @@ StartWindow::StartWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->goButton, SIGNAL (released()), this, SLOT (setSettings()));
-    connect(this, SIGNAL (settingsChanged(QString)), this, SLOT (close()));
+    connect(this, SIGNAL (settingsChanged(QString, int)), this, SLOT (close()));
 }
 
 StartWindow::~StartWindow()
@@ -20,7 +20,19 @@ StartWindow::~StartWindow()
 void StartWindow::setSettings()
 {
     playerName_ = ui->lineEdit->text();
-    emit settingsChanged(playerName_);
+    if (ui->radioRedBaronButton->isChecked())
+    {
+        plane_ = 1;
+    }
+    else if (ui->radioBomberButton->isChecked())
+    {
+        plane_ = 2;
+    }
+    else
+    {
+        plane_ = 3;
+    }
+    emit settingsChanged(playerName_, plane_);
 }
 
 }

@@ -5,8 +5,7 @@ namespace Student {
 Player::Player() :
     dir_(1),
     recentlyHit_(false),
-    bombs_(5),
-    image_(QImage(":/Resources/Graphics/red_baron.bmp"))
+    bombs_(5)
 {
     setPos(600, 300);
     setZValue(1);
@@ -133,6 +132,25 @@ bool Player::healthLeft() {
         return false;
     }
 }
+
+void Player::setPlaneType(int plane)
+{
+    planeType_ = plane;
+    switch (plane)
+    {
+        case 2:
+            image_ = QImage(":/Resources/Graphics/bomber.bmp");
+            // same
+            break;
+        case 3:
+            image_ = QImage(":/Resources/Graphics/thunderbird.bmp");
+            break;
+        default:
+            image_ = QImage(":/Resources/Graphics/red_baron.bmp");
+            // set attributes
+    }
+}
+
 int Player::getHealth()
 {
     return health_;

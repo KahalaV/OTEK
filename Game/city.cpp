@@ -87,6 +87,12 @@ void City::setPlayerName(QString &name)
     playerName_ = name;
     mainWindow_->setPlayerName(name);
 }
+
+void City::setPlaneType(int &plane)
+{
+    planeType_ = plane;
+    player_->setPlaneType(plane);
+}
 void City::endGame() const
 {
     std::shared_ptr<Student::EndWindow> endWindow(new Student::EndWindow);
