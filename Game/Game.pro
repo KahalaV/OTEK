@@ -14,6 +14,7 @@ SOURCES += \
     engine.cpp \
     main.cc \
     mainwindow.cpp \
+    nuke.cpp \
     player.cpp \
     startwindow.cpp
 
@@ -54,6 +55,7 @@ HEADERS += \
     endwindow.h \
     engine.hh \
     mainwindow.h \
+    nuke.h \
     player.h \
     startwindow.h
 

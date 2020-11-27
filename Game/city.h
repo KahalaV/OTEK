@@ -21,7 +21,7 @@ namespace Student
 class City : public Interface::ICity
 {
 public:
-    City(const int GAME_TIME = 15);
+    City(const int GAME_TIME = 60);
     ~City();
     void setBackground(QImage& basicbackground, QImage& bigbackground);
     void setClock(QTime clock);

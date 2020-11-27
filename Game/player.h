@@ -32,18 +32,20 @@ public:
     int getHealth();
     bool healthLeft();
     void setPlaneType(int plane);
+    bool hasNuke();
 
 private:
     int dir_;
     double bombs_;
     double bombsIncrease = 0.05;
-    int speedStraight_ = 4; //rb = 4; bm = 3; tb = 6
-    int speedDiagonal_ = 3; //rb = 3; bm = 2; tb = 4
-    int bombRadius = 40; //rb = 40; bm = 50; tb = 30
+    int speedStraight_;
+    int speedDiagonal_;
+    int bombRadius;
     bool recentlyHit_;
     QImage image_;
     int planeType_; // 1 = Red Baron, 2 = Bomber, 3 = Thunderbird
     int health_ = 4;
+    bool hasNuke_;
 };
 
 }

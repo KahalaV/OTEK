@@ -140,20 +140,32 @@ void Player::setPlaneType(int plane)
     {
         case 2:
             image_ = QImage(":/Resources/Graphics/bomber.bmp");
+            speedStraight_ = 3;
+            speedDiagonal_ = 2;
+            bombRadius = 50;
             // same
             break;
         case 3:
             image_ = QImage(":/Resources/Graphics/thunderbird.bmp");
+            speedStraight_ = 6;
+            speedDiagonal_ = 4;
+            bombRadius = 30;
             break;
         default:
             image_ = QImage(":/Resources/Graphics/red_baron.bmp");
-            // set attributes
+            speedStraight_ = 4;
+            speedDiagonal_ = 3;
+            bombRadius = 40;
     }
 }
 
 int Player::getHealth()
 {
     return health_;
+}
+bool Player::hasNuke()
+{
+    return hasNuke_;
 }
 
 }
