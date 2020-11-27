@@ -6,6 +6,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QPainter>
+#include <QDebug>
 
 namespace Student {
 
@@ -33,6 +34,7 @@ public:
     bool healthLeft();
     void setPlaneType(int plane);
     bool hasNuke();
+    void setNuke(bool status);
 
 private:
     int dir_;

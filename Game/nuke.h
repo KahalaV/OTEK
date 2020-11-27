@@ -9,7 +9,7 @@
 
 namespace Student {
 
-class Nuke : public Bomb
+class Nuke : public QGraphicsItem
 {
 public:
     Nuke();

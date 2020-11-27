@@ -5,9 +5,10 @@ namespace Student {
 Player::Player() :
     dir_(1),
     recentlyHit_(false),
+    hasNuke_(false),
     bombs_(5)
 {
-    setPos(600, 300);
+    setPos(50, 520);
     setZValue(1);
     setTransformOriginPoint(this->boundingRect().center());
 }
@@ -166,6 +167,10 @@ int Player::getHealth()
 bool Player::hasNuke()
 {
     return hasNuke_;
+}
+void Player::setNuke(bool status)
+{
+    hasNuke_ = status;
 }
 
 }

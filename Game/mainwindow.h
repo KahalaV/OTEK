@@ -9,6 +9,7 @@
 #include "player.h"
 #include <iostream>
 #include "bomb.h"
+#include "nuke.h"
 
 #include <QKeyEvent>
 #include <QDebug>
@@ -69,6 +70,7 @@ public:
     //clouds
     void addClouds();
     std::vector<int> randomizeCloudSlots();
+    void spawnNuke();
 
 
 public slots:
@@ -92,10 +94,12 @@ private:
     QVector<std::pair<std::shared_ptr<Interface::IActor>, Student::ActorItem*>> actors_;
     QVector<Student::Cloud*> clouds_;
     QVector<Student::Bomb*> bombs_;
+    Student::Nuke* nuke_;
     Student::Player* player_;
     QString playerName_;
     int score_;
     int cloudStatus_;
+    bool nukeSpawned_;
 
     double tick_ = 50;
     int cloudInterval_ = 50; //ticks between cloud sets

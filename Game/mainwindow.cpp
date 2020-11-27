@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
     playerName_(""),
     score_(0),
     cloudStatus_(30),
+    nuke_(new Student::Nuke()),
+    nukeSpawned_(false),
     gameOver(false)
 
 {   
@@ -19,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->graphicsView->setScene(map);
     map->setSceneRect(0,0,width_,height_);
 
-    ui->graphicsView->scale(2,2);
+    //ui->graphicsView->scale(2,2);
 
     QSound::play(":/Resources/Sound/gameMusic.wav");
     timer = new QTimer(this);
@@ -236,6 +238,14 @@ void MainWindow::movePlayer()
             player_->moveBy(-sd, -sd);
             break;
     }
+
+    //check nuke
+    if (!player_->hasNuke() && player_->collidesWithItem(nuke_)) {
+        player_->setNuke(true);
+        map->removeItem(nuke_);
+        nukeSpawned_ = false;
+    }
+
     //check collision with clouds
     for (auto cloud : clouds_) {
         if (player_->collidesWithItem(cloud)) {
@@ -259,6 +269,12 @@ void MainWindow::movePlayer()
 }
 void MainWindow::dropBomb()
 {
+    //if the player has nuke, drop nuke instead of bomb
+    if (player_->hasNuke()) {
+        player_->setNuke(false);
+        return;
+    }
+
     if (player_->getBombs() < 1) {
         return;
     }
@@ -420,8 +436,28 @@ bool MainWindow::isGameOver()
 }
 void MainWindow::update()
 {
+    //increase bombs
     player_->addBombs();
     ui->bombsLeftLabel->setText(QString::number(player_->getBombs()));
+
+    //if player doesn't have a nuke, spawn nuke
+    if (!nukeSpawned_ && !player_->hasNuke()) {
+        spawnNuke();
+        nukeSpawned_ = true;
+    }
+}
+void MainWindow::spawnNuke()
+{
+    //randomize location
+    int x = (rand() % 900) + 200;
+    int y = (rand() % 450) + 150;
+
+    nuke_->setPos(x,y);
+    map->addItem(nuke_);
+}
+void MainWindow::dropNuke()
+{
+
 }
 
 }
