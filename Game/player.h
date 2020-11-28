@@ -1,12 +1,15 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "core/location.hh"
-
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QPainter>
 #include <QDebug>
+
+/**
+ *@file
+ *@brief
+ */
 
 namespace Student {
 

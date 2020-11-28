@@ -6,6 +6,11 @@
 #include <string>
 #include <QTime>
 
+/**
+ *@file
+ *@brief
+ */
+
 namespace Student
 {
 
