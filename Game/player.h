@@ -33,8 +33,6 @@ public:
     int getHealth();
     bool healthLeft();
     void setPlaneType(int plane);
-    bool hasNuke();
-    void setNuke(bool status);
 
 private:
     int dir_;
@@ -47,7 +45,6 @@ private:
     QImage image_;
     int planeType_; // 1 = Red Baron, 2 = Bomber, 3 = Thunderbird
     int health_ = 4;
-    bool hasNuke_;
 };
 
 }

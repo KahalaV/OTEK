@@ -6,10 +6,9 @@ Bomb::Bomb() :
     exploded_(false),
     dropTime_(10),
     explosionTime_(0),
-    image_(QPixmap(":/Resources/Graphics/bomb.bmp"))
+    image_(QImage(":/Resources/Graphics/bomb.bmp"))
 {
     setZValue(0.9);
-    setOffset(-25,-25);
     setTransformOriginPoint(this->boundingRect().center());
 }
 
@@ -25,12 +24,12 @@ QRectF Bomb::boundingRect() const
 
 void Bomb::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->drawPixmap(QPoint(0, 0), image_);
+    painter->drawImage(QPoint(0, 0), image_);
 }
 
 void Bomb::explode() {
     exploded_ = true;
-    image_ = QPixmap(":/Resources/Graphics/explosion.bmp");
+    image_ = QImage(":/Resources/Graphics/explosion.bmp");
 }
 
 bool Bomb::getStatus() {
@@ -80,7 +79,7 @@ int Bomb::getDropTime()
 int Bomb::getExplosionTime() {
     return explosionTime_;
 }
-QPixmap Bomb::drawBomb()
+QImage Bomb::drawBomb()
 {
     return image_;
 }

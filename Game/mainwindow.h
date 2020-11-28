@@ -62,6 +62,8 @@ public:
     bool isGameOver();
     void dropBomb();
     void setPlayerName(QString &name);
+    void dropNuke();
+    void updateNuke();
 
     //player
     void setPlayer(Student::Player* player);
@@ -99,7 +101,6 @@ private:
     QString playerName_;
     int score_;
     int cloudStatus_;
-    bool nukeSpawned_;
 
     double tick_ = 50;
     int cloudInterval_ = 50; //ticks between cloud sets
