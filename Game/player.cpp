@@ -5,7 +5,8 @@ namespace Student {
 Player::Player() :
     dir_(1),
     cloudHitCooldown_(0),
-    bombs_(5)
+    bombs_(5),
+    health_(4)
 {
     setPos(50, 520);
     setZValue(1);

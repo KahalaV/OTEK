@@ -32,7 +32,7 @@ void Bomb::explode() {
     image_ = QImage(":/Resources/Graphics/explosion.bmp");
 }
 
-bool Bomb::getStatus() {
+bool Bomb::isExploded() {
     return exploded_;
 }
 
@@ -83,5 +83,12 @@ QImage Bomb::drawBomb()
 {
     return image_;
 }
-
+void Bomb::decreaseDropTime()
+{
+    dropTime_--;
+}
+void Bomb::increaseExplosionTime()
+{
+    explosionTime_++;
+}
 }

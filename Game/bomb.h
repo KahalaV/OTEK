@@ -14,17 +14,18 @@ public:
     ~Bomb();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    bool getStatus();
+    bool isExploded();
     int getDropTime();
     int getExplosionTime();
+    void decreaseDropTime();
+    void increaseExplosionTime();
     void explode();
     void setDirection(int dir);
     QImage drawBomb();
 
+private:
     int dropTime_;
     int explosionTime_;
-
-private:
     bool exploded_;
     QImage image_;
     int dir_;

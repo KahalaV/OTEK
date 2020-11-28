@@ -39,13 +39,13 @@ public:
 private:
     int dir_;
     double bombs_;
-    double bombsIncrease = 0.05;
+    double bombsIncrease = 0.02;
+    int health_;
     int speedStraight_;
     int speedDiagonal_;
     int bombRadius;
     QImage image_;
     int planeType_; // 1 = Red Baron, 2 = Bomber, 3 = Thunderbird
-    int health_ = 4;
     int cloudHitCooldown_;
     int coolDownDuration_;
 };

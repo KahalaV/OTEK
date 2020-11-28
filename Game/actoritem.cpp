@@ -38,11 +38,6 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
 }
 
-void ActorItem::setCoord(int x, int y)
-{
-    setX(x);
-    setY(y);
-}
 int ActorItem::getType()
 {
     return type_;

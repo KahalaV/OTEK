@@ -12,26 +12,26 @@
 #include "nuke.h"
 #include "statistics.hh"
 
-#include <QKeyEvent>
-#include <QDebug>
-#include <QMainWindow>
-#include <QGraphicsScene>
-#include <QTimer>
-#include <QTime>
-#include <iostream>
-#include <memory>
-#include <QVector>
-#include <map>
-#include <math.h>
 #include "cstdlib"
 #include "QSound"
+#include "unistd.h"
 #include <bits/stdc++.h>
+#include <iostream>
 #include <iterator>
-#include <QGraphicsRectItem>
+#include <map>
+#include <math.h>
+#include <memory>
+#include <QDebug>
 #include <QDesktopWidget>
+#include <QGraphicsRectItem>
+#include <QGraphicsScene>
+#include <QKeyEvent>
+#include <QMainWindow>
 #include <QScreen>
 #include <QSound>
-#include "unistd.h"
+#include <QTime>
+#include <QTimer>
+#include <QVector>
 
 /*!
  * Doxytest start

@@ -21,8 +21,6 @@ public:
     explicit Engine(QObject *parent = nullptr);
     ~Engine();
 
-    //std::shared_ptr<Student::City> createGame();
-
 public slots:
     void initCity(QString name, int plane);
     void logic();

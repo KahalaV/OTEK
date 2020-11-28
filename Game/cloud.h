@@ -16,11 +16,9 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     int getSpeed();
 
-    const int quadrantSide_ = 20;
-
 private:
     QImage image_;
-    int speed_ = 3;
+    int speed_ = 3; //pxls per tick
 };
 
 }

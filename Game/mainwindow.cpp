@@ -174,6 +174,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             dropBomb();
             break;
 
+        //nuking
+        case Qt::Key_R:
+            dropNuke();
+            break;
+
         //error
         case Qt::Key_E:
             QSound::play(":/Resources/Sound/error.wav");
@@ -269,13 +274,6 @@ void MainWindow::movePlayer()
 }
 void MainWindow::dropBomb()
 {
-    //if the player has nuke, drop nuke instead of bomb
-    if (nuke_->getStatus() == 2) {
-        dropNuke();
-        nuke_->setStatus(3);
-        return;
-    }
-
     if (player_->getBombs() < 1) {
         return;
     }
@@ -301,11 +299,11 @@ void MainWindow::setPlayerName(QString &name)
 void MainWindow::updateBombs()
 {
     for (auto bomb : bombs_) {
-        if (!bomb->getStatus()) {
+        if (!bomb->isExploded()) {
             //if the bomb has not exploded yet
-            bomb->setScale(bomb->dropTime_*0.15);
-            bomb->dropTime_--;
-            if (bomb->dropTime_ == 0) {
+            bomb->setScale(bomb->getDropTime()*0.15);
+            bomb->decreaseDropTime();
+            if (bomb->getDropTime() == 0) {
                 bomb->explode();
                 QSound::play(":/Resources/Sound/explosion.wav");
 
@@ -332,9 +330,9 @@ void MainWindow::updateBombs()
             }
         } else {
             //if the bomb has exploded
-            bomb->setScale((bomb->explosionTime_)*0.2);
-            bomb->explosionTime_++;
-            if (bomb->explosionTime_ == 10) {
+            bomb->setScale((bomb->getExplosionTime())*0.2);
+            bomb->increaseExplosionTime();
+            if (bomb->getExplosionTime() == 10) {
                 map->removeItem(bomb); //delete from scene
                 bombs_.remove(bombs_.indexOf(bomb)); //delete from QVector
             }
@@ -465,6 +463,13 @@ void MainWindow::spawnNuke()
 }
 void MainWindow::dropNuke()
 {
+    //player needs to have a nuke collected
+    if (nuke_->getStatus() != 2)
+    {
+        return;
+    }
+
+    nuke_->setStatus(3);
     int x = player_->x();
     int y = player_->y();
     nuke_->setPos(x, y);
