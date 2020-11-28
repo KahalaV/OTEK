@@ -24,8 +24,6 @@ public:
     int getSpeedStraight();
     int getSpeedDiagonal();
     int getBombRadius();
-    bool isRecentlyHit();
-    void setHit(bool hitStatus);
     void addBombs();
     int getBombs();
     void dropBomb();
@@ -33,6 +31,10 @@ public:
     int getHealth();
     bool healthLeft();
     void setPlaneType(int plane);
+    void decreaseCloudHitCooldown();
+    void setCooldown(int newCooldown);
+    int getCooldown();
+    int getCoolDownDuration();
 
 private:
     int dir_;
@@ -41,10 +43,11 @@ private:
     int speedStraight_;
     int speedDiagonal_;
     int bombRadius;
-    bool recentlyHit_;
     QImage image_;
     int planeType_; // 1 = Red Baron, 2 = Bomber, 3 = Thunderbird
     int health_ = 4;
+    int cloudHitCooldown_;
+    int coolDownDuration_;
 };
 
 }

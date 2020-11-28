@@ -4,7 +4,7 @@ namespace Student {
 
 Player::Player() :
     dir_(1),
-    recentlyHit_(false),
+    cloudHitCooldown_(0),
     bombs_(5)
 {
     setPos(50, 520);
@@ -101,13 +101,9 @@ int Player::getBombRadius()
 {
     return bombRadius;
 }
-bool Player::isRecentlyHit()
+void Player::setCooldown(int newCooldown)
 {
-    return recentlyHit_;
-}
-void Player::setHit(bool hitStatus)
-{
-    recentlyHit_ = hitStatus;
+    cloudHitCooldown_ = newCooldown;
 }
 void Player::addBombs()
 {
@@ -143,6 +139,7 @@ void Player::setPlaneType(int plane)
             speedStraight_ = 3;
             speedDiagonal_ = 2;
             bombRadius = 50;
+            coolDownDuration_ = 50;
             // same
             break;
         case 3:
@@ -150,18 +147,32 @@ void Player::setPlaneType(int plane)
             speedStraight_ = 6;
             speedDiagonal_ = 4;
             bombRadius = 30;
+            coolDownDuration_ = 30;
             break;
         default:
             image_ = QImage(":/Resources/Graphics/red_baron.bmp");
             speedStraight_ = 4;
             speedDiagonal_ = 3;
             bombRadius = 40;
+            coolDownDuration_ = 40;
     }
 }
 
 int Player::getHealth()
 {
     return health_;
+}
+void Player::decreaseCloudHitCooldown()
+{
+    cloudHitCooldown_--;
+}
+int Player::getCooldown()
+{
+    return cloudHitCooldown_;
+}
+int Player::getCoolDownDuration()
+{
+    return coolDownDuration_;
 }
 
 }

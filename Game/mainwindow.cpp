@@ -13,16 +13,15 @@ MainWindow::MainWindow(QWidget *parent) :
     nuke_(new Student::Nuke()),
     gameOver(false)
 
-{   
+{
     ui->setupUi(this);
     ui->scoreLabel->setText(QString::number(score_));
 
     map = new QGraphicsScene(this);
     ui->graphicsView->setScene(map);
     map->setSceneRect(0,0,width_,height_);
-    statistics_->writeStatistics();
 
-    //ui->graphicsView->scale(2,2);
+    ui->graphicsView->scale(2,2);
 
     QSound::play(":/Resources/Sound/gameMusic.wav");
     timer = new QTimer(this);
@@ -249,9 +248,9 @@ void MainWindow::movePlayer()
     //check collision with clouds
     for (auto cloud : clouds_) {
         if (player_->collidesWithItem(cloud)) {
-            if (!player_->isRecentlyHit()) {
+            if (player_->getCooldown() <= 0) {
                 //if the player has not recently taken hit
-                player_->setHit(true);
+                player_->setCooldown(30);
                 QSound::play(":/Resources/Sound/cloudHitSound.wav");
                 score_ -= 3;
                 ui->scoreLabel->setText(QString::number(score_));
@@ -370,7 +369,6 @@ void MainWindow::addClouds()
             Student::Cloud* cloud(new Student::Cloud(i * 50));
             clouds_.push_back(cloud);
             map->addItem(cloud);
-            player_->setHit(false);
         } else {
             continue;
         }
@@ -448,21 +446,23 @@ void MainWindow::update()
 
     //update dropping nuke
     updateNuke();
+
+    //if player has cooldown left, decrease cooldown
+    if (player_->getCooldown() > 0) {
+        player_->decreaseCloudHitCooldown();
+    }
 }
 void MainWindow::spawnNuke()
 {
     //randomize location
-    //int x = (rand() % 900) + 200;
-    //int y = (rand() % 450) + 150;
-
-    int x = 250;
-    int y = 450;
+    int x = (rand() % 895) + 200;
+    int y = (rand() % 350) + 200;
 
     nuke_->setStatus(1);
     nuke_->setPos(x,y);
     map->addItem(nuke_);
 }
-/*void MainWindow::dropNuke()
+void MainWindow::dropNuke()
 {
     int x = player_->x();
     int y = player_->y();
@@ -506,7 +506,7 @@ void MainWindow::updateNuke()
         }
     } else {
         //if the bomb has exploded
-        nuke_->setScale((nuke_->explosionTime_)*0.3);
+        nuke_->setScale((nuke_->explosionTime_)*0.4);
         nuke_->explosionTime_++;
         if (nuke_->explosionTime_ == 10) {
             map->removeItem(nuke_); //delete from scene
@@ -514,6 +514,6 @@ void MainWindow::updateNuke()
         }
     }
 
-}*/
+}
 
 }
