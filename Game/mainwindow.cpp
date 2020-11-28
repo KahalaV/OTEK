@@ -11,7 +11,6 @@ MainWindow::MainWindow(QWidget *parent) :
     score_(0),
     cloudStatus_(30),
     nuke_(new Student::Nuke()),
-    nukeSpawned_(false),
     gameOver(false)
 
 {   
@@ -242,10 +241,9 @@ void MainWindow::movePlayer()
     }
 
     //check nuke
-    if (!player_->hasNuke() && player_->collidesWithItem(nuke_)) {
-        player_->setNuke(true);
+    if (nuke_->getStatus() == 1 && player_->collidesWithItem(nuke_)) {
         map->removeItem(nuke_);
-        nukeSpawned_ = false;
+        nuke_->setStatus(2);
     }
 
     //check collision with clouds
@@ -272,8 +270,9 @@ void MainWindow::movePlayer()
 void MainWindow::dropBomb()
 {
     //if the player has nuke, drop nuke instead of bomb
-    if (player_->hasNuke()) {
-        player_->setNuke(false);
+    if (nuke_->getStatus() == 2) {
+        dropNuke();
+        nuke_->setStatus(3);
         return;
     }
 
@@ -443,22 +442,77 @@ void MainWindow::update()
     ui->bombsLeftLabel->setText(QString::number(player_->getBombs()));
 
     //if player doesn't have a nuke, spawn nuke
-    if (!nukeSpawned_ && !player_->hasNuke()) {
+    if (nuke_->getStatus() == 0) {
         spawnNuke();
-        nukeSpawned_ = true;
     }
+
+    //update dropping nuke
+    updateNuke();
 }
 void MainWindow::spawnNuke()
 {
     //randomize location
-    int x = (rand() % 900) + 200;
-    int y = (rand() % 450) + 150;
+    //int x = (rand() % 900) + 200;
+    //int y = (rand() % 450) + 150;
 
+    int x = 250;
+    int y = 450;
+
+    nuke_->setStatus(1);
     nuke_->setPos(x,y);
     map->addItem(nuke_);
 }
 /*void MainWindow::dropNuke()
 {
+    int x = player_->x();
+    int y = player_->y();
+    nuke_->setPos(x, y);
+    nuke_->setDirection(player_->getDir());
+    map->addItem(nuke_);
+}
+void MainWindow::updateNuke()
+{
+    if (nuke_->getStatus() != 3) {
+        return;
+    }
+
+    if (!nuke_->isExploded()) {
+        //if the bomb has not exploded yet
+        nuke_->setScale(nuke_->dropTime_*0.15);
+        nuke_->dropTime_--;
+        if (nuke_->dropTime_ == 0) {
+            nuke_->explode();
+            QSound::play(":/Resources/Sound/explosion.wav");
+
+            //check nearby actors and destroy buses within explosion radius
+            int bombX = nuke_->x() + 25;
+            int bombY = nuke_->y() + 25;
+            int nukeRadius = 80;
+
+            //map->addEllipse(bombX-80, bombY-80, 2*80, 2*80);
+
+            for (auto actor : actors_) {
+                int actorX = actor.second->x();
+                int actorY = actor.second->y();
+                //euclidean distance
+                int distance = sqrt((actorX - bombX)*(actorX - bombX) + (actorY-bombY)*(actorY-bombY));
+                if (distance < nukeRadius && actor.second->getType() == 1) {
+                    actor.second->setType(2);
+                    score_++;
+                    ui->scoreLabel->setText(QString::number(score_));
+                }
+
+            }
+        }
+    } else {
+        //if the bomb has exploded
+        nuke_->setScale((nuke_->explosionTime_)*0.3);
+        nuke_->explosionTime_++;
+        if (nuke_->explosionTime_ == 10) {
+            map->removeItem(nuke_); //delete from scene
+            nuke_->setStatus(0);
+        }
+    }
 
 }*/
 

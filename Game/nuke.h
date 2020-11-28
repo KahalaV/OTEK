@@ -16,16 +16,20 @@ public:
     ~Nuke();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    bool getStatus();
+    bool isExploded();
     int getDropTime();
     int getExplosionTime();
     void explode();
     void setDirection(int dir);
     QImage drawBomb();
+    void setStatus(int status);
+    int getStatus();
 
-private:
     int dropTime_;
     int explosionTime_;
+
+private:
+    int status_; //0 = no nuke in game, 1 = on map to be collected, 2 = player has nuke, not dropped, 3 = dropping
     bool exploded_;
     QImage image_;
     int dir_;

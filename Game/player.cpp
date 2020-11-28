@@ -5,7 +5,6 @@ namespace Student {
 Player::Player() :
     dir_(1),
     recentlyHit_(false),
-    hasNuke_(false),
     bombs_(5)
 {
     setPos(50, 520);
@@ -163,14 +162,6 @@ void Player::setPlaneType(int plane)
 int Player::getHealth()
 {
     return health_;
-}
-bool Player::hasNuke()
-{
-    return hasNuke_;
-}
-void Player::setNuke(bool status)
-{
-    hasNuke_ = status;
 }
 
 }
