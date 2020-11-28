@@ -11,12 +11,10 @@ EndWindow::EndWindow(QWidget *parent) :
 
     connect(ui->quitButton, SIGNAL (released()), this, SLOT (quitButtonClicked()));
 }
-
 EndWindow::~EndWindow()
 {
     delete ui;
 }
-
 void EndWindow::quitButtonClicked()
 {
     std::exit(0);

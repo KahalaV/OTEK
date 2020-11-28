@@ -4,9 +4,9 @@ namespace Student {
 
 Player::Player() :
     dir_(1),
-    cloudHitCooldown_(0),
     bombs_(5),
-    health_(4)
+    health_(4),
+    cloudHitCooldown_(0)
 {
     setPos(50, 520);
     setZValue(1);
@@ -17,12 +17,10 @@ Player::~Player()
 {
 
 }
-
 QRectF Player::boundingRect() const
 {
     return QRectF(0, 0, 49, 49);
 }
-
 void Player::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->drawImage(QPoint(0, 0), image_);
@@ -129,7 +127,6 @@ bool Player::healthLeft() {
         return false;
     }
 }
-
 void Player::setPlaneType(int plane)
 {
     planeType_ = plane;
@@ -158,7 +155,6 @@ void Player::setPlaneType(int plane)
             coolDownDuration_ = 40;
     }
 }
-
 int Player::getHealth()
 {
     return health_;

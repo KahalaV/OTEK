@@ -21,14 +21,14 @@ public:
     void increaseExplosionTime();
     void explode();
     void setDirection(int dir);
-    QImage drawBomb();
+    QImage getImage();
 
 private:
+    QImage image_;
+    int dir_;
     int dropTime_;
     int explosionTime_;
     bool exploded_;
-    QImage image_;
-    int dir_;
 };
 
 }

@@ -43,11 +43,11 @@ public:
 
 private:
     QTime clock_;
-    const int gameTime_;
-    std::shared_ptr<Student::MainWindow> mainWindow_;
-    Student::Player* player_;
     QString playerName_;
     int planeType_;
+    Student::Player* player_;
+    const int gameTime_;
+    std::shared_ptr<Student::MainWindow> mainWindow_;
     bool gamestatus_ = false;
 };
 

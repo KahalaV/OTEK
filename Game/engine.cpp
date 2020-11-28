@@ -6,8 +6,8 @@ namespace Student
 Engine::Engine(QObject *parent) :
     QObject(parent),
     gameLogic_(new CourseSide::Logic),
-    startWindow_(new Student::StartWindow),
-    city_(nullptr)
+    city_(nullptr),
+    startWindow_(new Student::StartWindow)
 {
     // city_ = std::shared_ptr<Student::City>(new Student::City);
     startWindow_->show();
@@ -16,9 +16,7 @@ Engine::Engine(QObject *parent) :
     connect(this, SIGNAL (cityInitialized()), this, SLOT (logic()));
     connect(this, SIGNAL (gameStartFinalized()), this, SLOT (startGame()));
 }
-
 Engine::~Engine() {}
-
 void Engine::initCity(QString name, int plane)
 {
     city_ = std::shared_ptr<Student::City>(new Student::City);
@@ -26,7 +24,6 @@ void Engine::initCity(QString name, int plane)
     city_->setPlaneType(plane);
     emit cityInitialized();
 }
-
 void Engine::logic()
 {
     gameLogic_->fileConfig();
@@ -35,7 +32,6 @@ void Engine::logic()
     gameLogic_->finalizeGameStart();
     emit gameStartFinalized();
 }
-
 void Engine::startGame()
 {
     city_->startGame();

@@ -3,39 +3,33 @@
 namespace Student {
 
 Bomb::Bomb() :
-    exploded_(false),
+    image_(QImage(":/Resources/Graphics/bomb.bmp")),
     dropTime_(10),
     explosionTime_(0),
-    image_(QImage(":/Resources/Graphics/bomb.bmp"))
+    exploded_(false)
 {
     setZValue(0.9);
     setTransformOriginPoint(this->boundingRect().center());
 }
-
 Bomb::~Bomb()
 {
 
 }
-
 QRectF Bomb::boundingRect() const
 {
     return QRectF(0, 0, 49, 49);
 }
-
 void Bomb::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->drawImage(QPoint(0, 0), image_);
 }
-
 void Bomb::explode() {
     exploded_ = true;
     image_ = QImage(":/Resources/Graphics/explosion.bmp");
 }
-
 bool Bomb::isExploded() {
     return exploded_;
 }
-
 void Bomb::setDirection(int dir)
 {
     if (dir == 1) {
@@ -71,7 +65,6 @@ void Bomb::setDirection(int dir)
         dir_ = dir;
     }
 }
-
 int Bomb::getDropTime()
 {
     return dropTime_;
@@ -79,7 +72,7 @@ int Bomb::getDropTime()
 int Bomb::getExplosionTime() {
     return explosionTime_;
 }
-QImage Bomb::drawBomb()
+QImage Bomb::getImage()
 {
     return image_;
 }
@@ -91,4 +84,5 @@ void Bomb::increaseExplosionTime()
 {
     explosionTime_++;
 }
+
 }

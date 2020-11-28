@@ -8,9 +8,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     statistics_(new Student::Statistics),
     playerName_(""),
+    nuke_(new Student::Nuke()),
     score_(0),
     cloudStatus_(30),
-    nuke_(new Student::Nuke()),
     gameOver(false)
 
 {
@@ -26,19 +26,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QSound::play(":/Resources/Sound/gameMusic.wav");
     timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(decreaseGameTime()));
-    connect(timer, SIGNAL(timeout()), this, SLOT(movePlayer()));
-    connect(timer, SIGNAL(timeout()), this, SLOT(updateBombs()));
-    connect(timer, SIGNAL(timeout()), this, SLOT(moveClouds()));
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
 
 }
-
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 void MainWindow::setPicture(QImage img)
 {
     map->setBackgroundBrush(img);
@@ -48,7 +42,6 @@ void MainWindow::setClock(QTime &clock)
     clock_ = &clock;
     ui->timeLabel->setText(clock_->toString("h:mm"));
 }
-
 void MainWindow::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     //check type
@@ -65,7 +58,6 @@ void MainWindow::addActor(std::shared_ptr<Interface::IActor> newactor)
     map->addItem(nActorItem);
 
 }
-
 void MainWindow::addStop(int x, int y)
 {
     QGraphicsPixmapItem* stopSprite = new QGraphicsPixmapItem(QPixmap(":/Resources/Graphics/stop.bmp"));
@@ -73,7 +65,6 @@ void MainWindow::addStop(int x, int y)
     stopSprite->setZValue(0.1);
     map->addItem(stopSprite);
 }
-
 void MainWindow::moveActor(std::shared_ptr<Interface::IActor> actor)
 {
     int x = actor->giveLocation().giveX() + 353;
@@ -88,7 +79,6 @@ void MainWindow::moveActor(std::shared_ptr<Interface::IActor> actor)
         it->second->setY(y);
     }
 }
-
 void MainWindow::updateTimeLabel()
 {
     ui->timeLabel->setText(clock_->toString("h:mm"));
@@ -289,13 +279,11 @@ void MainWindow::dropBomb()
     map->addItem(bomb);
     QSound::play(":/Resources/Sound/bombDrop.wav");
 }
-
 void MainWindow::setPlayerName(QString &name)
 {
     playerName_ = name;
     ui->playerLabel->setText(name);
 }
-
 void MainWindow::updateBombs()
 {
     for (auto bomb : bombs_) {
@@ -339,7 +327,6 @@ void MainWindow::updateBombs()
         }
     }
 }
-
 std::vector<int> MainWindow::randomizeCloudSlots()
 {
     //first generate the amount of clouds (2-4)
@@ -397,7 +384,6 @@ void MainWindow::removeActor(std::shared_ptr<Interface::IActor> actor) {
     map->removeItem(it->second);
     actors_.erase(it);
 }
-
 bool MainWindow::findActor(std::shared_ptr<Interface::IActor> actor)
 {
     if (std::find_if(actors_.begin(), actors_.end(), [&actor](const std::pair<std::shared_ptr<Interface::IActor>, ActorItem*>& elem){ return elem.first == actor;})) {
@@ -406,7 +392,6 @@ bool MainWindow::findActor(std::shared_ptr<Interface::IActor> actor)
         return false;
     }
 }
-
 void MainWindow::decreaseGameTime()
 {
     timeLeft_ = timeLeft_.addMSecs(-tick_);
@@ -421,7 +406,6 @@ void MainWindow::decreaseGameTime()
         return;
     }
 }
-
 void MainWindow::startGame(const int GAME_TIME)
 {
     timeLeft_ = QTime(0, GAME_TIME/60, GAME_TIME%60, 0);
@@ -434,22 +418,34 @@ bool MainWindow::isGameOver()
 }
 void MainWindow::update()
 {
+    //move player
+    movePlayer();
+
     //increase bombs
     player_->addBombs();
     ui->bombsLeftLabel->setText(QString::number(player_->getBombs()));
+
+    //update currently dropping and exploding bombs
+    updateBombs();
+
+    //update dropping nuke
+    updateNuke();
+
+    //move clouds
+    moveClouds();
+
+    //if player has cooldown left, decrease cooldown
+    if (player_->getCooldown() > 0) {
+        player_->decreaseCloudHitCooldown();
+    }
 
     //if player doesn't have a nuke, spawn nuke
     if (nuke_->getStatus() == 0) {
         spawnNuke();
     }
 
-    //update dropping nuke
-    updateNuke();
-
-    //if player has cooldown left, decrease cooldown
-    if (player_->getCooldown() > 0) {
-        player_->decreaseCloudHitCooldown();
-    }
+    //decrease game time left
+    decreaseGameTime();
 }
 void MainWindow::spawnNuke()
 {
@@ -484,9 +480,9 @@ void MainWindow::updateNuke()
 
     if (!nuke_->isExploded()) {
         //if the bomb has not exploded yet
-        nuke_->setScale(nuke_->dropTime_*0.15);
-        nuke_->dropTime_--;
-        if (nuke_->dropTime_ == 0) {
+        nuke_->setScale(nuke_->getDropTime()*0.15);
+        nuke_->decreaseDropTime();
+        if (nuke_->getDropTime() == 0) {
             nuke_->explode();
             QSound::play(":/Resources/Sound/explosion.wav");
 
@@ -512,9 +508,9 @@ void MainWindow::updateNuke()
         }
     } else {
         //if the bomb has exploded
-        nuke_->setScale((nuke_->explosionTime_)*0.4);
-        nuke_->explosionTime_++;
-        if (nuke_->explosionTime_ == 10) {
+        nuke_->setScale((nuke_->getExplosionTime())*0.4);
+        nuke_->increaseExplosionTime();
+        if (nuke_->getExplosionTime() == 10) {
             map->removeItem(nuke_); //delete from scene
             nuke_->setStatus(0);
         }

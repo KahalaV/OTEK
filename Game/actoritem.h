@@ -19,9 +19,8 @@ public:
     void setType(int type);
 
 private:
-    //0 = passenger, 1 = nysse, 2 = destroyed nysse
-    int type_;
     QImage image_;
+    int type_; //0 = passenger, 1 = nysse, 2 = destroyed nysse
 };
 
 }

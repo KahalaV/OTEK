@@ -37,15 +37,15 @@ public:
     int getCoolDownDuration();
 
 private:
+    QImage image_;
     int dir_;
+    int planeType_; // 1 = Red Baron, 2 = Bomber, 3 = Thunderbird
+    int speedStraight_;
+    int speedDiagonal_;
     double bombs_;
     double bombsIncrease = 0.02;
     int health_;
-    int speedStraight_;
-    int speedDiagonal_;
     int bombRadius;
-    QImage image_;
-    int planeType_; // 1 = Red Baron, 2 = Bomber, 3 = Thunderbird
     int cloudHitCooldown_;
     int coolDownDuration_;
 };

@@ -13,12 +13,10 @@ Cloud::~Cloud()
 {
 
 }
-
 QRectF Cloud::boundingRect() const
 {
     return QRectF(0, 0, 41, 41);
 }
-
 void Cloud::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->drawImage(QPoint(0, 0), image_);

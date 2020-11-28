@@ -4,8 +4,8 @@ namespace Student
 {
 
 City::City(const int GAME_TIME) :
-    mainWindow_(new Student::MainWindow),
-    gameTime_(GAME_TIME)
+    gameTime_(GAME_TIME),
+    mainWindow_(new Student::MainWindow)
 {
     mainWindow_->setPicture(QImage(":/offlinedata/offlinedata/kartta_iso_1095x592.png"));
     mainWindow_->setClock(clock_);
@@ -13,9 +13,7 @@ City::City(const int GAME_TIME) :
     setPlayer();
 }
 City::~City() {}
-
 void City::setBackground(QImage& basicbackground, QImage& bigbackground) {};
-
 void City::setClock(QTime clock)
 {
     clock_ = clock;
@@ -81,13 +79,11 @@ void City::setPlayer()
     player_ = player;
     mainWindow_->setPlayer(player_);
 }
-
 void City::setPlayerName(QString &name)
 {
     playerName_ = name;
     mainWindow_->setPlayerName(name);
 }
-
 void City::setPlaneType(int &plane)
 {
     planeType_ = plane;

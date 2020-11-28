@@ -65,27 +65,19 @@ public:
     void setPlayerName(QString &name);
     void dropNuke();
     void updateNuke();
-
-    //player
     void setPlayer(Student::Player* player);
     void keyPressEvent(QKeyEvent *event);
-
-    //clouds
+    void movePlayer();
     void addClouds();
+    void moveClouds();
+    void decreaseGameTime();
     std::vector<int> randomizeCloudSlots();
     void spawnNuke();
+    void updateBombs();
 
 
 public slots:
-    //player
-    void movePlayer();
-    void updateBombs();
-    //clouds
-    void moveClouds();
-
     void update();
-
-    void decreaseGameTime();
 
 private:
     Ui::MainWindow* ui;
@@ -93,21 +85,20 @@ private:
     QGraphicsScene* map;
     QTimer* timer;
     QTime timeLeft_;
-    bool gameOver;
     QTime* clock_;
     QVector<std::pair<std::shared_ptr<Interface::IActor>, Student::ActorItem*>> actors_;
     QVector<Student::Cloud*> clouds_;
     QVector<Student::Bomb*> bombs_;
-    Student::Nuke* nuke_;
     Student::Player* player_;
     QString playerName_;
+    Student::Nuke* nuke_;
     int score_;
     int cloudStatus_;
-
-    double tick_ = 50;
+    bool gameOver;
+    double tick_ = 50; //ms per game tick
     int cloudInterval_ = 50; //ticks between cloud sets
-    int width_ = 1095;
-    int height_ = 592;
+    const int width_ = 1095;
+    const int height_ = 592;
 };
 
 }

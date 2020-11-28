@@ -18,12 +18,10 @@ StartWindow::StartWindow(QWidget *parent) :
     connect(ui->goButton, SIGNAL (released()), this, SLOT (setSettings()));
     connect(this, SIGNAL (settingsChanged(QString, int)), this, SLOT (close()));
 }
-
 StartWindow::~StartWindow()
 {
     delete ui;
 }
-
 void StartWindow::setSettings()
 {
     playerName_ = ui->lineEdit->text();
