@@ -15,6 +15,11 @@
 #include <iostream>
 #include <QDebug>
 
+/**
+ *@file
+ *@brief
+ */
+
 namespace Student
 {
 

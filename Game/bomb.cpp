@@ -72,10 +72,6 @@ int Bomb::getDropTime()
 int Bomb::getExplosionTime() {
     return explosionTime_;
 }
-QImage Bomb::getImage()
-{
-    return image_;
-}
 void Bomb::decreaseDropTime()
 {
     dropTime_--;

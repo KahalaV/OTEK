@@ -5,13 +5,24 @@
 #include <QGraphicsScene>
 #include <QPainter>
 
+/**
+ *@file
+ *@brief
+ */
+
 namespace Student {
 
 class Cloud : public QGraphicsItem
 {
 public:
     Cloud(int y);
+
     ~Cloud();
+
+    /**
+     * @brief boundingRect of the graphicsitem
+     * @return returns boundingRect
+     */
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     int getSpeed();

@@ -18,9 +18,13 @@ class Player : public QGraphicsItem
 public:
     Player();
     ~Player();
+
+    /**
+     * @brief boundingRect of the graphicsitem
+     * @return returns boundingRect
+     */
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-
     void setDirection(int dir);
     bool checkNewCoords(int dx, int dy);
     int getDir();

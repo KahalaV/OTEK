@@ -7,6 +7,11 @@
 #include <QGraphicsScene>
 #include <QPainter>
 
+/**
+ *@file
+ *@brief
+ */
+
 namespace Student {
 
 class Nuke : public QGraphicsItem
@@ -14,6 +19,11 @@ class Nuke : public QGraphicsItem
 public:
     Nuke();
     ~Nuke();
+
+    /**
+     * @brief boundingRect of the graphicsitem
+     * @return returns boundingRect
+     */
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     bool isExploded();

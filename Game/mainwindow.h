@@ -33,8 +33,9 @@
 #include <QTimer>
 #include <QVector>
 
-/*!
- * Doxytest start
+/**
+ *@file
+ *@brief
  */
 
 namespace Ui {

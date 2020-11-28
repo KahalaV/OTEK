@@ -34,7 +34,7 @@ public:
 
     /**
      * @brief boundingRect of the graphicsitem
-     * @return
+     * @return returns boundingRect
      */
     QRectF boundingRect() const;
 

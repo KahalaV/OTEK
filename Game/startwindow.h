@@ -4,6 +4,11 @@
 #include <QDialog>
 #include <memory>
 
+/**
+ *@file
+ *@brief
+ */
+
 namespace Ui {
 class StartWindow;
 }
