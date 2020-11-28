@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     map = new QGraphicsScene(this);
     ui->graphicsView->setScene(map);
     map->setSceneRect(0,0,width_,height_);
+    statistics_->writeStatistics();
 
     ui->graphicsView->scale(2,2);
 
