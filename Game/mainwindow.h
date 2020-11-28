@@ -10,6 +10,7 @@
 #include <iostream>
 #include "bomb.h"
 #include "nuke.h"
+#include "statistics.hh"
 
 #include <QKeyEvent>
 #include <QDebug>
@@ -86,6 +87,7 @@ public slots:
 
 private:
     Ui::MainWindow* ui;
+    std::shared_ptr<Student::Statistics> statistics_;
     QGraphicsScene* map;
     QTimer* timer;
     QTime timeLeft_;

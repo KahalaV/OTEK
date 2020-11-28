@@ -6,6 +6,7 @@ namespace Student {
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
+    statistics_(new Student::Statistics),
     playerName_(""),
     score_(0),
     cloudStatus_(30),
@@ -20,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     map = new QGraphicsScene(this);
     ui->graphicsView->setScene(map);
     map->setSceneRect(0,0,width_,height_);
+    statistics_->writeStatistics();
 
     //ui->graphicsView->scale(2,2);
 
@@ -455,9 +457,9 @@ void MainWindow::spawnNuke()
     nuke_->setPos(x,y);
     map->addItem(nuke_);
 }
-void MainWindow::dropNuke()
+/*void MainWindow::dropNuke()
 {
 
-}
+}*/
 
 }

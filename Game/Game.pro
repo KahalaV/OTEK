@@ -16,7 +16,8 @@ SOURCES += \
     mainwindow.cpp \
     nuke.cpp \
     player.cpp \
-    startwindow.cpp
+    startwindow.cpp \
+    statistics.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -57,7 +58,8 @@ HEADERS += \
     mainwindow.h \
     nuke.h \
     player.h \
-    startwindow.h
+    startwindow.h \
+    statistics.hh
 
 RESOURCES += \
     Resources.qrc
