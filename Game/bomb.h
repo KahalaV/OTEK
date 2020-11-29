@@ -56,8 +56,8 @@ public:
     int getDropTime();
 
     /**
-     * @brief getDropTime returns the current explosion time integer of the bomb. The integer increases as the explosion goes on
-     * @return current dropTime_
+     * @brief getExplosionTime returns the current explosion time integer of the bomb. The integer increases as the explosion goes on
+     * @return current explosionTime_
      */
     int getExplosionTime();
 
