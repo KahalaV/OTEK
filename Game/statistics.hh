@@ -8,7 +8,7 @@
 #include <memory>
 #include <QTime>
 #include <QDebug>
-#include <QtTest/QTest>
+#include <QTest>
 
 /**
  *@file

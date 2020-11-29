@@ -12,6 +12,7 @@ Statistics::Statistics(QString &name, QObject *parent) :
 
 {
     highScores_->insert({playerName_, scores_});
+    QTest::qExec(this);
 }
 
 Statistics::~Statistics()
@@ -76,7 +77,6 @@ void Statistics::writeStatistics()
 
     if (statisticsFile.is_open())
     {
-        qDebug() << "opended nice";
         statisticsFile << playerName_.toStdString() << ",";
         statisticsFile << highScores_->at(playerName_)->score << ",";
         statisticsFile << highScores_->at(playerName_)->nyssesDestroyed << ",";
@@ -88,6 +88,7 @@ void Statistics::writeStatistics()
         statisticsFile << highScores_->at(playerName_)->gameTime.toString("m:ss").toStdString() << "\n";
     }
     statisticsFile.close();
+    qDebug() << "statistics.csv closed";
 }
 
 void Statistics::testStats()
@@ -110,7 +111,7 @@ std::fstream Statistics::createCsvFile()
     }
     else
     {
-        qDebug() << "file opened";
+        qDebug() << "Opened statistics.csv";
         return statisticsFile;
     }
 }
