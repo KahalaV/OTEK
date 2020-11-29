@@ -15,18 +15,33 @@ class StartWindow;
 
 namespace Student {
 
+/**
+ * @brief The StartWindow class defines the dialog that appears at the start of the game
+ */
 class StartWindow : public QDialog
 {
     Q_OBJECT
 
 public:
     explicit StartWindow(QWidget *parent = nullptr);
+
+    /**
+     * @brief Destructor
+     */
     ~StartWindow();
 
 public slots:
+    /**
+     * @brief Sets player name and plane type
+     */
     void setSettings();
 
 signals:
+    /**
+     * @brief Emits player information
+     * @param name: player name
+     * @param plane: plane type
+     */
     void settingsChanged(QString name, int plane);
 
 private:

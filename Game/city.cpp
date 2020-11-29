@@ -4,16 +4,22 @@ namespace Student
 {
 
 City::City(const int GAME_TIME) :
-    gameTime_(GAME_TIME),
-    mainWindow_(new Student::MainWindow)
+    mainWindow_(new Student::MainWindow),
+    gameTime_(GAME_TIME)
 {
     mainWindow_->setPicture(QImage(":/offlinedata/offlinedata/kartta_iso_1095x592.png"));
     mainWindow_->setClock(clock_);
     mainWindow_->show();
     setPlayer();
 }
-City::~City() {}
-void City::setBackground(QImage& basicbackground, QImage& bigbackground) {};
+City::~City()
+{
+
+}
+void City::setBackground(QImage& basicbackground, QImage& bigbackground)
+{
+
+}
 void City::setClock(QTime clock)
 {
     clock_ = clock;
@@ -34,34 +40,33 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
     if (std::dynamic_pointer_cast<CourseSide::Passenger>(newactor) == nullptr) {
         mainWindow_->addActor(newactor);
     }
-
 }
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
     if (std::dynamic_pointer_cast<CourseSide::Passenger>(actor) == nullptr) {
         mainWindow_->removeActor(actor);
     }
-
 }
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
-    //mikä vittu tämän idea on
+
 }
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 {
     if (std::dynamic_pointer_cast<CourseSide::Passenger>(actor) == nullptr) {
         return mainWindow_->findActor(actor);
     }
-
 }
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
     if (std::dynamic_pointer_cast<CourseSide::Passenger>(actor) == nullptr) {
         mainWindow_->moveActor(actor);
     }
+}
+std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
+{
 
 }
-std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const {}
 bool City::isGameOver() const
 {
     if (mainWindow_->isGameOver()) {

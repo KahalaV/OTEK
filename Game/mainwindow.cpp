@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     bombsDropped_(0),
     nukesDropped_(0),
     cloudStatus_(30),
-    gameOver(false)
+    gameOver_(false)
 
 {
     ui->setupUi(this);
@@ -256,7 +256,7 @@ void MainWindow::movePlayer()
                 player_->decreaseHealth();
                 ui->healthBar->setValue(player_->getHealth()*25);
                 if (player_->healthLeft()) {
-                    gameOver = true;
+                    gameOver_ = true;
                 }
             } else {
                 return;
@@ -428,7 +428,7 @@ void MainWindow::decreaseGameTime()
     ui->graphicsView->centerOn(player_);
 
     if (timeLeft_ == QTime(0,0,0,0)) {
-        gameOver = true;
+        gameOver_ = true;
         timer->stop();
     } else {
         return;
@@ -443,11 +443,11 @@ void MainWindow::startGame(const int GAME_TIME)
 }
 bool MainWindow::isGameOver()
 {
-    if (gameOver)
+    if (gameOver_)
     {
         setStatistics();
     }
-    return gameOver;
+    return gameOver_;
 }
 void MainWindow::update()
 {
@@ -469,7 +469,7 @@ void MainWindow::update()
 
     //if player has cooldown left, decrease cooldown
     if (player_->getCooldown() > 0) {
-        player_->decreaseCloudHitCooldown();
+        player_->decreaseCooldown();
     }
 
     //if player doesn't have a nuke, spawn nuke
