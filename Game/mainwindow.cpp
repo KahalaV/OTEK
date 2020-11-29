@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     nuke_(new Student::Nuke()),
     score_(0),
     cloudStatus_(30),
-    gameOver(false)
+    gameOver_(false)
 
 {
     ui->setupUi(this);
@@ -253,7 +253,7 @@ void MainWindow::movePlayer()
                 player_->decreaseHealth();
                 ui->healthBar->setValue(player_->getHealth()*25);
                 if (player_->healthLeft()) {
-                    gameOver = true;
+                    gameOver_ = true;
                 }
             } else {
                 return;
@@ -400,7 +400,7 @@ void MainWindow::decreaseGameTime()
     ui->graphicsView->centerOn(player_);
 
     if (timeLeft_ == QTime(0,0,0,0)) {
-        gameOver = true;
+        gameOver_ = true;
         timer->stop();
     } else {
         return;
@@ -414,7 +414,7 @@ void MainWindow::startGame(const int GAME_TIME)
 }
 bool MainWindow::isGameOver()
 {
-    return gameOver;
+    return gameOver_;
 }
 void MainWindow::update()
 {
