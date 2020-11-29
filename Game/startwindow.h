@@ -2,6 +2,7 @@
 #define STARTWINDOW_H
 
 #include <QDialog>
+#include <QPixmap>
 #include <memory>
 
 /**

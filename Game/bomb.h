@@ -77,7 +77,7 @@ public:
     void explode();
 
     /**
-     * @brief Sets the direction of the bomb graphic. 1 = north, 2 = northwest, 3 = east etc.
+     * @brief Sets the direction of the bomb graphic. 1 = north, 2 = northeast, 3 = east etc.
      * @param dir: new direction of the bomb
      */
     void setDirection(int dir);
