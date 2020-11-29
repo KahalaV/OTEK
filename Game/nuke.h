@@ -15,7 +15,7 @@
 namespace Student {
 
 /**
- * @brief The Nuke class defines the nuke that player can collect and drop with R key. Only one nuke can exists at a time
+ * @brief The Nuke class defines the nuke that player can collect and drop with R key. Only one nuke can exist at a time
  */
 class Nuke : public QGraphicsItem
 {
@@ -79,7 +79,7 @@ public:
     void explode();
 
     /**
-     * @brief Sets the direction of the bomb graphic. 1 = north, 2 = northwest, 3 = east etc.
+     * @brief Sets the direction of the bomb graphic. 1 = north, 2 = northeast, 3 = east etc.
      * @param dir: new direction of the bomb
      */
     void setDirection(int dir);

@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->scoreLabel->setText(QString::number(score_));
+    setWindowTitle("Boom! Stop the Nysse");
 
     map = new QGraphicsScene(this);
     ui->graphicsView->setScene(map);
