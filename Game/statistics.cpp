@@ -3,7 +3,8 @@
 namespace Student
 {
 
-Statistics::Statistics(QString &name) :
+Statistics::Statistics(QString &name, QObject *parent) :
+    QObject(parent),
     fileName_("statistics.csv"),
     scores_(new Scores),
     playerName_(name),
@@ -87,6 +88,16 @@ void Statistics::writeStatistics()
         statisticsFile << highScores_->at(playerName_)->gameTime.toString("m:ss").toStdString() << "\n";
     }
     statisticsFile.close();
+}
+
+void Statistics::testStats()
+{
+    QCOMPARE(1, 1);
+}
+
+void Statistics::testAnother()
+{
+    QCOMPARE(1, 1);
 }
 
 std::fstream Statistics::createCsvFile()

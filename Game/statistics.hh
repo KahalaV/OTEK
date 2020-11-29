@@ -8,6 +8,7 @@
 #include <memory>
 #include <QTime>
 #include <QDebug>
+#include <QtTest/QTest>
 
 /**
  *@file
@@ -32,10 +33,11 @@ struct Scores {
     QTime gameTime = QTime();
 };
 
-class Statistics
+class Statistics : public QObject
 {
+    Q_OBJECT
 public:
-    Statistics(QString &name);
+    explicit Statistics(QString &name, QObject *parent = nullptr);
     ~Statistics();
 
     void setScore(int &score);
@@ -49,6 +51,10 @@ public:
 
     void writeStatistics();
     void readStatistics();
+
+private slots:
+    void testStats();
+    void testAnother();
 
 private:
     std::string fileName_;
