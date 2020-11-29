@@ -6,10 +6,14 @@ namespace Student {
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    statistics_(new Student::Statistics),
     playerName_(""),
     nuke_(new Student::Nuke()),
+    gameTime_(0),
     score_(0),
+    nyssesDestroyed_(0),
+    cloudCollisions_(0),
+    bombsDropped_(0),
+    nukesDropped_(0),
     cloudStatus_(30),
     gameOver(false)
 
@@ -20,14 +24,12 @@ MainWindow::MainWindow(QWidget *parent) :
     map = new QGraphicsScene(this);
     ui->graphicsView->setScene(map);
     map->setSceneRect(0,0,width_,height_);
-    statistics_->writeStatistics();
 
     ui->graphicsView->scale(2,2);
 
     QSound::play(":/Resources/Sound/gameMusic.wav");
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-
 }
 MainWindow::~MainWindow()
 {
@@ -249,6 +251,7 @@ void MainWindow::movePlayer()
                 player_->setCooldown(30);
                 QSound::play(":/Resources/Sound/cloudHitSound.wav");
                 score_ -= 3;
+                cloudCollisions_++;
                 ui->scoreLabel->setText(QString::number(score_));
                 player_->decreaseHealth();
                 ui->healthBar->setValue(player_->getHealth()*25);
@@ -278,11 +281,35 @@ void MainWindow::dropBomb()
     bombs_.push_back(bomb);
     map->addItem(bomb);
     QSound::play(":/Resources/Sound/bombDrop.wav");
+    bombsDropped_++;
 }
 void MainWindow::setPlayerName(QString &name)
 {
     playerName_ = name;
     ui->playerLabel->setText(name);
+}
+
+void MainWindow::setPlaneType(int &plane)
+{
+    planeType_ = plane;
+}
+
+void MainWindow::setStatistics()
+{
+    statistics_ = std::shared_ptr<Student::Statistics>(
+                new Student::Statistics(playerName_));
+    statistics_->setScore(score_);
+    statistics_->setNyssesDestroyed(nyssesDestroyed_);
+    statistics_->setCloudCollisions(cloudCollisions_);
+    int health = player_->getHealth()*25;
+    statistics_->setHealthRemaining(health);
+    statistics_->setBombsDropped(bombsDropped_);
+    statistics_->setNukesDropped(nukesDropped_);
+    statistics_->setPlaneUsed(planeType_);
+    QTime timePlayed = QTime(0, gameTime_/60, gameTime_%60, 0).addMSecs(
+                -timeLeft_.msecsSinceStartOfDay());
+    statistics_->setGameTime(timePlayed);
+    statistics_->writeStatistics();
 }
 void MainWindow::updateBombs()
 {
@@ -311,6 +338,7 @@ void MainWindow::updateBombs()
                     if (distance < bombRadius && actor.second->getType() == 1) {
                         actor.second->setType(2);
                         score_++;
+                        nyssesDestroyed_++;
                         ui->scoreLabel->setText(QString::number(score_));
                     }
 
@@ -408,12 +436,17 @@ void MainWindow::decreaseGameTime()
 }
 void MainWindow::startGame(const int GAME_TIME)
 {
+    gameTime_ = GAME_TIME;
     timeLeft_ = QTime(0, GAME_TIME/60, GAME_TIME%60, 0);
     ui->timeLeftLabel->setText(timeLeft_.toString("mm:ss"));
     timer->start(tick_);
 }
 bool MainWindow::isGameOver()
 {
+    if (gameOver)
+    {
+        setStatistics();
+    }
     return gameOver;
 }
 void MainWindow::update()
@@ -471,6 +504,7 @@ void MainWindow::dropNuke()
     nuke_->setPos(x, y);
     nuke_->setDirection(player_->getDir());
     map->addItem(nuke_);
+    nukesDropped_++;
 }
 void MainWindow::updateNuke()
 {

@@ -87,6 +87,7 @@ void City::setPlayerName(QString &name)
 void City::setPlaneType(int &plane)
 {
     planeType_ = plane;
+    mainWindow_->setPlaneType(plane);
     player_->setPlaneType(plane);
 }
 void City::endGame() const

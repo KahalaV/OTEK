@@ -3,17 +3,14 @@
 namespace Student
 {
 
-Statistics::Statistics() :
-    score_(0),
-    nyssesDestroyed_(0),
-    cloudCollisions_(0),
-    healthRemaining_(0),
-    bombsDropped_(0),
-    nukesDropped_(0),
-    planeUsed_(0),
-    gameTime_(QTime())
-{
+Statistics::Statistics(QString &name) :
+    fileName_("statistics.csv"),
+    scores_(new Scores),
+    playerName_(name),
+    highScores_(new std::map<QString, std::shared_ptr<Scores>>)
 
+{
+    highScores_->insert({playerName_, scores_});
 }
 
 Statistics::~Statistics()
@@ -21,44 +18,55 @@ Statistics::~Statistics()
 
 }
 
-void Statistics::setScore(int score)
+void Statistics::setScore(int &score)
 {
-    score_ = score;
+    scores_->score = score;
 }
 
-void Statistics::setNyssesDestroyed(int nyssesDestroyed)
+void Statistics::setNyssesDestroyed(int &nyssesDestroyed)
 {
-    nyssesDestroyed_ = nyssesDestroyed;
+    scores_->nyssesDestroyed = nyssesDestroyed;
 }
 
-void Statistics::setCloudCollisions(int cloudCollisions)
+void Statistics::setCloudCollisions(int &cloudCollisions)
 {
-    cloudCollisions_ = cloudCollisions;
+    scores_->cloudCollisions = cloudCollisions;
 }
 
-void Statistics::setHealthRemaining(int healthRemaining)
+void Statistics::setHealthRemaining(int &healthRemaining)
 {
-    healthRemaining_ = healthRemaining;
+    scores_->healthRemaining = healthRemaining;
 }
 
-void Statistics::setBombsDropped(int bombsDropped)
+void Statistics::setBombsDropped(int &bombsDropped)
 {
-    bombsDropped_ = bombsDropped;
+    scores_->bombsDropped = bombsDropped;
 }
 
-void Statistics::setNukesDropped(int nukesDropped)
+void Statistics::setNukesDropped(int &nukesDropped)
 {
-    nukesDropped_ = nukesDropped;
+    scores_->nukesDropped = nukesDropped;
 }
 
-void Statistics::setPlaneUsed(int planeUsed)
+void Statistics::setPlaneUsed(int &planeUsed)
 {
-    planeUsed_ = planeUsed;
+    if (planeUsed == 2)
+    {
+        scores_->planeUsed = BOMBER;
+    }
+    else if (planeUsed == 3)
+    {
+        scores_->planeUsed = THUNDERBIRD;
+    }
+    else
+    {
+        scores_->planeUsed = RED_BARON;
+    }
 }
 
-void Statistics::setGameTime(QTime gameTime)
+void Statistics::setGameTime(QTime &gameTime)
 {
-    gameTime_ = gameTime;
+    scores_->gameTime = gameTime;
 }
 
 void Statistics::writeStatistics()
@@ -67,14 +75,16 @@ void Statistics::writeStatistics()
 
     if (statisticsFile.is_open())
     {
-        statisticsFile << score_ << ",";
-        statisticsFile << nyssesDestroyed_ << ",";
-        statisticsFile << cloudCollisions_ << ",";
-        statisticsFile << healthRemaining_ << ",";
-        statisticsFile << bombsDropped_ << ",";
-        statisticsFile << nukesDropped_ << ",";
-        statisticsFile << planeUsed_ << ",";
-        statisticsFile << gameTime_.toString().toStdString() << "\n";
+        qDebug() << "opended nice";
+        statisticsFile << playerName_.toStdString() << ",";
+        statisticsFile << highScores_->at(playerName_)->score << ",";
+        statisticsFile << highScores_->at(playerName_)->nyssesDestroyed << ",";
+        statisticsFile << highScores_->at(playerName_)->cloudCollisions << ",";
+        statisticsFile << highScores_->at(playerName_)->healthRemaining << ",";
+        statisticsFile << highScores_->at(playerName_)->bombsDropped << ",";
+        statisticsFile << highScores_->at(playerName_)->nukesDropped << ",";
+        statisticsFile << highScores_->at(playerName_)->planeUsed << ",";
+        statisticsFile << highScores_->at(playerName_)->gameTime.toString("m:ss").toStdString() << "\n";
     }
     statisticsFile.close();
 }
@@ -82,21 +92,16 @@ void Statistics::writeStatistics()
 std::fstream Statistics::createCsvFile()
 {
     std::fstream statisticsFile;
-    statisticsFile.open("statistics.csv", std::ios_base::in | std::ios_base::out);
-    if (statisticsFile.is_open())
+    statisticsFile.open(fileName_, std::ios_base::app);
+    if (!statisticsFile.is_open())
     {
-        std::string line;
-        if (!getline(statisticsFile, line))
-        {
-            statisticsFile << "Statistics for games played\n";
-            statisticsFile << "SCORE,NYSSES DESTROYED,CLOUD COLLISIONS,"
-                              "HEALTH REMAINING,BOMBS DROPPED,NUKES DROPPED,"
-                              "PLANE USED,GAME TIME\n";
-        }
+        return std::fstream();
+    }
+    else
+    {
+        qDebug() << "file opened";
         return statisticsFile;
     }
-
-    return std::fstream();
 }
 
 }

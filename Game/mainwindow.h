@@ -64,6 +64,8 @@ public:
     bool isGameOver();
     void dropBomb();
     void setPlayerName(QString &name);
+    void setPlaneType(int &plane);
+    void setStatistics();
     void dropNuke();
     void updateNuke();
     void setPlayer(Student::Player* player);
@@ -93,7 +95,13 @@ private:
     Student::Player* player_;
     QString playerName_;
     Student::Nuke* nuke_;
+    int gameTime_;
     int score_;
+    int nyssesDestroyed_;
+    int cloudCollisions_;
+    int bombsDropped_;
+    int nukesDropped_;
+    int planeType_;
     int cloudStatus_;
     bool gameOver;
     double tick_ = 50; //ms per game tick
