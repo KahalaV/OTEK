@@ -436,7 +436,7 @@ void MainWindow::update()
 
     //if player has cooldown left, decrease cooldown
     if (player_->getCooldown() > 0) {
-        player_->decreaseCloudHitCooldown();
+        player_->decreaseCooldown();
     }
 
     //if player doesn't have a nuke, spawn nuke

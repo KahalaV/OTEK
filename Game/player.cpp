@@ -98,7 +98,7 @@ int Player::getSpeedDiagonal()
 }
 int Player::getBombRadius()
 {
-    return bombRadius;
+    return bombRadius_;
 }
 void Player::setCooldown(int newCooldown)
 {
@@ -136,7 +136,7 @@ void Player::setPlaneType(int plane)
             image_ = QImage(":/Resources/Graphics/bomber.bmp");
             speedStraight_ = 3;
             speedDiagonal_ = 2;
-            bombRadius = 50;
+            bombRadius_ = 50;
             coolDownDuration_ = 50;
             // same
             break;
@@ -144,14 +144,14 @@ void Player::setPlaneType(int plane)
             image_ = QImage(":/Resources/Graphics/thunderbird.bmp");
             speedStraight_ = 6;
             speedDiagonal_ = 4;
-            bombRadius = 30;
+            bombRadius_ = 30;
             coolDownDuration_ = 30;
             break;
         default:
             image_ = QImage(":/Resources/Graphics/red_baron.bmp");
             speedStraight_ = 4;
             speedDiagonal_ = 3;
-            bombRadius = 40;
+            bombRadius_ = 40;
             coolDownDuration_ = 40;
     }
 }
@@ -159,7 +159,7 @@ int Player::getHealth()
 {
     return health_;
 }
-void Player::decreaseCloudHitCooldown()
+void Player::decreaseCooldown()
 {
     cloudHitCooldown_--;
 }
