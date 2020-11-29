@@ -1,4 +1,4 @@
-#include "statistics.hh"
+#include "statistics.h"
 
 namespace Student
 {

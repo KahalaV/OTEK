@@ -10,7 +10,7 @@
 #include <iostream>
 #include "bomb.h"
 #include "nuke.h"
-#include "statistics.hh"
+#include "statistics.h"
 
 #include "cstdlib"
 #include "QSound"

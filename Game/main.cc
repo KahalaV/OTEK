@@ -1,5 +1,5 @@
 #include "startwindow.h"
-#include "engine.hh"
+#include "engine.h"
 #include "city.h"
 #include "endwindow.h"
 #include <QApplication>

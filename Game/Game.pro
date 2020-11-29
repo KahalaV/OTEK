@@ -16,6 +16,7 @@ SOURCES += \
     mainwindow.cpp \
     nuke.cpp \
     player.cpp \
+    split.cpp \
     startwindow.cpp \
     statistics.cpp
 
@@ -54,12 +55,13 @@ HEADERS += \
     city.h \
     cloud.h \
     endwindow.h \
-    engine.hh \
+    engine.h \
     mainwindow.h \
     nuke.h \
     player.h \
+    split.h \
     startwindow.h \
-    statistics.hh
+    statistics.h
 
 RESOURCES += \
     Resources.qrc

@@ -34,7 +34,7 @@ public:
      * @brief City creates a new city
      * @param GAME_TIME defines how many seconds game round will last at maximum
      */
-    City(const int GAME_TIME = 60);
+    City(const int GAME_TIME = 10);
 
     /**
      * @brief destructor
