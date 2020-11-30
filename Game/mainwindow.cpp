@@ -246,8 +246,9 @@ void MainWindow::movePlayer()
             break;
     }
 
-    //check nuke
+    //check nuke collection
     if (nuke_->getStatus() == 1 && player_->collidesWithItem(nuke_)) {
+        QSound::play(":/Resources/Sound/nukeGained.wav");
         map->removeItem(nuke_);
         nuke_->setStatus(2);
         nukeStatus->setBackgroundBrush(QImage(":/Resources/Graphics/nukeReady.bmp"));
@@ -261,6 +262,10 @@ void MainWindow::movePlayer()
                 player_->setCooldown(30);
                 QSound::play(":/Resources/Sound/cloudHitSound.wav");
                 score_ -= 5;
+                //score will not go below 0
+                if (score_ < 0) {
+                    score_ = 0;
+                }
                 cloudCollisions_++;
                 ui->scoreLabel->setText(QString::number(score_));
                 player_->decreaseHealth();
