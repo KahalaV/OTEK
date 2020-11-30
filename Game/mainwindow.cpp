@@ -446,6 +446,7 @@ bool MainWindow::isGameOver()
 {
     if (gameOver_)
     {
+        timer->stop();
         setStatistics();
     }
     return gameOver_;
