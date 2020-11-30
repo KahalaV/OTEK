@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
+    <width>501</width>
     <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Game Over!</string>
   </property>
   <widget class="QPushButton" name="quitButton">
    <property name="geometry">
@@ -31,7 +31,7 @@
     <rect>
      <x>20</x>
      <y>20</y>
-     <width>91</width>
+     <width>161</width>
      <height>21</height>
     </rect>
    </property>
@@ -41,7 +41,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Game over!</string>
+    <string>The game has ended.</string>
    </property>
   </widget>
   <widget class="QLabel" name="playerScoresLabel">
@@ -179,12 +179,12 @@
     <rect>
      <x>150</x>
      <y>70</y>
-     <width>67</width>
+     <width>141</width>
      <height>17</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>PlaceHolder</string>
    </property>
   </widget>
   <widget class="QLabel" name="scoreLabel">
@@ -192,12 +192,12 @@
     <rect>
      <x>150</x>
      <y>90</y>
-     <width>67</width>
+     <width>101</width>
      <height>17</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>PlaceHolder</string>
    </property>
   </widget>
   <widget class="QLabel" name="nyssesDestroyedLabel">
@@ -205,12 +205,12 @@
     <rect>
      <x>150</x>
      <y>110</y>
-     <width>67</width>
+     <width>101</width>
      <height>17</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>PlaceHolder</string>
    </property>
   </widget>
   <widget class="QLabel" name="cloudCollisionsLabel">
@@ -218,12 +218,12 @@
     <rect>
      <x>150</x>
      <y>130</y>
-     <width>67</width>
+     <width>101</width>
      <height>17</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>PlaceHolder</string>
    </property>
   </widget>
   <widget class="QLabel" name="healthRemainingLabel">
@@ -231,12 +231,12 @@
     <rect>
      <x>150</x>
      <y>150</y>
-     <width>67</width>
+     <width>101</width>
      <height>17</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>PlaceHolder</string>
    </property>
   </widget>
   <widget class="QLabel" name="bombsDroppedLabel">
@@ -244,12 +244,12 @@
     <rect>
      <x>150</x>
      <y>170</y>
-     <width>67</width>
+     <width>101</width>
      <height>17</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>PlaceHolder</string>
    </property>
   </widget>
   <widget class="QLabel" name="nukesDroppedLabel">
@@ -257,12 +257,12 @@
     <rect>
      <x>150</x>
      <y>190</y>
-     <width>67</width>
+     <width>101</width>
      <height>17</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>PlaceHolder</string>
    </property>
   </widget>
   <widget class="QLabel" name="planeUsedLabel">
@@ -270,12 +270,12 @@
     <rect>
      <x>150</x>
      <y>210</y>
-     <width>67</width>
+     <width>101</width>
      <height>17</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>PlaceHolder</string>
    </property>
   </widget>
   <widget class="QLabel" name="timePlayedLabel">
@@ -283,12 +283,186 @@
     <rect>
      <x>150</x>
      <y>230</y>
-     <width>67</width>
+     <width>101</width>
      <height>17</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>PlaceHolder</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>20</y>
+     <width>67</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>TOP 5</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="topFivePlayerTitleLabel">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>50</y>
+     <width>141</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Player</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="topFiveScoreTitleLabel">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>50</y>
+     <width>41</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Score</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="topFivePlayerOneLabel">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>70</y>
+     <width>141</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="topFivePlayerTwoLabel">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>90</y>
+     <width>141</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="topFivePlayerThreeLabel">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>110</y>
+     <width>141</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="topFivePlayerFourLabel">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>130</y>
+     <width>141</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="topFivePlayerFiveLabel">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>150</y>
+     <width>141</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="topFiveScoreOneLabel">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>70</y>
+     <width>41</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="topFiveScoreThreeLabel">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>110</y>
+     <width>41</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="topFiveScoreTwoLabel">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>90</y>
+     <width>41</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="topFiveScoreFourLabel">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>130</y>
+     <width>41</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="topFiveScoreFiveLabel">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>150</y>
+     <width>41</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>
