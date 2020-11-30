@@ -10,6 +10,7 @@ Statistics::Statistics(QString &name) :
     highScores_(new std::map<QString, std::shared_ptr<Scores>>)
 
 {
+    // Creating a Scores struct to contain the scores
     highScores_->insert({playerName_, scores_});
 }
 
@@ -131,6 +132,7 @@ void Statistics::writeStatistics()
 
 std::fstream Statistics::createCsvFile()
 {
+    // Creating and/or opening the file
     std::fstream statisticsFile;
     statisticsFile.open(fileName_, std::ios_base::app);
     if (!statisticsFile.is_open())
