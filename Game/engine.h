@@ -18,12 +18,19 @@
 namespace Student
 {
 
+/**
+ * @brief The Engine class creates the City object and the Logic object and initializes and launches game execution
+ */
 class Engine : public QObject
 {
     Q_OBJECT
 
 public:
     explicit Engine(QObject *parent = nullptr);
+
+    /**
+     * @brief Destructor
+     */
     ~Engine();
 
 public slots:

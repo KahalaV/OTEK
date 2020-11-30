@@ -28,7 +28,7 @@ namespace Student {
 typedef std::pair<std::string, int> ScorePair;
 
 /**
- * @brief The EndWindow class
+ * @brief The EndWindow class displays game stats and ends execution of the game
  */
 class EndWindow : public QDialog
 {
@@ -38,23 +38,23 @@ public:
     explicit EndWindow(QWidget *parent = nullptr);
 
     /**
-     * @brief
+     * @brief Destructor
      */
     ~EndWindow();
 
     /**
-     * @brief readStatistics
+     * @brief readStatistics reads statistics from a file
      * @param fileName
      */
     void readStatistics(std::string &fileName);
 
     /**
-     * @brief displayStats
+     * @brief displayStats displays statistics of the last game
      */
     void displayStats();
 
     /**
-     * @brief displayTopFive
+     * @brief displayTopTen displays top ten highscores
      */
     void displayTopTen();
 

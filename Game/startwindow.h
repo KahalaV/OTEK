@@ -37,7 +37,7 @@ public slots:
      */
     void setSettings();
     /**
-     * @brief isNameOk
+     * @brief isNameOk checks that lineEdit is not empty
      */
     void isNameOk();
 
