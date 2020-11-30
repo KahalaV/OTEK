@@ -25,6 +25,11 @@ QRectF ActorItem::boundingRect() const
 void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->drawImage(QPoint(0, 0), image_);
+    QString text(QString::number(passengerCount_));
+    QPen pen2(QBrush(QColor(0,0,0)),2);
+    painter->setPen(pen2);
+    painter->drawText(12, 25, text);
+
     Q_UNUSED(option);
     Q_UNUSED(widget);
 }
@@ -39,6 +44,10 @@ void ActorItem::setType(int type)
          image_ = QImage(":/Resources/Graphics/destroyed_nysse.bmp");
          setZValue(0.2);
     }
+}
+void ActorItem::setPassengerCount(int passengers)
+{
+    passengerCount_ = passengers;
 }
 
 }

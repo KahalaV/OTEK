@@ -64,7 +64,6 @@ void MainWindow::addActor(std::shared_ptr<Interface::IActor> newactor)
 
     actors_.push_back(std::make_pair(newactor, nActorItem));
     map->addItem(nActorItem);
-
 }
 void MainWindow::addStop(int x, int y)
 {
@@ -78,6 +77,8 @@ void MainWindow::moveActor(std::shared_ptr<Interface::IActor> actor)
     int x = actor->giveLocation().giveX() + 353;
     int y = 500 - actor->giveLocation().giveY() + 56;
     auto it = std::find_if(actors_.begin(), actors_.end(), [&actor](const std::pair<std::shared_ptr<Interface::IActor>, ActorItem*>& elem){ return elem.first == actor;});
+    //to show passenger amount
+    it->second->setPassengerCount((std::dynamic_pointer_cast<CourseSide::Nysse>(actor)->getPassengers().size()));
 
     //if the item is a destroyed bus, ActorItem is set to nullptr to stop the movement
     if (it->second->getType() == 2) {

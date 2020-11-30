@@ -22,11 +22,6 @@ void Cloud::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     Q_UNUSED(option);
     Q_UNUSED(widget);
     painter->drawImage(QPoint(0, 0), image_);
-    /* enable to show coordinates on map
-    QString text(QString::number(this->x()) + " " + QString::number(this->y()));
-    QPen pen2(QBrush(QColor(0,0,0)),2);
-    painter->setPen(pen2);
-    painter->drawText(10, 20, text); */
 }
 int Cloud::getSpeed()
 {

@@ -60,9 +60,16 @@ public:
      */
     void setType(int type);
 
+    /**
+     * @brief sets the passenger count for nysse that is used to draw the passenger count in next to the nysse
+     * @param passengers amount
+     */
+    void setPassengerCount(int passengers);
+
 private:
     QImage image_;
     int type_;
+    int passengerCount_;
 };
 
 }
