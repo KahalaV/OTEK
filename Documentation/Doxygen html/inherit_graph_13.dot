@@ -1,0 +1,12 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node17 [label="QDialog",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node17 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 [label="Student::EndWindow",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_student_1_1_end_window.html",tooltip="The EndWindow class displays game stats and ends execution of the game."];
+  Node17 -> Node19 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="Student::StartWindow",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_student_1_1_start_window.html",tooltip="The StartWindow class defines the dialog that appears at the start of the game."];
+}

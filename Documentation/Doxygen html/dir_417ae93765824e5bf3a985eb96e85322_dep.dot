@@ -1,0 +1,16 @@
+digraph "C:/Users/PenthouseMediaCenter/Documents/TUT/OTEK/ehetvk/Course/CourseLib/core" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_eb5b344762bcab64b6c5ad9e858604c8 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="CourseLib" fontname="Helvetica", fontsize="10", URL="dir_eb5b344762bcab64b6c5ad9e858604c8.html"]
+  dir_417ae93765824e5bf3a985eb96e85322 [shape=box, label="core", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_417ae93765824e5bf3a985eb96e85322.html"];
+  }
+  dir_845be9270e81ff0045817235eaaaebf8 [shape=box label="actors" URL="dir_845be9270e81ff0045817235eaaaebf8.html"];
+  dir_9540c843c1f88da9982dc8849ae28e61 [shape=box label="interfaces" URL="dir_9540c843c1f88da9982dc8849ae28e61.html"];
+  dir_845be9270e81ff0045817235eaaaebf8->dir_417ae93765824e5bf3a985eb96e85322 [headlabel="3", labeldistance=1.5 headhref="dir_000008_000009.html"];
+  dir_845be9270e81ff0045817235eaaaebf8->dir_9540c843c1f88da9982dc8849ae28e61 [headlabel="7", labeldistance=1.5 headhref="dir_000008_000012.html"];
+  dir_417ae93765824e5bf3a985eb96e85322->dir_845be9270e81ff0045817235eaaaebf8 [headlabel="2", labeldistance=1.5 headhref="dir_000009_000008.html"];
+  dir_417ae93765824e5bf3a985eb96e85322->dir_9540c843c1f88da9982dc8849ae28e61 [headlabel="1", labeldistance=1.5 headhref="dir_000009_000012.html"];
+  dir_9540c843c1f88da9982dc8849ae28e61->dir_417ae93765824e5bf3a985eb96e85322 [headlabel="1", labeldistance=1.5 headhref="dir_000012_000009.html"];
+}

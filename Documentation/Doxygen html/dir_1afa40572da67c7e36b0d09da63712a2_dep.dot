@@ -1,0 +1,13 @@
+digraph "C:/Users/PenthouseMediaCenter/Documents/TUT/OTEK" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_91fff692cf5cdac17eaf05dcbd6b68f2 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="TUT" fontname="Helvetica", fontsize="10", URL="dir_91fff692cf5cdac17eaf05dcbd6b68f2.html"]
+  subgraph clusterdir_1afa40572da67c7e36b0d09da63712a2 {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_1afa40572da67c7e36b0d09da63712a2.html"];
+    dir_1afa40572da67c7e36b0d09da63712a2 [shape=plaintext label="OTEK"];
+    dir_0de491768064b354964dbef5b851d851 [shape=box label="ehetvk" color="red" fillcolor="white" style="filled" URL="dir_0de491768064b354964dbef5b851d851.html"];
+  }
+  }
+}

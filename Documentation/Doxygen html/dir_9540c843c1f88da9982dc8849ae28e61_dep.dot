@@ -1,0 +1,12 @@
+digraph "C:/Users/PenthouseMediaCenter/Documents/TUT/OTEK/ehetvk/Course/CourseLib/interfaces" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_eb5b344762bcab64b6c5ad9e858604c8 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="CourseLib" fontname="Helvetica", fontsize="10", URL="dir_eb5b344762bcab64b6c5ad9e858604c8.html"]
+  dir_9540c843c1f88da9982dc8849ae28e61 [shape=box, label="interfaces", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_9540c843c1f88da9982dc8849ae28e61.html"];
+  }
+  dir_417ae93765824e5bf3a985eb96e85322 [shape=box label="core" URL="dir_417ae93765824e5bf3a985eb96e85322.html"];
+  dir_417ae93765824e5bf3a985eb96e85322->dir_9540c843c1f88da9982dc8849ae28e61 [headlabel="1", labeldistance=1.5 headhref="dir_000009_000012.html"];
+  dir_9540c843c1f88da9982dc8849ae28e61->dir_417ae93765824e5bf3a985eb96e85322 [headlabel="1", labeldistance=1.5 headhref="dir_000012_000009.html"];
+}

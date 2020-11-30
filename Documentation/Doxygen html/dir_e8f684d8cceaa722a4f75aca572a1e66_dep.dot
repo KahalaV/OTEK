@@ -1,0 +1,11 @@
+digraph "C:/Users/PenthouseMediaCenter/Documents/TUT/OTEK/ehetvk/Game" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_0de491768064b354964dbef5b851d851 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="ehetvk" fontname="Helvetica", fontsize="10", URL="dir_0de491768064b354964dbef5b851d851.html"]
+  dir_e8f684d8cceaa722a4f75aca572a1e66 [shape=box, label="Game", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_e8f684d8cceaa722a4f75aca572a1e66.html"];
+  }
+  dir_a39bb0934491903c6b3d679801b4e2d2 [shape=box label="Course" fillcolor="white" style="filled" color="red" URL="dir_a39bb0934491903c6b3d679801b4e2d2.html"];
+  dir_e8f684d8cceaa722a4f75aca572a1e66->dir_a39bb0934491903c6b3d679801b4e2d2 [headlabel="10", labeldistance=1.5 headhref="dir_000013_000006.html"];
+}
