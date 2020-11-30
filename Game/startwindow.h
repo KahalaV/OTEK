@@ -36,6 +36,10 @@ public slots:
      * @brief Sets player name and plane type
      */
     void setSettings();
+    /**
+     * @brief isNameOk
+     */
+    void isNameOk();
 
 signals:
     /**

@@ -30,6 +30,9 @@
    </property>
   </widget>
   <widget class="QPushButton" name="goButton">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>260</x>
@@ -40,6 +43,9 @@
    </property>
    <property name="text">
     <string>Go!</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit">

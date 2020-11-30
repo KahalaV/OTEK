@@ -16,6 +16,7 @@ StartWindow::StartWindow(QWidget *parent) :
     ui->radioThunderbirdButton->setIcon(*imageThunderbird_);
 
     connect(ui->goButton, SIGNAL (released()), this, SLOT (setSettings()));
+    connect(ui->lineEdit, SIGNAL (editingFinished()), this, SLOT(isNameOk()));
     connect(this, SIGNAL (settingsChanged(QString, int)), this, SLOT (close()));
 }
 StartWindow::~StartWindow()
@@ -38,6 +39,18 @@ void StartWindow::setSettings()
         plane_ = 3;
     }
     emit settingsChanged(playerName_, plane_);
+}
+
+void StartWindow::isNameOk()
+{
+    if (!ui->lineEdit->text().isEmpty())
+    {
+        ui->goButton->setEnabled(true);
+    }
+    else
+    {
+        ui->goButton->setEnabled(false);
+    }
 }
 
 }
