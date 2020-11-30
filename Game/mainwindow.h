@@ -154,6 +154,15 @@ public:
     void keyPressEvent(QKeyEvent *event);
 
     /**
+     * @brief Used to prevent scrolling the graphics scene with mousewheel
+     * @param
+     * @param
+     * @return
+     */
+
+    bool eventFilter(QObject *object, QEvent *event);
+
+    /**
      * @brief If the player has bombs left, creates a new bomb object and adds the bomb graphics to the graphics scene.
      */
     void dropBomb();

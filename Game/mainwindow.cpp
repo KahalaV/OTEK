@@ -2,8 +2,8 @@
 #include "ui_mainwindow.h"
 
 const int PLAYER_ADJUST = 25; //offset of player image
-const int NYSSE_X_ADJUST = 11;
-const int NYSSE_Y_ADJUST = 6;
+const int NYSSE_X_ADJUST = 11; //offset of nysse image
+const int NYSSE_Y_ADJUST = 6; //offset of nysse image
 
 namespace Student {
 
@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
     nukeStatus->setBackgroundBrush(QImage(":/Resources/Graphics/noNuke.bmp"));
 
     ui->graphicsView->scale(2,2);
-
+    ui->graphicsView->viewport()->installEventFilter(this);
 
     QSound::play(":/Resources/Sound/gameMusic.wav");
     timer = new QTimer(this);
@@ -192,6 +192,15 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             QSound::play(":/Resources/Sound/error.wav");
             break;
 
+    }
+}
+bool MainWindow::eventFilter(QObject *object, QEvent *event)
+{
+    if (object == ui->graphicsView->viewport() && event->type() == QEvent::Wheel)
+    {
+        return true;
+    } else {
+        return false;
     }
 }
 void MainWindow::movePlayer()
