@@ -23,6 +23,8 @@ QRectF Player::boundingRect() const
 }
 void Player::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
     painter->drawImage(QPoint(0, 0), image_);
     /* enable to show coordinates on map
     QString text(QString::number(this->x()) + " " + QString::number(this->y()));

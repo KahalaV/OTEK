@@ -21,6 +21,8 @@ QRectF Bomb::boundingRect() const
 }
 void Bomb::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
     painter->drawImage(QPoint(0, 0), image_);
 }
 void Bomb::explode() {

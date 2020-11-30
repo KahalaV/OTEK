@@ -25,6 +25,8 @@ QRectF ActorItem::boundingRect() const
 void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->drawImage(QPoint(0, 0), image_);
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
     /* enable to show coordinates on map
     if (type_ == 1) {
         QString text(QString::number(this->x()) + " " + QString::number(this->y()));

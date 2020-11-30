@@ -18,7 +18,8 @@ City::~City()
 }
 void City::setBackground(QImage& basicbackground, QImage& bigbackground)
 {
-
+    Q_UNUSED(basicbackground);
+    Q_UNUSED(bigbackground);
 }
 void City::setClock(QTime clock)
 {
@@ -49,12 +50,14 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 }
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
-
+    Q_UNUSED(actor);
 }
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 {
     if (std::dynamic_pointer_cast<CourseSide::Passenger>(actor) == nullptr) {
         return mainWindow_->findActor(actor);
+    } else {
+        return false;
     }
 }
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
@@ -65,7 +68,8 @@ void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 }
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
 {
-
+    Q_UNUSED(loc);
+    return {};
 }
 bool City::isGameOver() const
 {

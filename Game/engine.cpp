@@ -5,8 +5,8 @@ namespace Student
 
 Engine::Engine(QObject *parent) :
     QObject(parent),
-    gameLogic_(new CourseSide::Logic),
     city_(nullptr),
+    gameLogic_(new CourseSide::Logic),
     startWindow_(new Student::StartWindow)
 {
     // city_ = std::shared_ptr<Student::City>(new Student::City);
