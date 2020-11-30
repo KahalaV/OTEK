@@ -537,6 +537,7 @@ void MainWindow::updateNuke()
                 if (distance < nukeRadius && actor.second->getType() == 1) {
                     actor.second->setType(2);
                     score_++;
+                    nyssesDestroyed_++;
                     ui->scoreLabel->setText(QString::number(score_));
                 }
 
