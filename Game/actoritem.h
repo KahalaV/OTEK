@@ -1,6 +1,8 @@
 #ifndef ACTORITEM_H
 #define ACTORITEM_H
 
+#include <actors/nysse.hh>
+
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QPainter>

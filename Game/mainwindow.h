@@ -199,6 +199,11 @@ public:
     void updateBombs();
 
     /**
+     * @brief checks if there are actors in the explosion area and adds points to the player for actors destroyed
+     */
+    void checkExplosionHits(int x, int y, int radius);
+
+    /**
      * @brief Updates the in-game clock label
      */
     void updateTimeLabel();

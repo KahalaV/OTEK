@@ -324,26 +324,7 @@ void MainWindow::updateBombs()
                 QSound::play(":/Resources/Sound/explosion.wav");
 
                 //check nearby actors and destroy buses within explosion radius
-                int bombX = bomb->x() + 25;
-                int bombY = bomb->y() + 25;
-                int bombRadius = player_->getBombRadius();
-
-                //test destruction radius
-                //map->addEllipse(bombX - bombRadius, bombY - bombRadius, 2*bombRadius, 2*bombRadius);
-
-                for (auto actor : actors_) {
-                    int actorX = actor.second->x();
-                    int actorY = actor.second->y();
-                    //euclidean distance
-                    int distance = sqrt((actorX - bombX)*(actorX - bombX) + (actorY-bombY)*(actorY-bombY));
-                    if (distance < bombRadius && actor.second->getType() == 1) {
-                        actor.second->setType(2);
-                        score_++;
-                        nyssesDestroyed_++;
-                        ui->scoreLabel->setText(QString::number(score_));
-                    }
-
-                }
+                checkExplosionHits(bomb->x() + 25, bomb->y() + 25, player_->getBombRadius());
             }
         } else {
             //if the bomb has exploded
@@ -523,25 +504,7 @@ void MainWindow::updateNuke()
             QSound::play(":/Resources/Sound/explosion.wav");
 
             //check nearby actors and destroy buses within explosion radius
-            int bombX = nuke_->x() + 25;
-            int bombY = nuke_->y() + 25;
-            int nukeRadius = 80;
-
-            //map->addEllipse(bombX-80, bombY-80, 2*80, 2*80);
-
-            for (auto actor : actors_) {
-                int actorX = actor.second->x();
-                int actorY = actor.second->y();
-                //euclidean distance
-                int distance = sqrt((actorX - bombX)*(actorX - bombX) + (actorY-bombY)*(actorY-bombY));
-                if (distance < nukeRadius && actor.second->getType() == 1) {
-                    actor.second->setType(2);
-                    score_++;
-                    nyssesDestroyed_++;
-                    ui->scoreLabel->setText(QString::number(score_));
-                }
-
-            }
+            checkExplosionHits(nuke_->x() + 25, nuke_->y() + 25, 80);
         }
     } else {
         //if the bomb has exploded
@@ -553,6 +516,21 @@ void MainWindow::updateNuke()
         }
     }
 
+}
+void MainWindow::checkExplosionHits(int x, int y, int radius)
+{
+    for (auto actor : actors_) {
+        int actorX = actor.second->x();
+        int actorY = actor.second->y();
+        //euclidean distance
+        int distance = sqrt((actorX - x)*(actorX - x) + (actorY-y)*(actorY-y));
+        if (distance < radius && actor.second->getType() == 1) {
+            actor.second->setType(2);
+            score_++;
+            nyssesDestroyed_++;
+            ui->scoreLabel->setText(QString::number(score_));
+        }
+    }
 }
 
 }
