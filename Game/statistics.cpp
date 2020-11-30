@@ -3,8 +3,7 @@
 namespace Student
 {
 
-Statistics::Statistics(QString &name, QObject *parent) :
-    QObject(parent),
+Statistics::Statistics(QString &name) :
     fileName_("statistics.csv"),
     scores_(new Scores),
     playerName_(name),
@@ -12,7 +11,6 @@ Statistics::Statistics(QString &name, QObject *parent) :
 
 {
     highScores_->insert({playerName_, scores_});
-    QTest::qExec(this);
 }
 
 Statistics::~Statistics()
@@ -71,6 +69,46 @@ void Statistics::setGameTime(QTime &gameTime)
     scores_->gameTime = gameTime;
 }
 
+int Statistics::getScore()
+{
+    return scores_->score;
+}
+
+int Statistics::getNyssesDestroyed()
+{
+    return scores_->nyssesDestroyed;
+}
+
+int Statistics::getCloudCollisions()
+{
+    return scores_->cloudCollisions;
+}
+
+int Statistics::getHealthRemaining()
+{
+    return scores_->healthRemaining;
+}
+
+int Statistics::getBombsDropped()
+{
+    return scores_->bombsDropped;
+}
+
+int Statistics::getNukesDropped()
+{
+    return scores_->nukesDropped;
+}
+
+std::string Statistics::getPlaneUsed()
+{
+    return scores_->planeUsed;
+}
+
+QTime Statistics::getGameTime()
+{
+    return scores_->gameTime;
+}
+
 void Statistics::writeStatistics()
 {
     std::fstream statisticsFile = createCsvFile();
@@ -89,16 +127,6 @@ void Statistics::writeStatistics()
     }
     statisticsFile.close();
     qDebug() << "statistics.csv closed";
-}
-
-void Statistics::testStats()
-{
-    QCOMPARE(1, 1);
-}
-
-void Statistics::testAnother()
-{
-    QCOMPARE(1, 1);
 }
 
 std::fstream Statistics::createCsvFile()

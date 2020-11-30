@@ -8,7 +8,6 @@
 #include <memory>
 #include <QTime>
 #include <QDebug>
-#include <QTest>
 
 /**
  *@file
@@ -33,11 +32,11 @@ struct Scores {
     QTime gameTime = QTime();
 };
 
-class Statistics : public QObject
+class Statistics
 {
-    Q_OBJECT
+
 public:
-    explicit Statistics(QString &name, QObject *parent = nullptr);
+    explicit Statistics(QString &name);
     ~Statistics();
 
     void setScore(int &score);
@@ -49,28 +48,23 @@ public:
     void setPlaneUsed(int &planeUsed);
     void setGameTime(QTime &gameTime);
 
+    int getScore();
+    int getNyssesDestroyed();
+    int getCloudCollisions();
+    int getHealthRemaining();
+    int getBombsDropped();
+    int getNukesDropped();
+    std::string getPlaneUsed();
+    QTime getGameTime();
+
     void writeStatistics();
     void readStatistics();
-
-private slots:
-    void testStats();
-    void testAnother();
 
 private:
     std::string fileName_;
     std::shared_ptr<Scores> scores_;
     QString playerName_;
     std::shared_ptr<std::map<QString, std::shared_ptr<Scores>>> highScores_;
-
-
-//    int score_;
-//    int nyssesDestroyed_;
-//    int cloudCollisions_;
-//    int healthRemaining_;
-//    int bombsDropped_;
-//    int nukesDropped_;
-//    int planeUsed_;
-//    QTime gameTime_;
 
     std::fstream createCsvFile();
 };

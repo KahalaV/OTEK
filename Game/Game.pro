@@ -18,7 +18,8 @@ SOURCES += \
     player.cpp \
     split.cpp \
     startwindow.cpp \
-    statistics.cpp
+    statistics.cpp \
+    teststatistics.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -61,7 +62,8 @@ HEADERS += \
     player.h \
     split.h \
     startwindow.h \
-    statistics.h
+    statistics.h \
+    teststatistics.h
 
 RESOURCES += \
     Resources.qrc
