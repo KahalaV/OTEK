@@ -257,7 +257,7 @@ void MainWindow::movePlayer()
                 //if the player has not recently taken hit
                 player_->setCooldown(30);
                 QSound::play(":/Resources/Sound/cloudHitSound.wav");
-                score_ -= 3;
+                score_ -= 5;
                 cloudCollisions_++;
                 ui->scoreLabel->setText(QString::number(score_));
                 player_->decreaseHealth();
