@@ -9,7 +9,6 @@ Engine::Engine(QObject *parent) :
     gameLogic_(new CourseSide::Logic),
     startWindow_(new Student::StartWindow)
 {
-    // city_ = std::shared_ptr<Student::City>(new Student::City);
     startWindow_->show();
 
     connect(startWindow_.get(), SIGNAL (settingsChanged(QString, int)), this, SLOT (initCity(QString, int)));

@@ -56,7 +56,7 @@ public:
     /**
      * @brief displayTopFive
      */
-    void displayTopFive();
+    void displayTopTen();
 
 public slots:
     void quitButtonClicked();

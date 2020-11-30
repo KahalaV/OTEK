@@ -96,6 +96,12 @@ public:
      */
     int getStatus();
 
+    /**
+     * @brief returns the explosion radius of nuke explosion
+     * @return
+     */
+    int getExplosionRadius() const;
+
 private:
     QImage image_;
     int dir_;
@@ -103,6 +109,7 @@ private:
     bool exploded_;
     int dropTime_;
     int explosionTime_;
+    const int explosionRadius_ = 80;
 };
 
 }

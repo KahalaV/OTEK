@@ -104,4 +104,8 @@ int Nuke::getExplosionTime()
 {
     return explosionTime_;
 }
+int Nuke::getExplosionRadius() const
+{
+    return explosionRadius_;
+}
 }

@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+const int PLAYER_ADJUST = 25; //offset of player image
+
 namespace Student {
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -331,7 +333,7 @@ void MainWindow::updateBombs()
                 QSound::play(":/Resources/Sound/explosion.wav");
 
                 //check nearby actors and destroy buses within explosion radius
-                checkExplosionHits(bomb->x() + 25, bomb->y() + 25, player_->getBombRadius());
+                checkExplosionHits(bomb->x() + PLAYER_ADJUST, bomb->y() + PLAYER_ADJUST, player_->getBombRadius());
             }
         } else {
             //if the bomb has exploded
@@ -512,7 +514,7 @@ void MainWindow::updateNuke()
             QSound::play(":/Resources/Sound/explosion.wav");
 
             //check nearby actors and destroy buses within explosion radius
-            checkExplosionHits(nuke_->x() + 25, nuke_->y() + 25, 80);
+            checkExplosionHits(nuke_->x() + PLAYER_ADJUST, nuke_->y() + PLAYER_ADJUST, nuke_->getExplosionRadius());
         }
     } else {
         //if the bomb has exploded
@@ -540,6 +542,8 @@ void MainWindow::checkExplosionHits(int x, int y, int radius)
             ui->scoreLabel->setText(QString::number(score_));
         }
     }
+    //test: draw ellipse that marks the explosion radius
+    //map->addEllipse(x - radius, y - radius, 2*radius, 2*radius);
 }
 
 }

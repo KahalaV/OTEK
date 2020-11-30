@@ -12,7 +12,7 @@ EndWindow::EndWindow(QWidget *parent) :
     ui->setupUi(this);
     readStatistics(fileName_);
     displayStats();
-    displayTopFive();
+    displayTopTen();
 
     connect(ui->quitButton, SIGNAL (released()), this, SLOT (quitButtonClicked()));
 }
@@ -81,34 +81,64 @@ void EndWindow::displayStats()
     ui->timePlayedLabel->setText(QString::fromStdString(row_.at(8)));
 }
 
-void EndWindow::displayTopFive()
+void EndWindow::displayTopTen()
 {
-    for (unsigned int i = 0; (i < 5 && i < highScores_->size()); i++)
+    for (unsigned int i = 0; (i < 10 && i < highScores_->size()); i++)
     {
         if (i == 0)
         {
-            ui->topFivePlayerOneLabel->setText(QString::fromStdString(highScores_->at(i).first));
-            ui->topFiveScoreOneLabel->setText(QString::fromStdString(std::to_string(highScores_->at(i).second)));
+            ui->topTenPlayerOneLabel->setText(QString::fromStdString(highScores_->at(i).first));
+            ui->topTenScoreOneLabel->setText(QString::fromStdString(std::to_string(highScores_->at(i).second)));
         }
         else if (i == 1)
         {
-            ui->topFivePlayerTwoLabel->setText(QString::fromStdString(highScores_->at(i).first));
-            ui->topFiveScoreTwoLabel->setText(QString::fromStdString(std::to_string(highScores_->at(i).second)));
+            ui->topTenPlayerTwoLabel->setText(QString::fromStdString(highScores_->at(i).first));
+            ui->topTenScoreTwoLabel->setText(QString::fromStdString(std::to_string(highScores_->at(i).second)));
         }
         else if (i == 2)
         {
-            ui->topFivePlayerThreeLabel->setText(QString::fromStdString(highScores_->at(i).first));
-            ui->topFiveScoreThreeLabel->setText(QString::fromStdString(std::to_string(highScores_->at(i).second)));
+            ui->topTenPlayerThreeLabel->setText(QString::fromStdString(highScores_->at(i).first));
+            ui->topTenScoreThreeLabel->setText(QString::fromStdString(std::to_string(highScores_->at(i).second)));
         }
         else if (i == 3)
         {
-            ui->topFivePlayerFourLabel->setText(QString::fromStdString(highScores_->at(i).first));
-            ui->topFiveScoreFourLabel->setText(QString::fromStdString(std::to_string(highScores_->at(i).second)));
+            ui->topTenPlayerFourLabel->setText(QString::fromStdString(highScores_->at(i).first));
+            ui->topTenScoreFourLabel->setText(QString::fromStdString(std::to_string(highScores_->at(i).second)));
+        }
+        else if (i == 4)
+        {
+            ui->topTenPlayerFiveLabel->setText(QString::fromStdString(highScores_->at(i).first));
+            ui->topTenScoreFiveLabel->setText(QString::fromStdString(std::to_string(highScores_->at(i).second)));
+        }
+        else if (i == 5)
+        {
+            ui->topTenPlayerSixLabel->setText(QString::fromStdString(highScores_->at(i).first));
+            ui->topTenScoreSixLabel->setText(QString::fromStdString(std::to_string(highScores_->at(i).second)));
+        }
+        else if (i == 6)
+        {
+            ui->topTenPlayerSevenLabel->setText(QString::fromStdString(highScores_->at(i).first));
+            ui->topTenScoreSevenLabel->setText(QString::fromStdString(std::to_string(highScores_->at(i).second)));
+        }
+        else if (i == 7)
+        {
+            ui->topTenPlayerEightLabel->setText(QString::fromStdString(highScores_->at(i).first));
+            ui->topTenScoreEightLabel->setText(QString::fromStdString(std::to_string(highScores_->at(i).second)));
+        }
+        else if (i == 8)
+        {
+            ui->topTenPlayerNineLabel->setText(QString::fromStdString(highScores_->at(i).first));
+            ui->topTenScoreNineLabel->setText(QString::fromStdString(std::to_string(highScores_->at(i).second)));
+        }
+        else if (i == 9)
+        {
+            ui->topTenPlayerFourLabel->setText(QString::fromStdString(highScores_->at(i).first));
+            ui->topTenScoreFourLabel->setText(QString::fromStdString(std::to_string(highScores_->at(i).second)));
         }
         else
         {
-            ui->topFivePlayerFiveLabel->setText(QString::fromStdString(highScores_->at(i).first));
-            ui->topFiveScoreFiveLabel->setText(QString::fromStdString(std::to_string(highScores_->at(i).second)));
+            ui->topTenPlayerTenLabel->setText(QString::fromStdString(highScores_->at(i).first));
+            ui->topTenScoreTenLabel->setText(QString::fromStdString(std::to_string(highScores_->at(i).second)));
         }
     }
 }
