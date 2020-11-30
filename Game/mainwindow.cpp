@@ -26,6 +26,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->graphicsView->setScene(map);
     map->setSceneRect(0,0,width_,height_);
 
+    nukeStatus = new QGraphicsScene(this);
+    ui->nukeGraphicsView->setScene(nukeStatus);
+    nukeStatus->setSceneRect(0,0,31,31);
+    nukeStatus->setBackgroundBrush(QImage(":/Resources/Graphics/noNuke.bmp"));
+
     ui->graphicsView->scale(2,2);
 
     QSound::play(":/Resources/Sound/gameMusic.wav");
@@ -242,6 +247,7 @@ void MainWindow::movePlayer()
     if (nuke_->getStatus() == 1 && player_->collidesWithItem(nuke_)) {
         map->removeItem(nuke_);
         nuke_->setStatus(2);
+        nukeStatus->setBackgroundBrush(QImage(":/Resources/Graphics/nukeReady.bmp"));
     }
 
     //check collision with clouds
@@ -482,6 +488,7 @@ void MainWindow::dropNuke()
     }
 
     nuke_->setStatus(3);
+    nukeStatus->setBackgroundBrush(QImage(":/Resources/Graphics/noNuke.bmp"));
     int x = player_->x();
     int y = player_->y();
     nuke_->setPos(x, y);

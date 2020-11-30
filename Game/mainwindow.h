@@ -230,6 +230,7 @@ private:
     Ui::MainWindow* ui;
     std::shared_ptr<Student::Statistics> statistics_;
     QGraphicsScene* map;
+    QGraphicsScene* nukeStatus;
     QTimer* timer;
     QTime timeLeft_;
     QTime* clock_;
