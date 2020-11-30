@@ -526,7 +526,8 @@ void MainWindow::checkExplosionHits(int x, int y, int radius)
         int distance = sqrt((actorX - x)*(actorX - x) + (actorY-y)*(actorY-y));
         if (distance < radius && actor.second->getType() == 1) {
             actor.second->setType(2);
-            score_++;
+            //one point for nysse and one for every passenger
+            score_ += std::dynamic_pointer_cast<CourseSide::Nysse>(actor.first)->getPassengers().size() + 1;
             nyssesDestroyed_++;
             ui->scoreLabel->setText(QString::number(score_));
         }
