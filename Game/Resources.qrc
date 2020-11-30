@@ -14,7 +14,6 @@
         <file>Resources/Sound/bombDrop.wav</file>
         <file>Resources/Sound/cloudHitSound.wav</file>
         <file>Resources/Sound/explosion.wav</file>
-        <file>Resources/Sound/error2.wav</file>
         <file>Resources/Graphics/nuke.bmp</file>
         <file>Resources/Graphics/noNuke.bmp</file>
         <file>Resources/Graphics/nukeReady.bmp</file>

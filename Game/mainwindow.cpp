@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 
 const int PLAYER_ADJUST = 25; //offset of player image
+const int NYSSE_X_ADJUST = 11;
+const int NYSSE_Y_ADJUST = 6;
 
 namespace Student {
 
@@ -23,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->scoreLabel->setText(QString::number(score_));
     setWindowTitle("Boom! Stop the Nysse");
+    std::srand(std::time(nullptr)); //set rng seed
 
     map = new QGraphicsScene(this);
     ui->graphicsView->setScene(map);
@@ -34,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
     nukeStatus->setBackgroundBrush(QImage(":/Resources/Graphics/noNuke.bmp"));
 
     ui->graphicsView->scale(2,2);
+
 
     QSound::play(":/Resources/Sound/gameMusic.wav");
     timer = new QTimer(this);
@@ -60,8 +64,8 @@ void MainWindow::addActor(std::shared_ptr<Interface::IActor> newactor)
     {
         type = 1;
     }
-    int x = newactor->giveLocation().giveX() + 353;
-    int y = 500 - newactor->giveLocation().giveY() + 56;
+    int x = newactor->giveLocation().giveX() + 353 - NYSSE_X_ADJUST;
+    int y = 556 - newactor->giveLocation().giveY() - NYSSE_Y_ADJUST;
     ActorItem* nActorItem = new ActorItem(x, y, type);
 
     actors_.push_back(std::make_pair(newactor, nActorItem));
@@ -76,8 +80,8 @@ void MainWindow::addStop(int x, int y)
 }
 void MainWindow::moveActor(std::shared_ptr<Interface::IActor> actor)
 {
-    int x = actor->giveLocation().giveX() + 353;
-    int y = 500 - actor->giveLocation().giveY() + 56;
+    int x = actor->giveLocation().giveX() + 353 - NYSSE_X_ADJUST;
+    int y = 556 - actor->giveLocation().giveY() - NYSSE_Y_ADJUST;
     auto it = std::find_if(actors_.begin(), actors_.end(), [&actor](const std::pair<std::shared_ptr<Interface::IActor>, ActorItem*>& elem){ return elem.first == actor;});
     //to show passenger amount
     it->second->setPassengerCount((std::dynamic_pointer_cast<CourseSide::Nysse>(actor)->getPassengers().size()));
@@ -185,7 +189,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             QSound::play(":/Resources/Sound/error.wav");
             break;
         case Qt::Key_Q:
-            QSound::play(":/Resources/Sound/error2.wav");
+            QSound::play(":/Resources/Sound/error.wav");
             break;
 
     }
@@ -480,8 +484,8 @@ void MainWindow::update()
 void MainWindow::spawnNuke()
 {
     //randomize location
-    int x = (rand() % 895) + 200;
-    int y = (rand() % 350) + 200;
+    int x = (rand() % 895) + 50;
+    int y = (rand() % 452) + 50;
 
     nuke_->setStatus(1);
     nuke_->setPos(x,y);
@@ -535,8 +539,8 @@ void MainWindow::updateNuke()
 void MainWindow::checkExplosionHits(int x, int y, int radius)
 {
     for (auto actor : actors_) {
-        int actorX = actor.second->x();
-        int actorY = actor.second->y();
+        int actorX = actor.second->x() + NYSSE_X_ADJUST;
+        int actorY = actor.second->y() + NYSSE_Y_ADJUST;
         //euclidean distance
         int distance = sqrt((actorX - x)*(actorX - x) + (actorY-y)*(actorY-y));
         if (distance < radius && actor.second->getType() == 1) {
